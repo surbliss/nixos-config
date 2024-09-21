@@ -85,6 +85,7 @@
     enable = true;
     enableContribAndExtras = true;
     config = ./xmonad.hs;
+    extraPackages = hPkgs: [ hPkgs.xmobar ];
     # now it is ~/.config/xmonad/xmonad.hs
   };
 
@@ -190,7 +191,6 @@
     # rofi-power-menu
 
     # Annoying in VM
-    xmobar
   ];
 
   # environment.variables.EDITOR = "nvim";
