@@ -9,13 +9,17 @@ Souce: https://www.youtube.com/watch?v=20BN4gqHwaQ
 3. Make `.git` folder: `sudo mkdir .git` in `/etc/nixos`
 4. Remove `sudo` requirement: `sudo chown <user-name>:users .git` (replace `<user-name>` with the system's username).
 5. Run `git init`.
-6. Add `progams.git.extraConfig.safe.directory = /etc/nixos;` in home-manager.
+6. Add `progams.git.extraConfig.safe.directory = "/etc/nixos";` in home-manager.
 7. Make an **empty** repo (on Github, or another site).
 8. `git remote add <remote-name> <link-to-repo>`
     Note1: `<remote-name>` is often `origin`, but it can be more descriptive, like `github`.
     Note2: If using SSH on Github, `<link-to-repo>` is of the form `git@github.com:<github-username>/<git-repo-name>.git`.
 9. `git push <remote-name> main`, and you're done!
+
+Alternative `git push <remote-name> master`, (github-syntax)and you're done!
 * Optional: Add `programs.git.extraConfig.init.defaultBranch = "main";` to home-manager.
+
+ Alternative: Add `programs.git.extraConfig.init.defaultBranch = "master";` to home-manager.
 
 ## Potential errors
 ### 'Git tree ... is dirty'
