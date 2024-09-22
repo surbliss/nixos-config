@@ -8,7 +8,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./disko-config.nix
+    # ./disko-config.nix
   ];
 
   nix.settings.experimental-features = [
