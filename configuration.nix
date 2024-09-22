@@ -84,9 +84,9 @@
   services.xserver.windowManager.xmonad = {
     enable = true;
     enableContribAndExtras = true;
-    config = ./xmonad.hs;
-    extraPackages = hPkgs: [ hPkgs.xmobar ];
     # now it is ~/.config/xmonad/xmonad.hs
+    config = ./xmonad.hs;
+    # extraPackages = hPkgs: [ hPkgs.xmobar ];
   };
 
   # add user
@@ -191,6 +191,7 @@
     # rofi-power-menu
 
     # Annoying in VM
+    xmobar
   ];
 
   # environment.variables.EDITOR = "nvim";
