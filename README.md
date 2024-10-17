@@ -25,3 +25,8 @@ Alternative `git push <remote-name> master`, (github-syntax)and you're done!
 ### 'Git tree ... is dirty'
 Make sure to add (and commit) everything to the git repo, and it should be fine.
 Comes up when you import a file (in configuration.nix, or likewise), but the file is not added to your git repo. Is to make sure, that there are no errors when cloning the repo, and building from it.
+
+### Note on git
+Note that when running `sudo`, the local git configuration is not passed.
+Thus, you should at some point do `git config user.email ...` and `git config
+user.name ...`.
