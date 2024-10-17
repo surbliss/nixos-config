@@ -50,7 +50,7 @@
 
   # TODO: Put all 'xserver' configs together
   services = {
-    # displayManager.defaultSession = "none+xmonad";
+    displayManager.defaultSession = "none+xmonad";
     xserver = {
       enable = true;
 
@@ -72,10 +72,20 @@
       displayManager.lightdm = {
         enable = true;
         background = /home/angryluck/.background-image;
-        greeters.gtk.enable = true;
+        greeters.gtk = {
+          enable = true;
+          extraConfig = ''
+            user-background = false
+          '';
+        };
       };
 
       windowManager.xmonad.enable = true;
+
+      # desktopManager = {
+      #   xterm.enable = false;
+      #   xfce.enable = true;
+      # };
 
       # windowManager.xmonad = {
       #   enable = true;
@@ -208,6 +218,12 @@
   ];
 
   # environment.variables.EDITOR = "nvim";
+
+  # For jEdit to work!
+  environment.sessionVariables = {
+    _JAVA_AWT_WM_NONREPARENTING = 1;
+  };
+
   programs.neovim = {
     enable = true;
     defaultEditor = true;
