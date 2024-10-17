@@ -71,7 +71,8 @@
 
       displayManager.lightdm = {
         enable = true;
-        background = /home/angryluck/.background-image;
+        # background = /home/angryluck/.background-image;
+        background = ./.background-image;
         greeters.gtk = {
           enable = true;
           extraConfig = ''
