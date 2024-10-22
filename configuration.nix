@@ -146,6 +146,12 @@
     };
   };
 
+  # Make uinput group
+  users.groups.uinput = {};
+
+  # Give uinput group necessary permissions
+  services.udev.extraRules = ''KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'';
+
   # add user
   users.users.angryluck = {
     isNormalUser = true;
