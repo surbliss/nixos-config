@@ -156,6 +156,8 @@
       "networkmanager"
       "video"
       "audio"
+      "input"
+      "uinput"
     ];
     # Maybe in home-manager instead?
     openssh.authorizedKeys.keys = [
