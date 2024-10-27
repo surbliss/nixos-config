@@ -50,11 +50,16 @@
 
   # TODO: Put all 'xserver' configs together
   services = {
-    displayManager.defaultSession = "none+xmonad";
+    # displayManager.defaultSession = "none+xmonad";
+    displayManager.sddm = {
+      enable = true;
+      # Options: elarun, maldives, maya
+      theme = "maldives";
+    };
     xserver = {
       enable = true;
 
-      desktopManager.wallpaper.mode = "fill";
+      desktopManager.wallpaper.mode = "max";
 
       dpi = 120;
 
@@ -69,17 +74,17 @@
         options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
       };
 
-      displayManager.lightdm = {
-        enable = true;
-        # background = /home/angryluck/.background-image;
-        background = ./.background-image;
-        greeters.gtk = {
-          enable = true;
-          extraConfig = ''
-            user-background = false
-          '';
-        };
-      };
+      # displayManager.lightdm = {
+      #   enable = true;
+      #   # background = /home/angryluck/.background-image;
+      #   # background = ./.background-image;
+      #   greeters.gtk = {
+      #     enable = true;
+      #     # extraConfig = ''
+      #     #   user-background = false
+      #     # '';
+      #   };
+      # };
 
       windowManager.xmonad.enable = true;
 
