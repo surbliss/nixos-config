@@ -131,4 +131,4 @@
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
-# vim: set ts=2 sw=2
+# vim: set ts=2 sw=2:

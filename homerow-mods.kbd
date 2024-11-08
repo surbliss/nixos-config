@@ -1,0 +1,34 @@
+;; TO EXIT (if keyboard is unusable): space + left control + esc, before
+;; remapping
+
+(defcfg
+  process-unmapped-keys yes
+)
+
+;; Uses ';' because that is what is on an american keyboard there...
+(defsrc
+     a	s	d	f		j	k	l	;
+)
+
+(defvar
+  tap-time 150
+  hold-time 200
+)
+
+(defalias
+  amo (tap-hold $tap-time $hold-time a lalt)
+  smo (tap-hold $tap-time $hold-time s lmet)
+  dmo (tap-hold $tap-time $hold-time d lctl)
+  fmo (tap-hold $tap-time $hold-time f lsft)
+  jmo (tap-hold $tap-time $hold-time j rsft)
+  kmo (tap-hold $tap-time $hold-time k rctl)
+  lmo (tap-hold $tap-time $hold-time l rmet)
+  ;; ralt=altgr, so want lalt instead.
+  [mo (tap-hold $tap-time $hold-time ; lalt)
+)
+
+(deflayer base
+     @amo @smo @dmo @fmo @jmo @kmo @lmo @[mo
+)
+
+;; vim: set tw=0 ts=8 sw=2 sts=5 smarttab expandtab:
