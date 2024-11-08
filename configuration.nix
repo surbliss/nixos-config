@@ -122,7 +122,7 @@
       # };
     };
   };
-  program.slock.enable = true;
+  programs.slock.enable = true;
   programs.zsh.enable = true;
   users.users.angryluck.shell = pkgs.zsh;
 

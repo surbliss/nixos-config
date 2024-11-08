@@ -89,7 +89,7 @@
 
   # Battery, see https://nixos.wiki/wiki/Laptop
   powerManagement.enable = true;
-  serices = {
+  services = {
     upower.enable = true; # Battery info
     thermald.enable = true; # Prevent overheating (primarily on intel CPUs)
     tlp = {
