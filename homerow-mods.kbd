@@ -1,34 +1,58 @@
+
 ;; TO EXIT (if keyboard is unusable): space + left control + esc, before
 ;; remapping
 
-(defcfg
-  process-unmapped-keys yes
-)
+;;(defcfg
+;;  process-unmapped-keys yes
+;;)
 
 ;; Uses ';' because that is what is on an american keyboard there...
 (defsrc
-     a	s	d	f		j	k	l	;
+grv	1	2	3	4	5	6	7	8	9	0	-	=	bspc
+tab	q	w	e	r	t	y	u	i	o	p	[	]	\
+caps	a	s	d	f	g	h	j	k	l	;	'	ret
+lsft	lsgt	z	x	c	v	b	n	m	,	.	/	rsft
+lctl	lmet	lalt			spc			ralt	comp	rctl
 )
 
 (defvar
   tap-time 150
   hold-time 200
+  tt $tap-time
+  ht $hold-time
 )
 
 (defalias
-  amo (tap-hold $tap-time $hold-time a lalt)
-  smo (tap-hold $tap-time $hold-time s lmet)
-  dmo (tap-hold $tap-time $hold-time d lctl)
-  fmo (tap-hold $tap-time $hold-time f lsft)
-  jmo (tap-hold $tap-time $hold-time j rsft)
-  kmo (tap-hold $tap-time $hold-time k rctl)
-  lmo (tap-hold $tap-time $hold-time l rmet)
+  amo (tap-hold $tt $ht a lalt)
+  smo (tap-hold $tt $ht s lmet)
+  dmo (tap-hold $tt $ht d lctl)
+  fmo (tap-hold $tt $ht f lsft)
+  jmo (tap-hold $tt $ht j rsft)
+  kmo (tap-hold $tt $ht k rctl)
+  lmo (tap-hold $tt $ht l rmet)
   ;; ralt=altgr, so want lalt instead.
-  [mo (tap-hold $tap-time $hold-time ; lalt)
+  ;mo (tap-hold $tt $ht ; lalt)
+  sym (tap-hold $tt $ht spc (layer-toggle symbols))
+  lef (tap-hold $tt $ht left _)
+  dow (tap-hold $tt $ht down _)
+  up (tap-hold $tt $ht up _)
+  rig (tap-hold $tt $ht right _)
+
 )
 
 (deflayer base
-     @amo @smo @dmo @fmo @jmo @kmo @lmo @[mo
+_	_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	_	_	_	_	_	_	_	_	_	_	_	_
+_	@amo	@smo	@dmo	@fmo	_	_	@jmo	@kmo	@lmo	@;mo	_	_
+_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	_			@sym			_	_	_
 )
 
-;; vim: set tw=0 ts=8 sw=2 sts=5 smarttab expandtab:
+(deflayer symbols
+_	_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	7	8	9	_	_	_	_	_	_	_	_	_
+_	_	4	5	6	_	@lef	@dow	@up	@rig	_	_	_
+_	0	1	2	3	_	_	_	_	_	_	_	_
+_	_	_			_			_	_	_
+)
+;; vim: set tw=0 ts=5 sw=2 sts=5 smarttab noexpandtab:
