@@ -16,7 +16,7 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
 )
 
 (defvar
-  tap-time 150
+  tap-time 200
   hold-time 200
   tt $tap-time
   ht $hold-time
@@ -37,21 +37,59 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   dow (tap-hold $tt $ht down _)
   up (tap-hold $tt $ht up _)
   rig (tap-hold $tt $ht right _)
+  cw (caps-word 1000)
+  ;;æ (unicode æ)
+  ;;ø (unicode ø)
+  ;;å (unicode å)
+  ;;Æ (unicode Æ)
+  ;;Ø (unicode Ø)
+  ;;Å (unicode Å)
+  ;;_æ (fork @æ @Æ (lsft rsft))
+  ;;_ø (fork @ø @Ø (lsft rsft))
+  ;;_å (fork @å @Å (lsft rsft))
+  ;; Requires mapping to ralt+... in actual keyboard-config...
+  ;;b AG-b
+  ;;æ AG-;
+  ;;ø AG-'
+  ;;å AG-[
+  4mo (tap-hold $tt $ht 4 lmet)
+  5mo (tap-hold $tt $ht 5 lctl)
+  6mo (tap-hold $tt $ht 6 lsft)
+)
 
+(defchords caps-word 100
+  (f  ) @fmo
+  (  j) @jmo
+  (f j) @cw
+)
+
+(defalias
+  f (chord caps-word f)
+  j (chord caps-word j)
 )
 
 (deflayer base
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
-_	@amo	@smo	@dmo	@fmo	_	_	@jmo	@kmo	@lmo	@;mo	_	_
+_	@amo	@smo	@dmo	@f	_	_	@j	@kmo	@lmo	@;mo	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_			@sym			_	_	_
 )
 
+;;(deflayer symbols_old
+;;_	_	_	_	_	_	_	_	_	_	_	_	_	_
+;;_	_	7	8	9	_	_	_	_	_	_	_	_	_
+;;_	_	4	5	6	_	@lef	@dow	@up	@rig	_	_	_
+;;_	0	1	2	3	_	_	_	_	_	_	_	_
+;;_	_	_			_			_	_	_
+;;)
+
+
+;; AG-shortcuts require rebinding the actual keyboard-layout!
 (deflayer symbols
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
-_	_	7	8	9	_	_	_	_	_	_	_	_	_
-_	_	4	5	6	_	@lef	@dow	@up	@rig	_	_	_
+_	_	7	8	9	_	mute	vold	volu	brdn	bru	AG-[	_	_
+_	@amo	@4mo	@5mo	@6mo	_	@lef	@dow	@up	@rig	AG-;	AG-'	_
 _	0	1	2	3	_	_	_	_	_	_	_	_
 _	_	_			_			_	_	_
 )
