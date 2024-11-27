@@ -9,7 +9,6 @@
   imports = [
     ./hardware-configuration.nix
     ./services.nix
-    inputs.home-manager.nixosModules.angryluck
     # ./disko-config.nix
   ];
 

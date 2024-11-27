@@ -36,7 +36,6 @@
     in
     {
       nixosConfigurations."angryluck" = nixpkgs.lib.nixosSystem {
-        # system = "x86_64-linux";
         specialArgs = {
           inherit system;
           #   inherit inputs;
@@ -50,16 +49,7 @@
             home-manager.useUserPackages = true; # Allow user-specific packages
             home-manager.users.angryluck = import ./home-manager/home.nix; # User Home Manager configuration
           }
-          # inputs.home-manager.nixosModules.angryluck
-          # home-manager.nixosModules.home-manager
-          #
-          # {
-          #   home-manager.useGlobalPkgs = true;
-          #   home-manager.useUserPackages = true;
-          #   home-manager.users.angryluck = import ./home-manager/home.nix;
-          #   # nixpkgs.overlays = overlays;
-          # }
-          { nixpkgs.overlays = overlays; }
+          # { nixpkgs.overlays = overlays; }
         ];
       };
       # homeConfigurations."angryluck" = home-manager.lib.homeManagerConfiguration {

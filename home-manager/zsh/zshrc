@@ -1,0 +1,123 @@
+bindkey -v		#vi-mode
+export KEYTIMEOUT=1	#1 sec for combinations
+
+# Use vim keys in tab complete menu:
+# bindkey -M menuselect '^h' vi-backward-char
+# bindkey -M menuselect '^k' vi-up-line-or-history
+# bindkey -M menuselect '^l' vi-forward-char
+# bindkey -M menuselect '^j' vi-down-line-or-history
+
+# Edit line in vim with ctrl-e:
+#autoload edit-command-line; zle -N edit-command-line
+#bindkey '^e' edit-command-line
+
+
+# Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# cursor_mode() {
+#     # See https://ttssh2.osdn.jp/manual/4/en/usage/tips/vim.html for cursor shapes
+#     cursor_block='\e[2 q'
+#     cursor_beam='\e[6 q'
+# 
+#     function zle-keymap-select {
+#         if [[ ${KEYMAP} == vicmd ]] ||
+#             [[ $1 = 'block' ]]; then
+#             echo -ne $cursor_block
+#         elif [[ ${KEYMAP} == main ]] ||
+#             [[ ${KEYMAP} == viins ]] ||
+#             [[ ${KEYMAP} = '' ]] ||
+#             [[ $1 = 'beam' ]]; then
+#             echo -ne $cursor_beam
+#         fi
+#     }
+# 
+#     zle-line-init() {
+#         echo -ne $cursor_beam
+#     }
+# 
+#     zle -N zle-keymap-select
+#     zle -N zle-line-init
+# }
+# 
+# cursor_mode
+
+# Enable backspace in insertmode
+bindkey -v '^?' backward-delete-char
+
+
+### complicated aliases (functions):
+function arkiver() {
+    if [ $# -eq 1 ]; then
+        if [ -e "$1" ]; then
+            echo "Flytter $1 til 4-arkiv"
+            mv -i "$1" ~/Documents/4-arkiv/ # -i so asks before overwrite
+        else
+            echo "Error: $1 doesn't exist"
+        fi
+    else
+        echo "Wrong number of arguments ($#)"
+    fi
+}
+
+
+
+# PROMPT!
+PROMPT='%F{green}[%F{white}%B%3~%b%F{green}]%(!.#.$) %f'
+
+# Better 'time' command
+TIMEFMT=$'\n================\nuser\t%*Us\nsystem\t%*Ss\ntotal\t%*Es'
+
+# Plugin-config
+bindkey '^ ' autosuggest-accept
+# bindkey '^[[15;4u' autosuggest-execute #Maps to CTRL+Enter, see alacritty
+bindkey '^[[13;5u' autosuggest-execute #Maps to CTRL+Enter, see alacritty
+# This one just maps enter to it, but no CTRL...
+# bindkey '^[M' autosuggest-execute #Maps to CTRL+Enter, see alacritty
+# bindkey '^M' autosuggest-execute #Maps to CTRL+Enter, see alacritty
+    #config for explanation.
+# See https://stackoverflow.com/questions/16359878/how-to-map-shift-enter
+bindkey '^N' autosuggest-clear
+
+
+# expand-multiple-dots.zsh, see 
+# https://github.com/parkercoates/dotfiles/blob/main/.zsh/expand-multiple-dots.zsh
+
+# Based on http://stackoverflow.com/a/41420448/4757
+function expand-multiple-dots() {
+    local MATCH
+    if [[ $LBUFFER =~ '(^| )\.\.\.+' ]]; then
+        LBUFFER=$LBUFFER:fs%\.\.\.%../..%
+    fi
+}
+
+function expand-multiple-dots-then-expand-or-complete() {
+    zle expand-multiple-dots
+    zle expand-or-complete
+}
+
+function expand-multiple-dots-then-accept-line() {
+    zle expand-multiple-dots
+    zle accept-line
+}
+
+zle -N expand-multiple-dots
+zle -N expand-multiple-dots-then-expand-or-complete
+zle -N expand-multiple-dots-then-accept-line
+bindkey '^I' expand-multiple-dots-then-expand-or-complete
+bindkey '^M' expand-multiple-dots-then-accept-line
+
+eval "$(direnv hook zsh)"
