@@ -1,6 +1,11 @@
 # My NixOS-configuration
 For personal use, but feel free to use it for inspiration.
 
+# First installation on NixOS
+`git clone` this repo into `/etc/nixos/`. After building and creating a user,
+remember to `sudo chown -R USER:` the `nixos` folder, so the git repo doesn't
+require sudo-privileges.
+
 # How to set up /etc/nixos/ folder as a git repo, that can be pushed.
 Souce: https://www.youtube.com/watch?v=20BN4gqHwaQ
 1. Configure git username/email (in home-manager)

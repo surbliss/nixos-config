@@ -2,12 +2,14 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 {
   imports = [
     ./hardware-configuration.nix
     ./services.nix
+    inputs.home-manager.nixosModules.angryluck
     # ./disko-config.nix
   ];
 
@@ -55,9 +57,23 @@
 
   # Make uinput group
   users.groups.uinput = { };
+  #
+  # users.groups.nixos-editors = { };
 
   # Give uinput group necessary permissions
   services.udev.extraRules = ''KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'';
+
+  # systemd.tmpfiles.rules = [
+  #   "g /etc/nixos 0775 root nixos-editors"
+  # ];
+
+  # system.activationScripts.nixosEtcPermissions = {
+  #   text = ''
+  #     chown -R angryluck:users /etc/nixos
+  #     chmod 755 /etc/nixos
+  #   '';
+  #   deps = [ "users" ];
+  # };
 
   # add user
   users.users.angryluck = {
@@ -71,6 +87,7 @@
       "audio"
       "input"
       "uinput"
+      "nixos-editor" # Allowed to edit /etc/nixos/ without sudo
     ];
     # Maybe in home-manager instead?
     openssh.authorizedKeys.keys = [
@@ -97,6 +114,7 @@
 
     # Needed for configuring eduroam (but not otherwise)
     networkmanagerapplet
+    fortune
   ];
 
   # For jEdit to work!
