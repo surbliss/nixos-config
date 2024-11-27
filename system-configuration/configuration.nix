@@ -12,6 +12,12 @@
     # ./disko-config.nix
   ];
 
+  # FIX:
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-27.3.11"
+  ];
+  nixpkgs.config.allowUnfree = true;
+
   nix.settings.experimental-features = [
     "nix-command"
     "flakes"

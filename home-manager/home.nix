@@ -1,5 +1,5 @@
 {
-  config,
+  # config,
   pkgs,
   lib,
   # inputs,
@@ -365,12 +365,13 @@
   #   })
   # ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "electron-27.3.11"
-  ];
+  # permittedInsecurePackages = [
+  #   "electron-27.3.11"
+  # ];
 
   # Unfree packages, to allow
-  nixpkgs.config.allowUnfree = true;
+  # nixpkgs.config.allowUnfree = true;
+  # config.allowUnfree = true;
   # Didn't work :/
   # nixpkgs.config.allowUnfreePredicate = pkg:
   #   builtins.elem (pkgs.lib.getName pkgs) [
@@ -380,8 +381,8 @@
   # All user-packages, systemwide packages should go in configuration.nix
   home.packages = with pkgs; [
     # UNFREE PACKAGES:
-    discord
-    gh-copilot # Not as helpful as I thought...
+    # discord
+    # gh-copilot # Not as helpful as I thought...
 
     # UNFREE END
     gh

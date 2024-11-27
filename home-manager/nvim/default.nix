@@ -378,7 +378,7 @@
 
         # Defined through overlay up top
         # isabelle-lsp.lua (skal stadig have det til at virke)
-        own-isabelle-syn
+        # own-isabelle-syn
         # (plugin "Treeniks/isabelle-lsp.nvim")
 
         {

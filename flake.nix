@@ -38,9 +38,15 @@
       nixosConfigurations."angryluck" = nixpkgs.lib.nixosSystem {
         specialArgs = {
           inherit system;
-          #   inherit inputs;
-          #   inherit stablePkgs;
+          inherit inputs;
+          inherit stablePkgs;
         };
+        # nixpkgs.config = {
+        #   allowUnfree = true;
+        #   nixpkgs.config.permittedInsecurePackages = [
+        #     "electron-27.3.11"
+        #   ];
+        # };
         modules = [
           ./system-configuration/configuration.nix
           home-manager.nixosModules.home-manager
@@ -48,8 +54,12 @@
             home-manager.useGlobalPkgs = true; # Use global packages in Home Manager
             home-manager.useUserPackages = true; # Allow user-specific packages
             home-manager.users.angryluck = import ./home-manager/home.nix; # User Home Manager configuration
+            home-manager.extraSpecialArgs = {
+              inherit inputs;
+              inherit stablePkgs;
+            };
           }
-          # { nixpkgs.overlays = overlays; }
+          { nixpkgs.overlays = overlays; }
         ];
       };
       # homeConfigurations."angryluck" = home-manager.lib.homeManagerConfiguration {
