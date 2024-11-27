@@ -50,6 +50,9 @@
     useXkbConfig = true; # use xkb.options in tty.
   };
 
+  # Doesn't do anything
+  # hardware.video.hidpi.enable = true;
+
   # Make uinput group
   users.groups.uinput = { };
 
