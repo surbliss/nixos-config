@@ -1,0 +1,20 @@
+xkb_symbols "dk-custom" {
+
+    include "dk(basic)"
+
+    name[Group1]="Danish (no dead keys)";
+
+    // key <TLDE>  { [     onehalf,    asciitilde,     section,   paragraph ] };
+    key <TLDE>	{[ asciitilde,	onehalf,	section,	paragraph	]};
+    key <AE12>	{[ slash,		bar,		grave,		acute		]};
+    key <AD11>	{[ less,		at,			aring,		Aring		]};
+    key <AD12>  {[ greater,		asciicircum,asciitilde,	macron		]};	
+    key <AC10>	{[ bracketleft,	braceleft,	ae,			AE			]};
+    key <AC11>	{[ bracketright,braceright,	oslash,		Oslash		]};
+    key <BKSL>	{[ apostrophe,	asterisk,	doubleacute,multiply	]};
+    key <AB08>	{[ comma,		semicolon,	cedilla,    ogonek      ]};
+    key <AB09>	{[ period,		colon,		periodcentered,	abovedot]};
+    key <AE04>  {[ 4,			dollar,		currency,	onequarter  ]};
+    key <LSGT>  {[ backslash,	bar,		acute					]};
+};
+// vim: set noexpandtab ts=4:
