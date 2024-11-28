@@ -101,6 +101,20 @@
 
   # FIX: Slå korrekt notation op! (se VimJoyers video)
   # xdg.mimeApps.defaultApplications."inode/directory" = "org.gnome.Nautilus.desktop";
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [
+        "org.pwmt.zathura.desktop"
+        "org.pwmt.zathura-pdf-mupdf.desktop"
+        "org.pwmt.zathura-pdf-djvu.desktop"
+        "org.pwmt.zathura-pdf-ps.desktop"
+        "org.pwmt.zathura-pdf-cb.desktop"
+        "zathura.desktop"
+        "firefox.desktop"
+      ];
+    };
+  };
 
   programs.git = {
     enable = true;
@@ -595,6 +609,9 @@
     zotero
 
     # test
-    haskellPackages.misfortune
+    # haskellPackages.misfortune
+    libreoffice
+
+    lazygit
   ];
 }

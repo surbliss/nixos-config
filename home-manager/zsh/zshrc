@@ -114,6 +114,25 @@ function expand-multiple-dots-then-accept-line() {
     zle accept-line
 }
 
+function tex-init() { 
+   if [[ $# -ne 1 ]]; then
+       echo "Available templates:"
+       for template in ~/Documents/3-ressourcer/latex-templates/*.tex; do
+           basename "$template" .tex
+       done
+       echo ""
+       echo "Usage: tex-init <template_name>"
+       echo "Example:"
+       echo "input: tex-init code"
+       echo "output: preamble.tex"
+       return 1
+   fi
+   
+   cp ~/Documents/3-ressourcer/latex-templates/"$1".tex "preamble.tex"
+}
+
+
+
 zle -N expand-multiple-dots
 zle -N expand-multiple-dots-then-expand-or-complete
 zle -N expand-multiple-dots-then-accept-line
