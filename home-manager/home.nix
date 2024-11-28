@@ -110,12 +110,12 @@
     aliases = {
       a = "add .";
       cm = "commit -m";
-      cam = "!git add . && git commit -m";
+      acm = "!git add . && git commit -m";
       ca = "!git add . && git commit -m 'empty'"; # commit with no msg
       st = "status";
       br = "branch";
       co = "checkout"; # Still not sure what this does...
-      qp = "!git add . && git commit -m 'quick-commit' && git push";
+      qp = "!git add . && git commit -m 'quick-commit' && git push"; # quick-push
       # acp = "!git add . && git commit -m 'empty' && git push";
     };
     extraConfig = {
