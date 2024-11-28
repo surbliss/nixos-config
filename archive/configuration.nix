@@ -102,7 +102,7 @@
     openssh.authorizedKeys.keys = [
       # Replace with your own public key
       # NEED PRIVATE KEY IN .ssh/ !
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj thomas@surlykke.dk"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj"
     ];
     #    packages = with pkgs; [
     #    	firefox
