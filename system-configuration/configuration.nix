@@ -50,8 +50,8 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Copenhagen";
-  i18n.defaultLocale = "en_US.UTF-8";
-  # i18n.defaultLocale = "da_DK.UTF-8";
+  # i18n.defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "da_DK.UTF-8";
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
     useXkbConfig = true; # use xkb.options in tty.

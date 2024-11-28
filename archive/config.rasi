@@ -1,0 +1,14 @@
+configuration {
+    display-drun: "Applications";
+    modi: [drun, file-browser-extended];
+    font: "Nimbus Sans 16";
+    show-icons: true;
+    cache-dir: ".config/rofi/cache";
+    filebrowser {
+        directory: "$HOME";
+        /* directories-first: true; */
+        matching: "fuzzy";
+        }
+    }
+@theme "/usr/share/rofi/themes/gruvbox-dark-soft.rasi"
+

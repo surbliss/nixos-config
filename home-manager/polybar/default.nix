@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ stablePkgs, pkgs, ... }:
 {
   #FIX: Reparer polybar, og skift xmobar ud med det.
   #Enten konfigurer i xmonad.hs, ellers få nedenstående til at virke...
