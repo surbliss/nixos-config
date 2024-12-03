@@ -4,6 +4,7 @@
   lib,
   # inputs,
   stablePkgs,
+  overlays,
   ...
 }:
 {
@@ -15,7 +16,7 @@
   ];
 
   # FIX: DELETE THIS!
-  home.enableNixpkgsReleaseCheck = false;
+  # home.enableNixpkgsReleaseCheck = false;
 
   # Let home-manager manage itself, required
   programs.home-manager.enable = true;
@@ -59,6 +60,10 @@
     # target = "xmonad/xmonad.hs";
     source = ./xmonad.hs;
   };
+
+  # xdg.configFile."aocd/token" = {
+  #   source = ./aocd-token.txt;
+  # };
 
   xsession = {
     enable = true;
@@ -136,7 +141,8 @@
       # Set push.autoSetupRemote to true
       push.autoSetupRemote = "true";
       init.defaultBranch = "master";
-      safe.directory = "/etc/nixos";
+      pull.rebase = "false";
+      # safe.directory = "/etc/nixos";
     };
   };
 
@@ -200,6 +206,8 @@
       # database = "sqlite";
     };
   };
+
+  programs.autorandr.enable = true;
 
   programs.feh = {
     enable = true;
@@ -395,7 +403,8 @@
   # All user-packages, systemwide packages should go in configuration.nix
   home.packages = with pkgs; [
     # UNFREE PACKAGES:
-    # discord
+    discord
+    zoom-us
     # gh-copilot # Not as helpful as I thought...
 
     # UNFREE END
@@ -507,7 +516,8 @@
         scikit-learn
         matplotlib
         notebook
-        # sklearn-deap
+        aocd
+        lark
       ]
     ))
     # rust
@@ -613,5 +623,7 @@
     libreoffice
 
     lazygit
+
+    ispc
   ];
 }

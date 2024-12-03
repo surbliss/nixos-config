@@ -18,6 +18,9 @@
       enableCompletion = true;
       autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
+      sessionVariables = {
+        AOCD_DIR = "~/aocd/";
+      };
       shellAliases = {
         # ls = "ls --color --group-directories-first -F";
         ls = "eza --group-directories-first";
@@ -26,7 +29,8 @@
         df = "df -h";
         free = "free -m";
         bc = "bc -l";
-        hms = "home-manager switch";
+        hms = "home-manager switch --flake /etc/nixos"; # opt: #angryluck
+        hm = "home-manager --flake /etc/nixos"; # opt: #angryluck
         sudo = "sudo ";
         nrs = "nixos-rebuild switch";
         nrt = "nixos-rebuild test";

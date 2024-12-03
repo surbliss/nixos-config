@@ -29,6 +29,30 @@
   # makes sure that <nixpkgs> refers to actual nixpkgs used for system
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
+  # Python LSP-settings
+  programs.ruff = {
+    enable = true;
+    settings = {
+      line-length = 80;
+      lint = {
+        select = [ "ALL" ];
+        ignore = [
+          "ERA001" # Commented out code
+          "T201" # print
+          "D100" # Missing docstrings
+          "D101" # .
+          "D102" # .
+          "D103" # .
+          "D104" # .
+          "D105" # .
+          "D106" # .
+          "D107" # .
+
+        ];
+      };
+    };
+  };
+
   # NOTE: If you make an init.lua in ./nvim, then below code doesn't run.
   # But the above lets us have an after/ftplugin/ folder!!!
   programs.neovim = {
@@ -92,17 +116,18 @@
           # sklearn-deap
 
           ### LSP-stuff:
-          python-lsp-server
-          rope
-          pyflakes
-          mccabe
-          pycodestyle
-          # pydocstyle
-          yapf
-          flake8
-          pylint
+          # python-lsp-server
+          # rope
+          # pyflakes
+          # mccabe
+          # pycodestyle
+          # # pydocstyle
+          # yapf
+          # flake8
+          # pylint
         ]
       ))
+      ruff
 
       tree-sitter
       ### FOR GITHUB PLUGIN BELOW! nodejs
@@ -326,6 +351,12 @@
                 },
                 model = 'claude-3.5-sonnet',
                 auto_insert_mode = true,
+                prompts = {
+                  Documentation = {
+                    system_prompt = "Give me a built in function from the language of the current buffer, that does the following. Do NOT comment on any of the code in the buffer, and do NOT insert it into the given code - only give the function name, and how to pass each parameter",
+                    mapping = "<leader>cd",
+                  }
+                }
               })
               vim.keymap.set('n', '<leader>co', chat.open, {silent = true})
               vim.keymap.set('n', '<leader>ce', ':CopilotChatExplain<CR>', {silent = true})

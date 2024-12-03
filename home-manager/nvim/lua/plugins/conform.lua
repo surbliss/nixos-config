@@ -19,7 +19,7 @@ require("conform").setup({
     -- json = { "jq" },
     c = { "clang-format" },
     -- Conform can also run multiple formatters sequentially
-    python = { "yapf" },
+    python = { "ruff" },
     fut = {},
     -- python = { "autopep8", "black" },
     -- latex = { "latexindent" },

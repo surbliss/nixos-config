@@ -7,7 +7,7 @@ vim.keymap.set(
   -- "<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/.config/nvim/luasnippets/'})<CR>"
   -- To quickly reload snippets, without having to run home-manager switch.
   -- But do remember to run home-manager switch at end of session!
-  "<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/.config/home-manager/nvim/luasnippets/'})<CR>"
+  "<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '/etc/nixos/home-manager/nvim/luasnippets/'})<CR>"
 )
 luasnip.config.setup({
   enable_autosnippets = true,

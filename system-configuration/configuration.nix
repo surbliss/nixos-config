@@ -102,6 +102,8 @@
     ];
   };
 
+  programs.ssh.startAgent = true;
+
   # Brightness control
   hardware.brillo.enable = true;
 

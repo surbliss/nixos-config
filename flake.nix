@@ -30,6 +30,14 @@
       system = "x86_64-linux";
       stablePkgs = nixpkgs-stable.legacyPackages.${system};
       pkgs = nixpkgs.legacyPackages.${system};
+      # pkgs = (
+      #   import nixpkgs {
+      #     inherit system;
+      #     config = {
+      #       permittedInsecurePackages = [ "electron_27" ];
+      #     };
+      #   }
+      # );
       overlays = [
         inputs.neovim-nightly-overlay.overlays.default
       ];
@@ -51,6 +59,10 @@
           ./system-configuration/configuration.nix
           home-manager.nixosModules.home-manager
           {
+            nixpkgs.config.permittedInsecurePackages = [
+              "electron-27.3.11"
+            ];
+            # nixpkgs.config.allowUnfree = true;
             home-manager.useGlobalPkgs = true; # Use global packages in Home Manager
             home-manager.useUserPackages = true; # Allow user-specific packages
             home-manager.users.angryluck = import ./home-manager/home.nix; # User Home Manager configuration
@@ -62,17 +74,38 @@
           { nixpkgs.overlays = overlays; }
         ];
       };
-      # homeConfigurations."angryluck" = home-manager.lib.homeManagerConfiguration {
-      #   inherit pkgs;
-      #   extraSpecialArgs = {
-      #     inherit inputs;
-      #     inherit stablePkgs;
+      # homeConfigurations = {
+      #   angryluck = home-manager.lib.homeManagerConfiguration {
+      #     pkgs = import nixpkgs { system = "x86_64-linux"; };
+      #     homeDirectory = "/home/angryluck";
+      #     username = "angryluck";
+      #     configuration = import ./home-manager/home.nix;
+      #     extraSpecialArgs = {
+      #       inherit inputs;
+      #       inherit stablePkgs;
+      #     };
+      #     modules = [
+      #       ./home-manager/home.nix
+      #       { nixpkgs.overlays = overlays; }
+      #     ];
       #   };
-      #   modules = [
-      #     ./home-manager/home.nix
-      #     { nixpkgs.overlays = overlays; }
-      #   ];
       # };
+
+      homeConfigurations."angryluck" = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        extraSpecialArgs = {
+          inherit inputs;
+          inherit stablePkgs;
+        };
+        modules = [
+          ./home-manager/home.nix
+          { nixpkgs.overlays = overlays; }
+          # { nix.settings.allowInsecure = [ "nixpkgs:electron_27" ]; }
+          { nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ]; }
+          { nixpkgs.config.allowUnfree = true; }
+          { nix.package = pkgs.nix; }
+        ];
+      };
     };
 }
 # vim: set sw=2

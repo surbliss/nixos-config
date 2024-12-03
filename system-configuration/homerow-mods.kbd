@@ -16,27 +16,27 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
 )
 
 (defvar
-  tap-time 100
-  hold-time 200
+  tap-time 200
+  hold-time 1000
   tt $tap-time
   ht $hold-time
 )
 
 (defalias
-  amo (tap-hold $tt $ht a lalt)
-  smo (tap-hold $tt $ht s lmet)
-  dmo (tap-hold $tt $ht d lctl)
-  fmo (tap-hold $tt $ht f lsft)
-  jmo (tap-hold $tt $ht j rsft)
-  kmo (tap-hold $tt $ht k rctl)
-  lmo (tap-hold $tt $ht l rmet)
+  amo (tap-hold-release $tt $ht a lalt)
+  smo (tap-hold-release $tt $ht s lmet)
+  dmo (tap-hold-release $tt $ht d lctl)
+  fmo (tap-hold-release $tt $ht f lsft)
+  jmo (tap-hold-release $tt $ht j rsft)
+  kmo (tap-hold-release $tt $ht k rctl)
+  lmo (tap-hold-release $tt $ht l rmet)
   ;; ralt=altgr, so want lalt instead.
-  ;mo (tap-hold $tt $ht ; lalt)
-  sym (tap-hold $tt $ht spc (layer-toggle symbols))
-  lef (tap-hold $tt $ht left _)
-  dow (tap-hold $tt $ht down _)
-  up (tap-hold $tt $ht up _)
-  rig (tap-hold $tt $ht right _)
+  ;mo (tap-hold-release $tt $ht ; lalt)
+  sym (tap-hold-release $tt $ht spc (layer-toggle symbols))
+  lef (tap-hold-release $tt $ht left _)
+  dow (tap-hold-release $tt $ht down _)
+  up (tap-hold-release $tt $ht up _)
+  rig (tap-hold-release $tt $ht right _)
   cw (caps-word 1000)
   ;;æ (unicode æ)
   ;;ø (unicode ø)
@@ -52,26 +52,26 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   ;;æ AG-;
   ;;ø AG-'
   ;;å AG-[
-  4mo (tap-hold $tt $ht 4 lmet)
-  5mo (tap-hold $tt $ht 5 lctl)
-  6mo (tap-hold $tt $ht 6 lsft)
+  4mo (tap-hold-release $tt $ht 4 lmet)
+  5mo (tap-hold-release $tt $ht 5 lctl)
+  6mo (tap-hold-release $tt $ht 6 lsft)
 )
 
 (defchords caps-word 100
-  (f  ) @fmo
-  (  j) @jmo
-  (f j) @cw
+  (a  ) @amo
+  (  ;) @;mo
+  (a ;) @cw
 )
 
 (defalias
-  f (chord caps-word f)
-  j (chord caps-word j)
+  a (chord caps-word a)
+  ; (chord caps-word ;)
 )
 
 (deflayer base
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
-_	@amo	@smo	@dmo	@f	_	_	@j	@kmo	@lmo	@;mo	_	_
+_	@a	@smo	@dmo	@fmo	_	_	@jmo	@kmo	@lmo	@;	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_			@sym			_	_	_
 )

@@ -65,3 +65,9 @@ vim.opt.hidden = false
 
 -- Combined with mapping <Esc> to clear highlights
 vim.opt.hlsearch = true
+
+vim.filetype.add({
+  extension = {
+    ispc = "ispc"
+  }
+})
