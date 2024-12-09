@@ -35,6 +35,8 @@
         nrs = "nixos-rebuild switch";
         nrt = "nixos-rebuild test";
         polybar-refresh = "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default&; disown";
+        # Temporarily needed, delete later
+        popcp = "cp mothApp.fsx ../../virtual-box-share/pop-3/src/";
       };
       # autocd = true;
       dotDir = ".config/zsh";

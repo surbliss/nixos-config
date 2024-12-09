@@ -28,6 +28,10 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 
+  home.sessionVariables = {
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libGL}/lib:${pkgs.SDL2}/lib";
+  };
+
   # # Temporary fix for pipewire-issue
   # home.activation.mute-unmute = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
   #   ${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
@@ -147,8 +151,28 @@
   };
 
   # File browser
-  programs.yazi.enable = true;
-
+  programs.yazi = {
+    enable = true;
+    settings.opener.open = [
+      {
+        run = "xdg-open \"$1\"";
+        orphan = true; # Allows closing yazi, after opening a file (e.g. pdf)
+        desc = "Open";
+        for = "linux";
+      }
+      {
+        run = "open \"$@\"";
+        desc = "Open";
+        for = "macos";
+      }
+      {
+        run = "start \"\" \"%1\"";
+        orphan = true;
+        desc = "Open";
+        for = "windows";
+      }
+    ];
+  };
   programs.rofi = {
     # Can't set file-browser-extended options here, have to modify the command
     # in xmonad!
@@ -496,10 +520,16 @@
     gcc14
     gnumake
     valgrind
-    gdb
+    # gdb
     rars
-    fsharp
+    # fsharp
     dotnet-sdk
+    dotnet-runtime
+    dotnet-aspnetcore
+    dotnet-repl
+    dotnetPackages.Nuget
+    # dotnet-sdk
+    # dotnetCorePackages.sdk_8_0_1xx
 
     ### IF YOU INSTALL THIS, THEN HASKELL-LANGUAGE-SERVER DOESN'T WORK!
     ### -> Must be because you then have two different ghc-versions...
@@ -517,7 +547,8 @@
         matplotlib
         notebook
         aocd
-        lark
+        # lark
+        pyparsing
       ]
     ))
     # rust
@@ -625,5 +656,23 @@
     lazygit
 
     ispc
+    # SDL.overrideAttrs
+    # (old: { dontDisableStatic = true; })
+    SDL2
+    SDL2_ttf
+    SDL2_image
+    SDL2_net
+    SDL2_Pango
+    SDL2_gfx
+    SDL2_mixer
+    SDL2_sound
+    gtk3
+    mesa
+
+    nuget-to-nix
+    # fsautocomplete
+
+    # cudaPackages.cuda_gdb
+    cudatoolkit
   ];
 }

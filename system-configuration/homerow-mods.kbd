@@ -23,7 +23,7 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
 )
 
 (defalias
-  amo (tap-hold-release $tt $ht a lalt)
+  amo (tap-hold-release-timeout $tt $ht a lalt lalt) ;; Helps with accidental ALTS
   smo (tap-hold-release $tt $ht s lmet)
   dmo (tap-hold-release $tt $ht d lctl)
   fmo (tap-hold-release $tt $ht f lsft)

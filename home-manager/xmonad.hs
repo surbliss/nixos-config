@@ -163,6 +163,8 @@ myKeys =
     ("M-0", spawn "rofi -show p -modi p:rofi-power-menu"),
     ("M-e", spawn "rofi modi emoji -show emoji -kb-custom1 Ctrl+c -emoji-mode insert_no_copy"),
     ("M-o", spawn "firefox"),
+    -- ("M-p", spawn "yazi"),
+    ("M-p", spawn (myTerminal ++ " -e yazi")),
     ("C-M-l", spawn "slock")
     -- , ("M-w", sendMessage ToggleStruts)
   ]
@@ -255,10 +257,12 @@ myStartupHook = do
 
 myManageHook =
   composeAll
-    [ className =? "VirtualBox Machine" --> doShift (myWorkspaces !! 8),
+    [ 
+    -- className =? "VirtualBox Machine" --> doShift (myWorkspaces !! 8),
       title =? "Oracle VM VirtualBox Manager" --> doCenterFloat,
-      title =? "Extension: (Bitwarden Password Manager) - Bitwarden \033%G\342\200\224\033%@ Mozilla Firefox" --> doCenterFloat,
-      title =? "isabelle-jedit-JEdit_Main" --> doShift (myWorkspaces !! 5),
+      -- title =? "Extension: (Bitwarden Password Manager) - Bitwarden \033%G\342\200\224\033%@ Mozilla Firefox" --> doCenterFloat,
+      -- title =? "isabelle-jedit-JEdit_Main" --> doShift (myWorkspaces !! 5),
+      className =? "SDL_App" --> doFloat,
       return True --> doF W.swapDown -- Makes new windows not spawn as master pane
     ]
 

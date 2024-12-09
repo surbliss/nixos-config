@@ -37,6 +37,8 @@
 
     # Doesn't work setting this in home-manager
     windowManager.xmonad.enable = true;
+    # displayManager.gdm.enable = true;
+    # desktopManager.gnome.enable = true;
   };
 
   # Audio

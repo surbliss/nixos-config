@@ -92,7 +92,8 @@
       "audio"
       "input"
       "uinput"
-      "nixos-editor" # Allowed to edit /etc/nixos/ without sudo
+      # "nixos-editor" # Allowed to edit /etc/nixos/ without sudo
+      # "vboxusers"
     ];
     # Maybe in home-manager instead?
     openssh.authorizedKeys.keys = [
@@ -154,6 +155,9 @@
   programs.zsh.enable = true;
   users.users.angryluck.shell = pkgs.zsh;
 
+  # Virtualbox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "angryluck" ];
   # Don't change, doesn't affect the version of packages installed.
   # IF you relly want to change, first read `man configuration.nix` and 
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion.

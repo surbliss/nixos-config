@@ -18,6 +18,7 @@ require("conform").setup({
     -- haskell = { "ormolu" },
     -- json = { "jq" },
     c = { "clang-format" },
+    ispc = { "clang-format" },
     -- Conform can also run multiple formatters sequentially
     python = { "ruff" },
     fut = {},

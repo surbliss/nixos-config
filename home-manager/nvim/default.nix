@@ -47,7 +47,8 @@
           "D105" # .
           "D106" # .
           "D107" # .
-
+          "N803" # Variables lowercase
+          "N806" # .
         ];
       };
     };
@@ -77,7 +78,7 @@
       # is merged
       # alejandra
       # nixfmt-rfc-style
-      fsautocomplete # FIX: Virker ikke :/
+      # fsautocomplete
 
       # For copilot
       luajitPackages.tiktoken_core
@@ -324,7 +325,7 @@
         # Replaced with haskell-language-server for now
         haskell-tools-nvim
 
-        Ionide-vim
+        # Ionide-vim
         markdown-preview-nvim
 
         # code formatter:
@@ -333,7 +334,7 @@
           config = "${builtins.readFile ./lua/plugins/conform.lua}";
         }
 
-        #zarchive-vim-fsharp
+        # zarchive-vim-fsharp
         ### NEED TO ADD STUDENT MAIL TO GITHUB FIRST!
         {
           plugin = CopilotChat-nvim;
