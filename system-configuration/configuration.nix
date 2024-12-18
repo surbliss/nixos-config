@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     ./services.nix
+    ./programs.nix
     # ./disko-config.nix
   ];
 
@@ -101,6 +102,11 @@
       # NEED PRIVATE KEY IN .ssh/ (And need to chmod 600 it)!
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj" # Can, optionally, add email after public ssh-key
     ];
+
+    # User-specific packages
+    packages = with pkgs; [
+      passh
+    ];
   };
 
   programs.ssh.startAgent = true;
@@ -110,50 +116,60 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search <package>
-  environment.systemPackages = with pkgs; [
-    # nano # installed by default
-    vim
-    git
-    wget
-    curl
-    home-manager
-    nix-search-cli
-    xclip
+  # Packages to be used for all users
+  # environment.systemPackages = with pkgs; [
+  #   # nano # installed by default
+  #   vim
+  #   git
+  #   wget
+  #   curl
+  #   home-manager
+  #   nix-search-cli
+  #   xclip
+  #
+  #   # Needed for configuring eduroam (but not otherwise)
+  #   networkmanagerapplet
+  #
+  #   stow
+  # ];
 
-    # Needed for configuring eduroam (but not otherwise)
-    networkmanagerapplet
-    fortune
-  ];
+  # For before login (systemd services)
+  environment.variables = {
 
-  # For jEdit to work!
+  };
+  # For after login
   environment.sessionVariables = {
+    # For jEdit to work!
     _JAVA_AWT_WM_NONREPARENTING = 1;
+    AOCD_DIR = "$HOME/aocd/";
   };
 
-  programs = {
-    neovim = {
-      enable = true;
-      defaultEditor = true;
-      # viAlias = true;
-      vimAlias = true;
-      # configure = {
-      #   customRC = ''
-      #     set tabstop=2
-      #     set softtabstop=4
-      #     set shiftwidth=2
-      #     set expandtab
-      #     set number
-      #     set relativenumber
-      #     set clipboard+=unnamedplus
-      #     set list
-      #     set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
-      #   '';
-      # };
-    };
-  };
-  programs.slock.enable = true;
-  programs.zsh.enable = true;
-  users.users.angryluck.shell = pkgs.zsh;
+  # programs = {
+  #   neovim = {
+  #     enable = true;
+  #     defaultEditor = true;
+  #     # viAlias = true;
+  #     vimAlias = true;
+  #     # configure = {
+  #     #   customRC = ''
+  #     #     set tabstop=2
+  #     #     set softtabstop=4
+  #     #     set shiftwidth=2
+  #     #     set expandtab
+  #     #     set number
+  #     #     set relativenumber
+  #     #     set clipboard+=unnamedplus
+  #     #     set list
+  #     #     set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
+  #     #   '';
+  #     # };
+  #   };
+  # };
+  # programs.slock.enable = true;
+  # programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
+  # users.users.angryluck.shell = pkgs.zsh;
+  users.users.angryluck.useDefaultShell = true;
 
   # Virtualbox
   virtualisation.virtualbox.host.enable = true;
