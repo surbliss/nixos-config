@@ -1,3 +1,5 @@
+-- NOTE: Keymaps are in ../.../keymaps.lua, so all keymaps are in the same file
+
 -- local on_attach = function(_, bufnr)
 --   local bufmap = function(keys, func)
 --     vim.keymap.set('n', keys, func, { buffer = bufnr })
@@ -21,10 +23,50 @@
 --     vim.lsp.buf.format()
 --   end, {})
 -- end
+--
+--
+--
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if not client then return end
+    -- if client.supports_method('textDocument/implementation') then
+    --   -- Create a keymap for vim.lsp.buf.implementation
+    -- end
+
+    -- if client.supports_method('textDocument/completion') then
+    --   -- Enable auto-completion
+    --   vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+    -- end
+
+    -- FIX:
+    ---@diagnostic disable-next-line: missing-parameter, param-type-mismatch
+    if client.supports_method('textDocument/formatting') then
+      -- Format the current buffer on save
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        buffer = args.buf,
+        callback = function()
+          vim.lsp.buf.format({ bufnr = args.buf, id = client.id })
+        end,
+      })
+    end
+  end,
+})
+
+
+
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
+---@diagnostic disable-next-line: unused-local
+local on_attach = function(client, bufnr)
+  if client.name == 'ruff_lsp' then
+    -- Disable hover in favor of Pyright
+    client.server_capabilities.hoverProvider = false
+  end
+end
 
 -- 1
 -- vim.api.nvim_create_autocmd("LspAttach", {
@@ -111,7 +153,24 @@ require("lspconfig").nixd.setup({
 require('lspconfig').clangd.setup {}
 
 require('lspconfig').ruff.setup {
+  on_attach = on_attach
+  -- capabilities = capabilities,
+}
+
+require("lspconfig").pyright.setup {
   capabilities = capabilities,
+  settings = {
+    pyright = {
+      -- Using Ruff's import organizer
+      disableOrganizeImports = true,
+    },
+    -- python = {
+    --   analysis = {
+    --     -- Ignore all files for analysis to exclusively use Ruff for linting
+    --     ignore = { '*' },
+    --   },
+    -- },
+  },
 }
 
 -- require("lspconfig").pylsp.setup {

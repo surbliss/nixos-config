@@ -13,7 +13,7 @@ require("conform").setup({
     }
   end,
   formatters_by_ft = {
-    -- lua = { "stylua" },
+    lua = { "stylua" },
     haskell = { "fourmolu" },
     -- haskell = { "ormolu" },
     -- json = { "jq" },

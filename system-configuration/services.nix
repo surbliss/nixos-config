@@ -1,5 +1,11 @@
-{ config, ... }:
 {
+  lib,
+  config,
+  pkgs,
+  ...
+}:
+{
+  services.pantheon.apps.enable = false;
   services.xserver = {
     enable = true;
 
@@ -27,7 +33,10 @@
       # greeters.pantheon.enable = true;
       #   # background = /home/angryluck/.background-image;
       background = ./.background-image;
+      # greeter.package = lib.mkForce pkgs.lightdm-gtk-greeter;
+      greeters.pantheon.enable = false;
       greeters.gtk = {
+        # enable = lib.mkForce true;
         enable = true;
         #     # extraConfig = ''
         #     #   user-background = false
@@ -36,7 +45,12 @@
     };
 
     # Doesn't work setting this in home-manager
-    windowManager.xmonad.enable = true;
+    windowManager.xmonad = {
+      enable = true;
+      enableContribAndExtras = true;
+      # enableConfiguredRecompile = true;
+      config = ./xmonad.hs;
+    };
     # displayManager.gdm.enable = true;
     # desktopManager.gnome.enable = true;
   };
@@ -93,7 +107,7 @@
   powerManagement.enable = true;
   services = {
     upower.enable = true; # Battery info
-    thermald.enable = true; # Prevent overheating (primarily on intel CPUs)
+    # thermald.enable = true; # Prevent overheating (primarily on intel CPUs)
     tlp = {
       enable = true;
       settings = {
@@ -109,8 +123,8 @@
         CPU_MIN_PERF_ON_BAT = 0;
         CPU_MAX_PERF_ON_BAT = 20;
 
-        START_CHARGE_THRESH_BATT = 50; # 50 and bellow it starts to charge
-        STOP_CHARGE_THRESH_BATT = 80; # 80 and above it stops charging
+        START_CHARGE_THRESH_BAT0 = 50; # 50 and bellow it starts to charge
+        STOP_CHARGE_THRESH_BAT0 = 80; # 80 and above it stops charging
       };
     };
   };
@@ -119,6 +133,67 @@
     enable = true;
     keyboards.homerow-mods.configFile = ./homerow-mods.kbd;
   };
+
+  services.autorandr.enable = true;
+
+  services.picom = {
+    enable = true;
+    packages = pkgs.picom-pijulius;
+    inactiveOpacity = 0.95;
+    menuOpacity = 1.0;
+    fadeDelta = 1000;
+    backend = "glx";
+    settings = {
+      corner-radius = 8; # or whatever
+      round-borders = 1;
+      # these are required!
+      experimental-backends = true;
+      # backend = "glx";
+      blur = {
+        method = "gaussian";
+        size = 10;
+        deviation = 5.0;
+      };
+    };
+  };
+
+  services.syncthing.enable = true;
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [
+        "Noto Color Emoji"
+        "NerdFontSymbolsOnly"
+      ];
+      monospace = [ "0xProto" ];
+      sansSerif = [ "Lato" ];
+      serif = [ "Noto Serif" ];
+    };
+  };
+
+  # systemd.user.services.polybar = {
+  #   Unit = {
+  #     Description = "Polybar status bar";
+  #     PartOf = [ "tray.target" ];
+  #     X-Restart-Triggers = mkIf (configFile != null) "${configFile}";
+  #   };
+  #
+  #   Service = {
+  #     Type = "forking";
+  #     Environment = "PATH=${cfg.package}/bin:/run/wrappers/bin";
+  #     ExecStart =
+  #       let
+  #         scriptPkg = pkgs.writeShellScriptBin "polybar-start" cfg.script;
+  #       in
+  #       "${scriptPkg}/bin/polybar-start";
+  #     Restart = "on-failure";
+  #   };
+  #
+  #   Install = {
+  #     WantedBy = [ "tray.target" ];
+  #   };
+  # };
 
 }
 # vim: set ts=2 sw=2

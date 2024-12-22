@@ -165,6 +165,7 @@ myKeys =
     ("M-o", spawn "firefox"),
     -- ("M-p", spawn "yazi"),
     ("M-p", spawn (myTerminal ++ " -e yazi")),
+    -- ("M-i", spawn (myTerminal ++ " yazi")),
     ("C-M-l", spawn "slock")
     -- , ("M-w", sendMessage ToggleStruts)
   ]

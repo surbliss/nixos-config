@@ -24,13 +24,22 @@ local function as(trigger, nodes, opts)
 end
 
 return {
-  as("eq", fmta([[
+  as(
+    "eq",
+    fmta(
+      [[
   \[
     <>
   \]
-]], { i(1) }), { condition = line_begin }),
+]],
+      { i(1) }
+    ),
+    { condition = line_begin }
+  ),
 
-  as("\\[", fmta(
+  as(
+    "\\[",
+    fmta(
       [[
         \[
           <>
@@ -41,25 +50,44 @@ return {
     { condition = line_begin }
   ),
 
-
-  s("\\", fmta([[
+  s(
+    "\\",
+    fmta(
+      [[
 \[
   <>
 \]
-  ]], { i(1) }), { condition = line_begin }),
+  ]],
+      { i(1) }
+    ),
+    { condition = line_begin }
+  ),
 
-
-  as("begin", fmta([[
+  as(
+    "begin",
+    fmta(
+      [[
 \begin{<>}
   <>
 \end{<>}
-]], { i(1), i(2), rep(1) }), { condition = line_begin }),
+]],
+      { i(1), i(2), rep(1) }
+    ),
+    { condition = line_begin }
+  ),
 
-  as("bg", fmta([[
+  as(
+    "bg",
+    fmta(
+      [[
         \begin{<>}
           <>
         \end{<>}
-      ]], { i(1), i(2), rep(1) }), { condition = line_begin }),
+      ]],
+      { i(1), i(2), rep(1) }
+    ),
+    { condition = line_begin }
+  ),
 
   as(
     "als",
@@ -87,7 +115,6 @@ return {
     { condition = line_begin }
   ),
 
-
   as(
     "enumm",
     fmta(
@@ -100,7 +127,6 @@ return {
     ),
     { condition = line_begin }
   ),
-
 
   as(
     "itemm",
@@ -117,7 +143,6 @@ return {
 
   as(",i", { t("\\item") }, { condition = line_begin }),
 
-
   -- Primært til programmering (MLA)
   as(
     "lst",
@@ -132,21 +157,42 @@ return {
     { condition = line_begin }
   ),
 
+  -- Minted, bedre end lst
+  as(
+    "minted",
+    fmta(
+      [[
+  \begin{minted}{<>}
+  <>
+  \end{minted}
+  ]],
+      { i(1, "futhark"), i(2) }
+    ),
+    { condition = line_begin }
+  ),
 
-
-  s("fig", fmta([[
+  s(
+    "fig",
+    fmta(
+      [[
 \begin{figure}[hb]
   \centering
   \includegraphics[width=0.9\textwidth]{<>}
   \caption{<>}
 \end{figure}
-  ]], { i(1, "file_path"), i(2, "caption") }), { condition = line_begin }),
-
-
+  ]],
+      { i(1, "file_path"), i(2, "caption") }
+    ),
+    { condition = line_begin }
+  ),
 
   -- Sections:
   as("secc", fmta("\\section{<>} %", { i(1) }), { condition = line_begin }),
   as("subb", fmta("\\subsection{<>} %", { i(1) }), { condition = line_begin }),
   as("ssubb", fmta("\\subsubsection{<>} %", { i(1) }), { condition = line_begin }),
-  as("codd", fmta("\\code{<>}", { i(1) }))
+  as("secss", fmta("\\section*{<>} %", { i(1) }), { condition = line_begin }),
+  as("subss", fmta("\\subsection*{<>} %", { i(1) }), { condition = line_begin }),
+  as("ssubss", fmta("\\subsubsection*{<>} %", { i(1) }), { condition = line_begin }),
+  as("codd", fmta("\\code{<>}", { i(1) })),
+  as("shll", fmta("\\shell{<>}", { i(1) })),
 }

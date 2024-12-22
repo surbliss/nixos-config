@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ./services.nix
     ./programs.nix
+    ./shell-config.nix
     # ./disko-config.nix
   ];
 
@@ -17,6 +18,8 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-27.3.11"
   ];
+
+  # TODO: Make per package
   nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [
@@ -39,7 +42,7 @@
       # root access by passing init=bin/sh
       editor = false;
       # Set resultion of console
-      consoleMode = "1";
+      consoleMode = "auto";
       # So /boot/ doesn't run out of memory
       configurationLimit = 120;
     };
@@ -52,7 +55,11 @@
 
   time.timeZone = "Europe/Copenhagen";
   # i18n.defaultLocale = "en_US.UTF-8";
-  i18n.defaultLocale = "da_DK.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.supportedLocales = [
+    "en_US.UTF-8/UTF-8"
+    "da_DK.UTF-8/UTF-8"
+  ];
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
     useXkbConfig = true; # use xkb.options in tty.
@@ -61,27 +68,36 @@
   # Doesn't do anything
   # hardware.video.hidpi.enable = true;
 
-  # Make uinput group
+  # # Make uinput group for kanata, see https://github.com/jtroo/kanata/wiki/Avoid-using-sudo-on-Linux
   users.groups.uinput = { };
-  #
-  # users.groups.nixos-editors = { };
-
-  # Give uinput group necessary permissions
   services.udev.extraRules = ''KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'';
+  #
+  # add user
+  users.users.milla = {
+    isNormalUser = true;
+    home = "/home/milla";
+    description = "Til Milla - uden alt muligt mystisk ;)";
+    extraGroups = [
+      "wheel" # Let's you do sudo things
+      "networkmanager"
+      "video"
+      "audio"
+      # "input"
+    ];
+    initialPassword = "";
 
-  # systemd.tmpfiles.rules = [
-  #   "g /etc/nixos 0775 root nixos-editors"
-  # ];
+  };
 
-  # system.activationScripts.nixosEtcPermissions = {
-  #   text = ''
-  #     chown -R angryluck:users /etc/nixos
-  #     chmod 755 /etc/nixos
-  #   '';
-  #   deps = [ "users" ];
+  # services.xserver.desktopManager.gnome.enable = true;
+  services.xserver.desktopManager.pantheon.enable = true;
+  # services.xserver.displayManager.lightdm.greeters.gtk.enable = false;
+  # Conflicts with tlp
+  services.power-profiles-daemon.enable = false;
+  # services.xserver.displayManager.sessionData.loginArgs = {
+  #   milla = "--session gnome";
+  #   angryluck = "--session xmonad";
   # };
 
-  # add user
   users.users.angryluck = {
     isNormalUser = true;
     home = "/home/angryluck";
@@ -102,6 +118,7 @@
       # NEED PRIVATE KEY IN .ssh/ (And need to chmod 600 it)!
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj" # Can, optionally, add email after public ssh-key
     ];
+    useDefaultShell = true;
 
     # User-specific packages
     packages = with pkgs; [
@@ -133,43 +150,22 @@
   #   stow
   # ];
 
-  # For before login (systemd services)
-  environment.variables = {
-
-  };
-  # For after login
-  environment.sessionVariables = {
-    # For jEdit to work!
-    _JAVA_AWT_WM_NONREPARENTING = 1;
-    AOCD_DIR = "$HOME/aocd/";
-  };
-
-  # programs = {
-  #   neovim = {
-  #     enable = true;
-  #     defaultEditor = true;
-  #     # viAlias = true;
-  #     vimAlias = true;
-  #     # configure = {
-  #     #   customRC = ''
-  #     #     set tabstop=2
-  #     #     set softtabstop=4
-  #     #     set shiftwidth=2
-  #     #     set expandtab
-  #     #     set number
-  #     #     set relativenumber
-  #     #     set clipboard+=unnamedplus
-  #     #     set list
-  #     #     set listchars=tab:→\ ,space:·,nbsp:␣,trail:•,precedes:«,extends:»
-  #     #   '';
-  #     # };
-  #   };
-  # };
   # programs.slock.enable = true;
-  # programs.zsh.enable = true;
-  users.defaultUserShell = pkgs.zsh;
-  # users.users.angryluck.shell = pkgs.zsh;
-  users.users.angryluck.useDefaultShell = true;
+
+  xdg.mime = {
+    enable = true;
+    defaultApplications = {
+      "application/pdf" = [
+        "org.pwmt.zathura.desktop"
+        "org.pwmt.zathura-pdf-mupdf.desktop"
+        "org.pwmt.zathura-pdf-djvu.desktop"
+        "org.pwmt.zathura-pdf-ps.desktop"
+        "org.pwmt.zathura-pdf-cb.desktop"
+        "zathura.desktop"
+        "firefox.desktop"
+      ];
+    };
+  };
 
   # Virtualbox
   virtualisation.virtualbox.host.enable = true;

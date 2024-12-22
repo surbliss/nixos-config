@@ -1,14 +1,4 @@
--- import XMonad.Layout.Gaps
-
--- {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
--- import XMonad.Layout.LayoutModifier
-
--- import XMonad.StackSet
-
--- import Numeric.Natural (Natural)
--- import XMonad.Layout.Magnifier
--- import qualified XMonad.Layout.Magnifier as Mag
-
+-- {-# OPTIONS_GHC -Wall #-}
 import Control.Arrow ((>>>))
 import Control.Monad (when)
 import Control.Monad.RWS (MonadWriter (pass))
@@ -16,10 +6,17 @@ import Data.Function ((&))
 import Data.Map qualified as M
 import XMonad
 import XMonad.Actions.CycleRecentWS
-import XMonad.Actions.Promote
-import XMonad.Actions.SpawnOn
 
 -- import XMonad.Hooks.DynamicLog
+
+-- import XMonad.Util.Loggers
+
+-- import XMonad.Util.Ungrab
+-- for using "unGrab"
+
+import XMonad.Actions.NoBorders (toggleBorder)
+import XMonad.Actions.Promote
+import XMonad.Actions.SpawnOn
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
@@ -29,42 +26,88 @@ import XMonad.Hooks.WindowSwallowing
 import XMonad.Layout.FixedColumn (FixedColumn (FixedColumn))
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.Magnifier (magnifiercz')
-
+import XMonad.Layout.Magnifier qualified as Mag
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle as MT (Toggle (..))
+import XMonad.Layout.MultiToggle.Instances (StdTransformers (NBFULL))
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
+
+-- import XMonad.Layout.ToggleLayouts (ToggleLayout (Toggle, ToggleLayout), toggleLayouts)
+import XMonad.ManageHook (composeAll)
+import XMonad.Operations
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Hacks (trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook)
-
--- import XMonad.Util.Loggers
 import XMonad.Util.SpawnOnce
 
--- import XMonad.Util.Ungrab
-import XMonad.Operations -- for using "unGrab"
-
-import XMonad.Layout.Magnifier qualified as Mag
-import XMonad.Layout.MultiToggle.Instances (StdTransformers (NBFULL))
-
--- import XMonad.Layout.ToggleLayouts (ToggleLayout (Toggle, ToggleLayout), toggleLayouts)
-
-import XMonad.Actions.NoBorders (toggleBorder)
-import XMonad.ManageHook (composeAll)
-
 ------------------------------------------------------------------------
--- Colors
-
-grey1, grey2, grey3, grey4, cyan, orange :: String
+-- VARIABLES
+------------------------------------------------------------------------
+grey1, grey2, grey3, grey4, cyan, orange, darkBlue :: String
 grey1 = "#2B2E37"
 grey2 = "#555E70"
 grey3 = "#697180"
 grey4 = "#8691A8"
 cyan = "#8BABF0"
 orange = "#C45500"
+darkBlue = "#1E1E2E"
+
+-- Catppuccin colors:
+rosewater, flamingo, pink, mauve, red, maroon, peach, yellow, green, teal, sky, sapphire, blue, lavender, text, subtext1, subtext0, overlay2, overlay1, overlay0, surface2, surface1, surface0, base, mantle, crust :: String
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+pink = "#f5c2e7"
+mauve = "#cba6f7"
+red = "#f38ba8"
+maroon = "#eba0ac"
+peach = "#fab387"
+yellow = "#f9e2af"
+green = "#a6e3a1"
+teal = "#94e2d5"
+sky = "#89dceb"
+sapphire = "#74c7ec"
+blue = "#89b4fa"
+lavender = "#b4befe"
+text = "#cdd6f4"
+subtext1 = "#bac2de"
+subtext0 = "#a6adc8"
+overlay2 = "#9399b2"
+overlay1 = "#7f849c"
+overlay0 = "#6c7086"
+surface2 = "#585b70"
+surface1 = "#45475a"
+surface0 = "#313244"
+base = "#1e1e2e"
+mantle = "#181825"
+crust = "#11111b"
+
+myTerminal :: String
+myTerminal = "wezterm"
+
+myFocusFollowsMouse :: Bool
+myFocusFollowsMouse = False
+
+myClickJustFocuses :: Bool
+myClickJustFocuses = False
+
+myWorkspaces :: [String]
+myWorkspaces = ["1: dev", "2: www", "3: doc", "4: read", "5", "6", "7: video", "8: music"]
+
+myModMask :: KeyMask
+myModMask = mod4Mask -- 4 for super, 1 for alt
+
+myBorderWidth :: Dimension
+myBorderWidth = 3
+
+myNormalBorderColor :: String
+myNormalBorderColor = base
+
+myFocusedBorderColor :: String
+myFocusedBorderColor = yellow -- lavender other good option
 
 -- See: https://www.reddit.com/r/xmonad/comments/npdtxs/toggle_full_screen_in_xmonad/
 -- Looks to see if focused window is floating and if it is the places it in the stack
@@ -83,31 +126,21 @@ toggleFull =
 -- Using "additionalKeysP" syntax, rather than "additionalKeys"
 myKeys :: [(String, X ())]
 myKeys =
-    -- XMonad
     [ ("M-S-r", spawn "xmonad --restart")
     , ("M-S-q", kill)
-    , -- MOVE THESET TO sxhkd
-      ("<XF86MonBrightnessUp>", spawn "brillo -q -A 5")
+    , ("<XF86MonBrightnessUp>", spawn "brillo -q -A 5")
     , ("<XF86MonBrightnessDown>", spawn "brillo -q -U 5")
-    , -- -l makes sure that there is upper limit on volume
+    , -- l for upper limit on volume
       ("<XF86AudioRaiseVolume>", spawn "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")
     , ("<XF86AudioLowerVolume>", spawn "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-")
     , ("<XF86AudioMute>", spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
-    , -- , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
-      -- , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
-      -- , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-      ("M-<Tab>", sendMessage NextLayout)
+    , ("M-<Tab>", sendMessage NextLayout)
     , ("M-S-s", spawn "flameshot gui")
-    , -- , ("M-<KP_Page_Up>", sendMessage MirrorExpand)
-      -- , ("M-<KP_Page_Down>", sendMessage MirrorShrink)
-      ("M-<Page_Up>", sendMessage MirrorExpand)
-    , ("M-<Page_Down>", sendMessage MirrorShrink)
-    , -- , ("M-f", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)
-      ("M-f", toggleFull)
-    , -- ("M-f", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
-      ("M-b", toggleRecentWS)
-    , -- , (workspace remappings)
-      ("M-S-1", windows $ shiftThenView "1")
+    , ("M-<Page_Up>", sendMessage MirrorExpand)
+    , ("M-<Page_Down>", sendMessage MirrorShrink) --
+    , ("M-f", toggleFull)
+    , ("M-b", toggleRecentWS)
+    , ("M-S-1", windows $ shiftThenView "1")
     , ("M-S-2", windows $ shiftThenView "2")
     , ("M-S-3", windows $ shiftThenView "3")
     , ("M-S-4", windows $ shiftThenView "4")
@@ -127,16 +160,17 @@ myKeys =
       ("M-d", spawn "rofi -show drun")
     , -- , ("M-s", spawn "rofi -show file-browser-extended")
       ("M-s", spawn "rofi -show file-browser-extended -file-browser-dir Documents -file-browser-depth 0")
-    , ("M-c", spawn "rofi -show calc")
+    , -- ("M-c", spawn "rofi -show calc"),
+      ("M-c", spawn "rofi -show calc -modi calc -no-show-match -no-sort -calc-command \"echo -n '{result}' | xclip\"")
     , ("M-0", spawn "rofi -show p -modi p:rofi-power-menu")
     , ("M-e", spawn "rofi modi emoji -show emoji -kb-custom1 Ctrl+c -emoji-mode insert_no_copy")
     , ("M-o", spawn "firefox")
-    , ("C-M-l", spawn "slock")
-    -- , ("M-w", sendMessage ToggleStruts)
+    , -- ("M-p", spawn "yazi"),
+      ("M-p", spawn (myTerminal ++ " -e yazi"))
+    , -- ("M-i", spawn (myTerminal ++ " yazi")),
+      ("C-M-l", spawn "slock")
+      -- , ("M-w", sendMessage ToggleStruts)
     ]
-
--- myTerminal = "kitty"
-myTerminal = "wezterm"
 
 myRemovedKeys =
     [ "M-<Space>" -- Mapped to switching keyboardlayout instead
@@ -145,10 +179,6 @@ myRemovedKeys =
     ]
 
 shiftThenView i = W.shift i >>> W.greedyView i
-
-myFocusFollowsMouse = False
-
-myClickJustFocuses = False
 
 -- FIX: Renable mod + rightclick to resize float-windows
 myMouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
@@ -163,6 +193,15 @@ myMouseBindings (XConfig{XMonad.modMask = modMask}) =
                     mouseMoveWindow w
                     windows W.shiftMaster
             )
+        ,
+            ( (modMask, button3)
+            , \w -> do
+                floats <- gets $ W.floating . windowset
+                when (w `M.member` floats) $ do
+                    focus w
+                    mouseResizeWindow w
+                    windows W.shiftMaster
+            )
         ]
 
 --
@@ -172,21 +211,17 @@ myMouseBindings (XConfig{XMonad.modMask = modMask}) =
 -- myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
 -- myLayout = smartBorders $ magnifiercz' 1.3 tiled ||| Full
 -- myLayout = smartBorders $ magnifiercz' 1.3 tiled ||| Full
---
---
---
---
---
---
---
---
 
 -- myLayout = (Mag.magnifyxy 1 10.0 (Mag.NoMaster 1) True tiled) ||| threeCol ||| Full
 -- myLayout = (Mag.magnifyxy 1 1.5 (Mag.NoMaster 1) True tiled) ||| threeCol ||| Full
 -- myLayout = spacingWithEdge 10 $ smartBorders $ mkToggle (single FULL) (tiled ||| threeCol)
+
 -- 'avoidStruts' gives spaces to polybar/xmobar!
--- TODO: Remove mkToggle (replaced by fullscreen float function above)
-myLayout = smartBorders $ avoidStruts $ spacingRaw True (Border 0 bw bw bw) True (Border bw bw bw bw) True $ mkToggle (single NBFULL) (tiled ||| threeCol)
+myLayout =
+    smartBorders $
+        avoidStruts $
+            spacingRaw True (Border 0 bw bw bw) True (Border bw bw bw bw) True $
+                tiled ||| threeCol
   where
     -- myLayout =
     --     toggleLayouts Full $
@@ -220,96 +255,41 @@ myLayout = smartBorders $ avoidStruts $ spacingRaw True (Border 0 bw bw bw) True
 
 myStartupHook :: X ()
 myStartupHook = do
-    -- spawn "pkill xmobar" -- adding this in case of switching between xmobar and polybar.
-    -- spawn "pkill trayer" -- adding this in case of switching between xmobar and polybar.
-    -- spawn "pkill polybar ; polybar default&"
-    -- spawn "polybar default"
-    -- spawnStatusBar "polybar default"
-    -- spawn "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default"
-    -- spawn "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default"
-    spawn "systemctl --user restart polybar"
-
--- spawn "polybar default&"
-
--- spawn "polybar -c ~/.config/home-manager/polybar/example example&"
--- spawn "polybar -c ~/.config/home-manager/polybar/reedrw base&"
-
-myWorkspaces :: [String]
-myWorkspaces = ["1: dev", "2: www", "3: doc", "4: read", "5", "6", "7: video", "8: music"]
-
-myXmobarPP :: PP
-myXmobarPP =
-    def
-        { ppSep = "" -- ppSep = magenta " • "
-        , ppWsSep = " "
-        , ppTitleSanitize = xmobarStrip
-        , -- , ppCurrent = wrap " " "" . xmobarBorder "Top" "#8be9fd" 2
-          ppCurrent = xmobarColor cyan "" -- . clickable wsIconFull
-        , ppVisible = xmobarColor grey4 "" -- . clickable wsIconFull
-        , ppVisibleNoWindows = Just (xmobarColor grey4 "") -- . clickable wsIconFull
-        , ppHidden = xmobarColor "#FFFFFF" ""
-        , ppHiddenNoWindows = xmobarColor grey2 ""
-        , -- , ppHidden = white . wrap " " ""
-          -- , ppHiddenNoWindows = lowWhite . wrap " " ""
-          -- ppUrgent = red . wrap (yellow "!") (yellow "!")
-          ppUrgent = xmobarColor orange "" . wrap (yellow "!") (yellow "!")
-        , ppOrder = \[ws, l, _, wins] -> [ws, l, wins]
-        -- , ppExtras = [logTitles formatFocused formatUnfocused]
-        }
-  where
-    formatFocused = wrap (white "[") (white "]") . magenta . ppWindow
-    formatUnfocused = wrap (lowWhite "[") (lowWhite "]") . blue . ppWindow
-    -- \| Windows should have *some* title, which should not not exceed a
-    -- sane length.
-    ppWindow :: String -> String
-    ppWindow = xmobarRaw . (\w -> if null w then "untitled" else w) . shorten 20
-
-    blue, lowWhite, magenta, red, white, yellow :: String -> String
-    magenta = xmobarColor "#ff79c6" ""
-    blue = xmobarColor "#bd93f9" ""
-    white = xmobarColor "#f8f8f2" ""
-    yellow = xmobarColor "#f1fa8c" ""
-    red = xmobarColor "#ff5555" ""
-    lowWhite = xmobarColor "#bbbbbb" ""
-
--- TODO, see https://xmonad.org/TUTORIAL.html
+    spawn "$HOME/.config/polybar/launch.sh"
+    -- spawn "systemctl --user restart polybar"
+    -- spawnOnce "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle && wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle &"
+    -- Should be done in a better way...
+    spawnOnce "feh --bg-fill .background-image"
 
 myManageHook =
     composeAll
-        [ className =? "VirtualBox Machine" --> doShift (myWorkspaces !! 8)
-        , title =? "Oracle VM VirtualBox Manager" --> doCenterFloat
-        , title =? "Extension: (Bitwarden Password Manager) - Bitwarden \033%G\342\200\224\033%@ Mozilla Firefox" --> doCenterFloat
-        , return True --> doF W.swapDown
+        [ -- className =? "VirtualBox Machine" --> doShift (myWorkspaces !! 8),
+          title =? "Oracle VM VirtualBox Manager" --> doCenterFloat
+        , -- title =? "Extension: (Bitwarden Password Manager) - Bitwarden \033%G\342\200\224\033%@ Mozilla Firefox" --> doCenterFloat,
+          -- title =? "isabelle-jedit-JEdit_Main" --> doShift (myWorkspaces !! 5),
+          className =? "SDL_App" --> doFloat
+        , return True --> doF W.swapDown -- Makes new windows not spawn as master pane
         ]
 
--- No type signature, but I should probably just remove this unecessary
--- abstraction
+-- Type signature?
 myConfig =
     def
-        { modMask = mod4Mask -- Rebind Mod to the Super Key
+        { modMask = myModMask
         , layoutHook = myLayout
         , terminal = myTerminal
-        , borderWidth = 3
-        , normalBorderColor = grey2
-        , focusedBorderColor = cyan
-        , -- , focusedBorderColor = "#ff9933"
-          -- , workspaces = myWorkspaces
+        , borderWidth = myBorderWidth
+        , normalBorderColor = myNormalBorderColor
+        , focusedBorderColor = myFocusedBorderColor
+        , -- , workspaces = myWorkspaces
           focusFollowsMouse = myFocusFollowsMouse
         , clickJustFocuses = myClickJustFocuses
-        , -- , manageHook = myManageHook <+> manageDocks
-          manageHook = myManageHook
-        , -- <+> manageHook def
-          startupHook = myStartupHook
+        , manageHook = myManageHook -- <+> manageDocks
+        , startupHook = myStartupHook
         , mouseBindings = myMouseBindings
-        , handleEventHook = windowedFullscreenFixEventHook <> swallowEventHook (className =? "wezterm" <||> className =? "st-256color" <||> className =? "XTerm") (return True) <> trayerPaddingXmobarEventHook
-        -- manageHook =
-        --   composeOne
-        --       [ checkDock -?> doIgnore -- equivalent to manageDocks
-        --       , isDialog -?> doFloat
-        --       , (className =? "albert") -?> doFloat
-        --       , -- , (className =? "VirtualBox Machine") -?> doShift "5"
-        --         return True -?> doF W.swapDown
-        --       ]
+        , handleEventHook =
+            windowedFullscreenFixEventHook
+            -- <> swallowEventHook (className =? "wezterm" <||> className =? "st-256color" <||> className =? "XTerm") (return True)
+            -- <> trayerPaddingXmobarEventHook
         }
         `additionalKeysP` myKeys
         `removeKeysP` myRemovedKeys -- Remove certain defaults not needed.
@@ -343,12 +323,10 @@ myConfig =
 --     interfaceName = D.interfaceName_ "org.xmonad.Log"
 --     memberName = D.memberName_ "Update"
 
--- mySB = statusBarProp "polybar default" (pure myXmobarPP)
-
 main :: IO ()
 main =
     xmonad
-        . ewmhFullscreen -- DOESN'T WORK!
+        -- . ewmhFullscreen -- If you enable this, don't disable ewmh!
         . ewmh
         . docks
         -- HACK: We are starting xmobar, and then immediately killing it...
@@ -362,3 +340,4 @@ main =
 --   toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
 --   -- v for now mod + W, find out how to disable
 --   toggleStrutsKey XConfig{modMask = m} = (m, xK_w)
+-- {-# OPTIONS_GHC -fno-warn-missing-signatures #-}

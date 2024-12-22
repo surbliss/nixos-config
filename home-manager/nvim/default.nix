@@ -39,17 +39,37 @@
         ignore = [
           "ERA001" # Commented out code
           "T201" # print
-          "D100" # Missing docstrings
-          "D101" # .
-          "D102" # .
+          # "D100" # Missing docstrings
+          # "D101" # .
+          # "D102" # .
           "D103" # .
-          "D104" # .
-          "D105" # .
-          "D106" # .
-          "D107" # .
+          # "D104" # .
+          # "D105" # .
+          # "D106" # .
+          # "D107" # .
           "N803" # Variables lowercase
           "N806" # .
+
+          # For formatting, see https://docs.astral.sh/ruff/formatter/#format-suppression:
+          "W191"
+          "E111"
+          "E114"
+          "E117"
+          "D206"
+          "D300"
+          "Q000"
+          "Q001"
+          "Q002"
+          "Q003"
+          "Q003"
+          "COM812"
+          "COM819"
+          "ISC001"
+          "ISC002"
         ];
+      };
+      format = {
+        skip-magic-trailing-comma = true;
       };
     };
   };
@@ -70,6 +90,7 @@
     extraPackages = with pkgs; [
       # LSPs
       lua-language-server
+      stylua
       ### Replaced by nixd
       # nil
       nixd
@@ -128,7 +149,8 @@
           # pylint
         ]
       ))
-      ruff
+      ruff # Also enabled above
+      pyright
 
       tree-sitter
       ### FOR GITHUB PLUGIN BELOW! nodejs
@@ -306,7 +328,6 @@
         # vim-orgmode (logseq i stedet)
 
         # Behøves ikk:
-        # conform
         # colorscheme
 
         # Mangler (ik på nixpkgs)
@@ -435,7 +456,7 @@
                   { open = '[', close = ']' },
                   { open = '{', close = '}' }
                 },
-                ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+                ignore_beginning = false, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
                 exclude = {} -- tabout will ignore these filetypes
               }
             '';

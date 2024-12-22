@@ -10,28 +10,24 @@
 -- import qualified XMonad.Layout.Magnifier as Mag
 
 import Control.Arrow ((>>>))
-import Control.Monad (when)
 import Control.Monad.RWS (MonadWriter (pass))
 import Data.Function ((&))
-import Data.Map qualified as M
 import XMonad
 import XMonad.Actions.CycleRecentWS
 import XMonad.Actions.Promote
 import XMonad.Actions.SpawnOn
-
--- import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
-import XMonad.Hooks.WindowSwallowing
 import XMonad.Layout.FixedColumn (FixedColumn (FixedColumn))
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.Magnifier (magnifiercz')
-
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle as MT (Toggle (..))
+import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Renamed (Rename (Replace), renamed)
 import XMonad.Layout.ResizableTile
@@ -39,20 +35,12 @@ import XMonad.Layout.Spacing
 import XMonad.Layout.ThreeColumns
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
-import XMonad.Util.Hacks (trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook)
-
--- import XMonad.Util.Loggers
-import XMonad.Util.SpawnOnce
+import XMonad.Util.Loggers
 
 -- import XMonad.Util.Ungrab
 import XMonad.Operations -- for using "unGrab"
 
 import XMonad.Layout.Magnifier qualified as Mag
-import XMonad.Layout.MultiToggle.Instances (StdTransformers (NBFULL))
-
--- import XMonad.Layout.ToggleLayouts (ToggleLayout (Toggle, ToggleLayout), toggleLayouts)
-
-import XMonad.Actions.NoBorders (toggleBorder)
 import XMonad.ManageHook (composeAll)
 
 ------------------------------------------------------------------------
@@ -66,20 +54,6 @@ grey4 = "#8691A8"
 cyan = "#8BABF0"
 orange = "#C45500"
 
--- See: https://www.reddit.com/r/xmonad/comments/npdtxs/toggle_full_screen_in_xmonad/
--- Looks to see if focused window is floating and if it is the places it in the stack
--- else it makes it floating but as full screen
-toggleFull =
-    withFocused
-        ( \windowId -> do
-            floats <- gets (W.floating . windowset)
-            -- Not needed with smartBorder
-            -- withFocused toggleBorder
-            if windowId `M.member` floats
-                then withFocused $ windows . W.sink
-                else withFocused $ windows . flip W.float (W.RationalRect 0 0 1 1)
-        )
-
 -- Using "additionalKeysP" syntax, rather than "additionalKeys"
 myKeys :: [(String, X ())]
 myKeys =
@@ -87,25 +61,19 @@ myKeys =
     [ ("M-S-r", spawn "xmonad --restart")
     , ("M-S-q", kill)
     , -- MOVE THESET TO sxhkd
-      ("<XF86MonBrightnessUp>", spawn "brillo -q -A 5")
-    , ("<XF86MonBrightnessDown>", spawn "brillo -q -U 5")
-    , -- -l makes sure that there is upper limit on volume
-      ("<XF86AudioRaiseVolume>", spawn "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+")
-    , ("<XF86AudioLowerVolume>", spawn "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-")
-    , ("<XF86AudioMute>", spawn "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle")
-    , -- , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
-      -- , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
-      -- , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-      ("M-<Tab>", sendMessage NextLayout)
+      ("<XF86MonBrightnessUp>", spawn "brillo -q -A 10")
+    , ("<XF86MonBrightnessDown>", spawn "brillo -q -U 10")
+    , ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%")
+    , ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%")
+    , ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ("M-<Tab>", sendMessage NextLayout)
     , ("M-S-s", spawn "flameshot gui")
     , -- , ("M-<KP_Page_Up>", sendMessage MirrorExpand)
       -- , ("M-<KP_Page_Down>", sendMessage MirrorShrink)
       ("M-<Page_Up>", sendMessage MirrorExpand)
     , ("M-<Page_Down>", sendMessage MirrorShrink)
-    , -- , ("M-f", sendMessage (Toggle NBFULL) >> sendMessage ToggleStruts)
-      ("M-f", toggleFull)
-    , -- ("M-f", sendMessage (Toggle "Full") >> sendMessage ToggleStruts)
-      ("M-b", toggleRecentWS)
+    , ("M-f", sendMessage (Toggle FULL))
+    , ("M-b", toggleRecentWS)
     , -- , (workspace remappings)
       ("M-S-1", windows $ shiftThenView "1")
     , ("M-S-2", windows $ shiftThenView "2")
@@ -131,8 +99,6 @@ myKeys =
     , ("M-0", spawn "rofi -show p -modi p:rofi-power-menu")
     , ("M-e", spawn "rofi modi emoji -show emoji -kb-custom1 Ctrl+c -emoji-mode insert_no_copy")
     , ("M-o", spawn "firefox")
-    , ("C-M-l", spawn "slock")
-    -- , ("M-w", sendMessage ToggleStruts)
     ]
 
 -- myTerminal = "kitty"
@@ -149,21 +115,6 @@ shiftThenView i = W.shift i >>> W.greedyView i
 myFocusFollowsMouse = False
 
 myClickJustFocuses = False
-
--- FIX: Renable mod + rightclick to resize float-windows
-myMouseBindings :: XConfig Layout -> M.Map (KeyMask, Button) (Window -> X ())
-myMouseBindings (XConfig{XMonad.modMask = modMask}) =
-    M.fromList
-        [
-            ( (modMask, button1)
-            , \w -> do
-                floats <- gets $ W.floating . windowset
-                when (w `M.member` floats) $ do
-                    focus w
-                    mouseMoveWindow w
-                    windows W.shiftMaster
-            )
-        ]
 
 --
 -- maximizeTest :: l a -> ModifiedLayout Mag.Magnifier l a
@@ -183,18 +134,8 @@ myMouseBindings (XConfig{XMonad.modMask = modMask}) =
 
 -- myLayout = (Mag.magnifyxy 1 10.0 (Mag.NoMaster 1) True tiled) ||| threeCol ||| Full
 -- myLayout = (Mag.magnifyxy 1 1.5 (Mag.NoMaster 1) True tiled) ||| threeCol ||| Full
--- myLayout = spacingWithEdge 10 $ smartBorders $ mkToggle (single FULL) (tiled ||| threeCol)
--- 'avoidStruts' gives spaces to polybar/xmobar!
--- TODO: Remove mkToggle (replaced by fullscreen float function above)
-myLayout = smartBorders $ avoidStruts $ spacingRaw True (Border 0 bw bw bw) True (Border bw bw bw bw) True $ mkToggle (single NBFULL) (tiled ||| threeCol)
+myLayout = smartBorders $ mkToggle (single FULL) (tiled ||| threeCol)
   where
-    -- myLayout =
-    --     toggleLayouts Full $
-    --         avoidStruts $
-    --             spacingRaw True (Border 0 bw bw bw) True (Border bw bw bw bw) True $
-    --                 tiled ||| threeCol
-
-    bw = 4 -- borderwidth
     threeCol = ThreeColMid nmaster delta ratio
     tiled = Tall nmaster delta ratio
     nmaster = 1 -- Default number of windows in the master pane
@@ -218,25 +159,12 @@ myLayout = smartBorders $ avoidStruts $ spacingRaw True (Border 0 bw bw bw) True
 --     ratio = 1 / 2 -- Master width
 --     slaves = [1] -- list of slaves height multipliers
 
-myStartupHook :: X ()
-myStartupHook = do
-    -- spawn "pkill xmobar" -- adding this in case of switching between xmobar and polybar.
-    -- spawn "pkill trayer" -- adding this in case of switching between xmobar and polybar.
-    -- spawn "pkill polybar ; polybar default&"
-    -- spawn "polybar default"
-    -- spawnStatusBar "polybar default"
-    -- spawn "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default"
-    -- spawn "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default"
-    spawn "systemctl --user restart polybar"
-
--- spawn "polybar default&"
-
--- spawn "polybar -c ~/.config/home-manager/polybar/example example&"
--- spawn "polybar -c ~/.config/home-manager/polybar/reedrw base&"
+-- myStartupHook :: X ()
+-- myStartupHook = do
+--     sendMessage $ Toggle "coding"
 
 myWorkspaces :: [String]
 myWorkspaces = ["1: dev", "2: www", "3: doc", "4: read", "5", "6", "7: video", "8: music"]
-
 myXmobarPP :: PP
 myXmobarPP =
     def
@@ -254,7 +182,7 @@ myXmobarPP =
           -- ppUrgent = red . wrap (yellow "!") (yellow "!")
           ppUrgent = xmobarColor orange "" . wrap (yellow "!") (yellow "!")
         , ppOrder = \[ws, l, _, wins] -> [ws, l, wins]
-        -- , ppExtras = [logTitles formatFocused formatUnfocused]
+        , ppExtras = [logTitles formatFocused formatUnfocused]
         }
   where
     formatFocused = wrap (white "[") (white "]") . magenta . ppWindow
@@ -278,7 +206,6 @@ myManageHook =
     composeAll
         [ className =? "VirtualBox Machine" --> doShift (myWorkspaces !! 8)
         , title =? "Oracle VM VirtualBox Manager" --> doCenterFloat
-        , title =? "Extension: (Bitwarden Password Manager) - Bitwarden \033%G\342\200\224\033%@ Mozilla Firefox" --> doCenterFloat
         , return True --> doF W.swapDown
         ]
 
@@ -296,12 +223,8 @@ myConfig =
           -- , workspaces = myWorkspaces
           focusFollowsMouse = myFocusFollowsMouse
         , clickJustFocuses = myClickJustFocuses
-        , -- , manageHook = myManageHook <+> manageDocks
-          manageHook = myManageHook
-        , -- <+> manageHook def
-          startupHook = myStartupHook
-        , mouseBindings = myMouseBindings
-        , handleEventHook = windowedFullscreenFixEventHook <> swallowEventHook (className =? "wezterm" <||> className =? "st-256color" <||> className =? "XTerm") (return True) <> trayerPaddingXmobarEventHook
+        , manageHook = myManageHook <+> manageDocks
+        -- , startupHook = myStartupHook
         -- manageHook =
         --   composeOne
         --       [ checkDock -?> doIgnore -- equivalent to manageDocks
@@ -317,48 +240,16 @@ myConfig =
 -- \^ putting this below, because if I was removing something I had rebound,
 -- then it should be removed from "myRemovedKeys"
 
--- myLogHook :: D.Client -> PP
--- myLogHook dbus =
---     def
---         { ppOutput = dbusOutput dbus
---         , ppCurrent = wrap ("%{B" ++ bg2 ++ "} ") " %{B-}"
---         , ppVisible = wrap ("%{B" ++ bg1 ++ "} ") " %{B-}"
---         , ppUrgent = wrap ("%{F" ++ red ++ "} ") " %{F-}"
---         , ppHidden = wrap " " " "
---         , ppWsSep = ""
---         , ppSep = " : "
---         , ppTitle = shorten 40
---         }
-
--- -- Emit a DBus signal on log updates
--- dbusOutput :: D.Client -> String -> IO ()
--- dbusOutput dbus str = do
---     let signal =
---             (D.signal objectPath interfaceName memberName)
---                 { D.signalBody = [D.toVariant $ UTF8.decodeString str]
---                 }
---     D.emit dbus signal
---   where
---     objectPath = D.objectPath_ "/org/xmonad/Log"
---     interfaceName = D.interfaceName_ "org.xmonad.Log"
---     memberName = D.memberName_ "Update"
-
--- mySB = statusBarProp "polybar default" (pure myXmobarPP)
-
+-- Apply the stuff
 main :: IO ()
 main =
     xmonad
-        . ewmhFullscreen -- DOESN'T WORK!
+        -- . ewmhFullscreen
         . ewmh
-        . docks
-        -- HACK: We are starting xmobar, and then immediately killing it...
-        -- Polybar only spawns on one workspace otherwise...
-        -- . withEasySB mySB toggleStrutsKey
-        -- . withEasySB mySB toggleStrutsKey
+        . withEasySB (statusBarProp "xmobar" (pure myXmobarPP)) toggleStrutsKey
         $ myConfig
-
--- where
---   -- For this, use "withEasySB" instead
---   toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
---   -- v for now mod + W, find out how to disable
---   toggleStrutsKey XConfig{modMask = m} = (m, xK_w)
+  where
+    -- For this, use "withEasySB" instead
+    toggleStrutsKey :: XConfig Layout -> (KeyMask, KeySym)
+    -- v for now mod + W, find out how to disable
+    toggleStrutsKey XConfig{modMask = m} = (m, xK_w)

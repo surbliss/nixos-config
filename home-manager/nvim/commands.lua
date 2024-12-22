@@ -75,3 +75,16 @@ end
 
 vim.api.nvim_create_user_command("ToggleCheckbox", toggle, {})
 vim.keymap.set("n", "<leader>tt", ":ToggleCheckbox<CR>")
+
+-- dot-* files same filetype as .* files
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "dot-*",
+  callback = function(args)
+    local filename = vim.fn.fnamemodify(args.file, ":t")
+    local real_name = "." .. filename:sub(5) -- Replace `dot-` with `.`
+    local filetype = vim.filetype.match({ filename = real_name })
+    if filetype then
+      vim.bo.filetype = filetype
+    end
+  end,
+})

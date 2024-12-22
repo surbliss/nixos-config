@@ -28,9 +28,9 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
   home.file.".icons/default".source = "${pkgs.vanilla-dmz}/share/icons/Vanilla-DMZ";
 
-  home.sessionVariables = {
-    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libGL}/lib:${pkgs.SDL2}/lib";
-  };
+  # home.sessionVariables = {
+  #   LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:${pkgs.libGL}/lib:${pkgs.SDL2}/lib";
+  # };
 
   # # Temporary fix for pipewire-issue
   # home.activation.mute-unmute = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
@@ -110,6 +110,7 @@
 
   # FIX: Slå korrekt notation op! (se VimJoyers video)
   # xdg.mimeApps.defaultApplications."inode/directory" = "org.gnome.Nautilus.desktop";
+  # Move to configuration.nix
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
@@ -153,6 +154,7 @@
   # File browser
   programs.yazi = {
     enable = true;
+    enableZshIntegration = true;
     settings.opener.open = [
       {
         run = "xdg-open \"$1\"";
@@ -170,6 +172,13 @@
         orphan = true;
         desc = "Open";
         for = "windows";
+      }
+    ];
+    keymap.manager.prepend_keymap = [
+      {
+        on = "t";
+        run = "shell \"$SHELL\"  --confirm --block --orphan";
+        desc = "Open shell here";
       }
     ];
   };
@@ -651,7 +660,7 @@
 
     # test
     # haskellPackages.misfortune
-    libreoffice
+    # libreoffice
 
     lazygit
 
