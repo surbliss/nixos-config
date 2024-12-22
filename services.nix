@@ -5,6 +5,7 @@
   ...
 }:
 {
+  services.accounts-daemon.enable = true;
   services.pantheon.apps.enable = false;
   services.xserver = {
     enable = true;
@@ -13,7 +14,7 @@
     # desktopManager.wallpaper.mode = "max";
 
     # Not strictly needed
-    # displayManager.defaultSession = "none+xmonad";
+    displayManager.defaultSession = "none+xmonad";
 
     dpi = 120;
 
@@ -30,16 +31,6 @@
 
     displayManager.lightdm = {
       enable = true;
-      extraConfig = ''
-        [Seat:*]
-        user-session-default=none+xmonad
-
-        [User=angryluck]
-        session-wrapper=none+xmonad
-
-        [User=milla]
-        session-wrapper=pantheon
-      '';
       # greeters.pantheon.enable = true;
       #   # background = /home/angryluck/.background-image;
       background = ./.background-image;
