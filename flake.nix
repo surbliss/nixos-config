@@ -56,7 +56,8 @@
         #   ];
         # };
         modules = [
-          ./system-configuration/configuration.nix
+          # ./system-configuration/configuration.nix
+          ./configuration.nix
           #   home-manager.nixosModules.home-manager
           #   {
           #     nixpkgs.config.permittedInsecurePackages = [
