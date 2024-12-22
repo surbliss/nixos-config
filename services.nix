@@ -32,10 +32,10 @@
       enable = true;
       extraConfig = ''
         [Seat:*]
-        user-session-default=xmonad
+        user-session-default=none+xmonad
 
         [User=angryluck]
-        session-wrapper=xmonad
+        session-wrapper=none+xmonad
 
         [User=milla]
         session-wrapper=pantheon
