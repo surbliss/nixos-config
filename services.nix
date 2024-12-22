@@ -30,6 +30,16 @@
 
     displayManager.lightdm = {
       enable = true;
+      extraConfig = ''
+        [Seat:*]
+        user-session-default=xmonad
+
+        [User=angryluck]
+        session-wrapper=xmonad
+
+        [User=milla]
+        session-wrapper=pantheon
+      '';
       # greeters.pantheon.enable = true;
       #   # background = /home/angryluck/.background-image;
       background = ./.background-image;
@@ -138,7 +148,7 @@
 
   services.picom = {
     enable = true;
-    packages = pkgs.picom-pijulius;
+    package = pkgs.picom-pijulius;
     inactiveOpacity = 0.95;
     menuOpacity = 1.0;
     fadeDelta = 1000;

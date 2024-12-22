@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
 
   programs.firefox.enable = true;
@@ -32,6 +32,8 @@
     defaultEditor = true;
     vimAlias = true;
   };
+
+  nix.nixPath = [ "nixpkgs=¤${inputs.nixpkgs}" ];
 
   programs.yazi = {
     enable = true;
@@ -114,7 +116,7 @@
     git
     wget
     curl
-    home-manager
+    # home-manager
     nix-search-cli
     xclip
 
@@ -386,6 +388,79 @@
     mupdf
 
     feh
+
+    # For neovim:
+
+    # LSPs
+    lua-language-server
+    stylua
+    ### Replaced by nixd
+    # nil
+    nixd
+    nixfmt-rfc-style
+    # HACK: Only until https://github.com/neovim/neovim/pull/29601
+    # is merged
+    # alejandra
+    # nixfmt-rfc-style
+    # fsautocomplete
+
+    # For copilot
+    luajitPackages.tiktoken_core
+
+    ### To fix haskell-lsp for xmonad
+    (haskellPackages.ghcWithPackages (
+      hpkgs: with hpkgs; [
+        # xmobar
+        xmonad
+        xmonad-contrib
+        # haskell-language-server
+        # fast-tags
+        # hoogle
+        # haskell-debug-adapter
+        # fourmolu
+      ]
+    ))
+    haskellPackages.fourmolu
+    haskellPackages.hoogle
+    haskellPackages.haskell-language-server
+
+    # ccls
+    clang-tools_19 # clangd + clang-format
+
+    # (python3.withPackages (
+    (python3.withPackages (
+      python-pkgs: with python-pkgs; [
+        # select Python packages here
+        # pandas
+        # requests
+        torch
+        torchvision
+        numpy
+        scikit-learn
+        matplotlib
+        # sklearn-deap
+
+        ### LSP-stuff:
+        # python-lsp-server
+        # rope
+        # pyflakes
+        # mccabe
+        # pycodestyle
+        # # pydocstyle
+        # yapf
+        # flake8
+        # pylint
+      ]
+    ))
+    ruff # Also enabled above
+    pyright
+
+    tree-sitter
+    ### FOR GITHUB PLUGIN BELOW! nodejs
+    nodejs
+
+    ### Til fsharp
+    # mono
   ];
 
 }

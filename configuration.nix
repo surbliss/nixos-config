@@ -131,27 +131,6 @@
   # Brightness control
   hardware.brillo.enable = true;
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search <package>
-  # Packages to be used for all users
-  # environment.systemPackages = with pkgs; [
-  #   # nano # installed by default
-  #   vim
-  #   git
-  #   wget
-  #   curl
-  #   home-manager
-  #   nix-search-cli
-  #   xclip
-  #
-  #   # Needed for configuring eduroam (but not otherwise)
-  #   networkmanagerapplet
-  #
-  #   stow
-  # ];
-
-  # programs.slock.enable = true;
-
   xdg.mime = {
     enable = true;
     defaultApplications = {

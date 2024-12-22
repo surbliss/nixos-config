@@ -6,14 +6,14 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    home-manager = {
-      url = "github:nix-community/home-manager/master"; # /master for unstable
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    plugin-isabelle-syn = {
-      url = "github:Treeniks/isabelle-syn.nvim";
-      flake = false;
-    };
+    # home-manager = {
+    #   url = "github:nix-community/home-manager/master"; # /master for unstable
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    # plugin-isabelle-syn = {
+    #   url = "github:Treeniks/isabelle-syn.nvim";
+    #   flake = false;
+    # };
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
     # disko.url = "github:nix-community/disko";
     # disko.inputs.nixpkgs.follows = "nixpkgs";
@@ -23,7 +23,7 @@
       # self, 
       nixpkgs,
       nixpkgs-stable,
-      home-manager,
+      # home-manager,
       ...
     }@inputs:
     let
@@ -57,20 +57,20 @@
         # };
         modules = [
           ./system-configuration/configuration.nix
-          home-manager.nixosModules.home-manager
-          {
-            nixpkgs.config.permittedInsecurePackages = [
-              "electron-27.3.11"
-            ];
-            # nixpkgs.config.allowUnfree = true;
-            home-manager.useGlobalPkgs = true; # Use global packages in Home Manager
-            home-manager.useUserPackages = true; # Allow user-specific packages
-            home-manager.users.angryluck = import ./home-manager/home.nix; # User Home Manager configuration
-            home-manager.extraSpecialArgs = {
-              inherit inputs;
-              inherit stablePkgs;
-            };
-          }
+          #   home-manager.nixosModules.home-manager
+          #   {
+          #     nixpkgs.config.permittedInsecurePackages = [
+          #       "electron-27.3.11"
+          #     ];
+          #     # nixpkgs.config.allowUnfree = true;
+          #     home-manager.useGlobalPkgs = true; # Use global packages in Home Manager
+          #     home-manager.useUserPackages = true; # Allow user-specific packages
+          #     home-manager.users.angryluck = import ./home-manager/home.nix; # User Home Manager configuration
+          #     home-manager.extraSpecialArgs = {
+          #       inherit inputs;
+          #       inherit stablePkgs;
+          #     };
+          #   }
           { nixpkgs.overlays = overlays; }
         ];
       };
@@ -91,21 +91,21 @@
       #   };
       # };
 
-      homeConfigurations."angryluck" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = {
-          inherit inputs;
-          inherit stablePkgs;
-        };
-        modules = [
-          ./home-manager/home.nix
-          { nixpkgs.overlays = overlays; }
-          # { nix.settings.allowInsecure = [ "nixpkgs:electron_27" ]; }
-          { nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ]; }
-          { nixpkgs.config.allowUnfree = true; }
-          { nix.package = pkgs.nix; }
-        ];
-      };
+      # homeConfigurations."angryluck" = home-manager.lib.homeManagerConfiguration {
+      #   inherit pkgs;
+      #   extraSpecialArgs = {
+      #     inherit inputs;
+      #     inherit stablePkgs;
+      #   };
+      #   modules = [
+      #     ./home-manager/home.nix
+      #     { nixpkgs.overlays = overlays; }
+      #     # { nix.settings.allowInsecure = [ "nixpkgs:electron_27" ]; }
+      #     { nixpkgs.config.permittedInsecurePackages = [ "electron-27.3.11" ]; }
+      #     { nixpkgs.config.allowUnfree = true; }
+      #     { nix.package = pkgs.nix; }
+      #   ];
+      # };
     };
 }
 # vim: set sw=2
