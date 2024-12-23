@@ -83,7 +83,6 @@
     stow
   ];
 
-
   fonts.packages = with pkgs; [
 
     ### FONTS
@@ -110,7 +109,7 @@
     #     "NerdFontsSymbolsOnly"
     #   ];
     # })
-  ]
+  ];
 
   # User specific:
   users.users.milla.packages =
@@ -167,7 +166,6 @@
 
     # v2
     # inputs.nixpkgs-stable.legacyPackages."x86_64-linux". # Not the best...
-
 
     ### CLI-tools
     hello
