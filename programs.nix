@@ -33,7 +33,7 @@
     vimAlias = true;
   };
 
-  nix.nixPath = [ "nixpkgs=¤${inputs.nixpkgs}" ];
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   programs.yazi = {
     enable = true;
@@ -209,11 +209,17 @@
     # syncthing
     flameshot
     # wineWowPackages.stable
-    # rofi
-    rofi-unwrapped
-    rofi-file-browser
+    rofi
     rofi-emoji
+    rofi-file-browser
+    rofimoji
+    rofi-calc
+    # rofi-unwrapped
+    # rofi-file-browser
+    # rofi-emoji
+    # rofimoji
     rofi-power-menu
+    # rofi-calc
 
     # Terminal
     # wezterm
@@ -461,6 +467,7 @@
 
     ### Til fsharp
     # mono
+    pkg-config
   ];
 
 }

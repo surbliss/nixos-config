@@ -48,6 +48,7 @@
           inherit system;
           inherit inputs;
           inherit stablePkgs;
+          inherit pkgs;
         };
         # nixpkgs.config = {
         #   allowUnfree = true;
