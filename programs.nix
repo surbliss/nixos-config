@@ -83,6 +83,35 @@
     stow
   ];
 
+
+  fonts.packages = with pkgs; [
+
+    ### FONTS
+    _0xproto
+    font-awesome
+    inconsolata
+    hack-font
+    noto-fonts-color-emoji
+    # noto-fonts-extra
+    # otf-fira-mono
+    terminus_font
+    # ttf-aptos 1.0-1
+    caladea
+    noto-fonts
+    lato
+    font-awesome
+    nerd-fonts.NerdFontsSymbolsOnly
+    nerd-fonts._0xproto
+    # (nerdfonts.override {
+    #   fonts = [
+    #     # "0xProto"
+    #     # "Inconsolata"
+    #     # "Hack"
+    #     "NerdFontsSymbolsOnly"
+    #   ];
+    # })
+  ]
+
   # User specific:
   users.users.milla.packages =
     with pkgs;
@@ -139,29 +168,6 @@
     # v2
     # inputs.nixpkgs-stable.legacyPackages."x86_64-linux". # Not the best...
 
-    ### FONTS
-    _0xproto
-    font-awesome
-    inconsolata
-    hack-font
-    noto-fonts-color-emoji
-    # noto-fonts-extra
-    # otf-fira-mono
-    terminus_font
-    # ttf-aptos 1.0-1
-    caladea
-    noto-fonts
-    lato
-    font-awesome
-
-    (nerdfonts.override {
-      fonts = [
-        # "0xProto"
-        # "Inconsolata"
-        # "Hack"
-        "NerdFontsSymbolsOnly"
-      ];
-    })
 
     ### CLI-tools
     hello

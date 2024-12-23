@@ -7,6 +7,7 @@
 {
   services.accounts-daemon.enable = true;
   services.pantheon.apps.enable = false;
+  services.displayManager.defaultSession = "none+xmonad";
   services.xserver = {
     enable = true;
 
@@ -14,7 +15,6 @@
     # desktopManager.wallpaper.mode = "max";
 
     # Not strictly needed
-    displayManager.defaultSession = "none+xmonad";
 
     dpi = 120;
 
