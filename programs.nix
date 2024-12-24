@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 {
 
   programs.firefox.enable = true;
@@ -99,8 +104,11 @@
     noto-fonts
     lato
     font-awesome
-    nerd-fonts.NerdFontsSymbolsOnly
+    # nerd-fonts.NerdFontsSymbolsOnly
     nerd-fonts._0xproto
+    nerd-fonts.symbols-only
+    nerd-fonts.inconsolata
+    nerd-fonts.hack
     # (nerdfonts.override {
     #   fonts = [
     #     # "0xProto"
@@ -137,6 +145,13 @@
       elementary-videos
       epiphany
     ]);
+
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
+    builtins.elem (lib.getName pkg) [
+      "discord"
+      "zoom-us"
+    ];
 
   environment.systemPackages = with pkgs; [
     # nano # installed by default
