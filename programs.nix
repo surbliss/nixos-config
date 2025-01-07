@@ -2,6 +2,7 @@
   lib,
   pkgs,
   inputs,
+  stablePkgs,
   ...
 }:
 {
@@ -88,6 +89,7 @@
     stow
   ];
 
+  fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
 
     ### FONTS
@@ -104,6 +106,7 @@
     noto-fonts
     lato
     font-awesome
+
     # nerd-fonts.NerdFontsSymbolsOnly
     nerd-fonts._0xproto
     nerd-fonts.symbols-only
@@ -117,6 +120,19 @@
     #     "NerdFontsSymbolsOnly"
     #   ];
     # })
+
+    # Aptos clone
+    inter
+
+    # Helvetica clones
+    # tex-gyre-heros-fonts
+    gyre-fonts
+    # urw-base35-fonts # Includes Nimbus Sans
+    aileron
+
+    lato
+    poppins
+
   ];
 
   # User specific:
@@ -218,8 +234,10 @@
     logseq
     # Needed for logseq for some reason
     # glibc
-    isabelle
-    isabelle-components.isabelle-linter
+
+    # Didn't work on unstable
+    stablePkgs.isabelle
+    stablePkgs.isabelle-components.isabelle-linter
 
     # virtualbox
 
@@ -230,7 +248,7 @@
     # wineWowPackages.stable
     rofi
     rofi-emoji
-    rofi-file-browser
+    # rofi-file-browser
     rofimoji
     rofi-calc
     # rofi-unwrapped
@@ -262,7 +280,7 @@
     ### -> Must be because you then have two different ghc-versions...
     # ghc
 
-    (python3.withPackages (
+    (python312.withPackages (
       python-pkgs: with python-pkgs; [
         # select Python packages here
         # pandas
@@ -273,7 +291,7 @@
         scikit-learn
         matplotlib
         notebook
-        aocd
+        stablePkgs.aocd
         # lark
         pyparsing
       ]
@@ -286,6 +304,7 @@
     # mpc-cli
     #FIX: Configure this with 'programs.texlive.enable' instead
     texlive.combined.scheme-full
+    texliveTeTeX
 
     # nodejs
     # Fonts:
@@ -487,6 +506,10 @@
     ### Til fsharp
     # mono
     pkg-config
+
+    # Til futhark
+    jemalloc
+    numactl
   ];
 
 }

@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  stablePkgs,
   ...
 }:
 {
@@ -150,7 +151,7 @@
   virtualisation.virtualbox.host.enable = true;
   users.extraGroups.vboxusers.members = [ "angryluck" ];
   # Don't change, doesn't affect the version of packages installed.
-  # IF you relly want to change, first read `man configuration.nix` and 
+  # IF you relly want to change, first read `man configuration.nix` and
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion.
   system.stateVersion = "24.05"; # Did you read the comment?
 }

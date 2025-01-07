@@ -33,6 +33,7 @@
     polybar-refresh = "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default&; disown";
     # Temporarily needed, delete later
     popcp = "cp mothApp.fsx ../../virtual-box-share/pop-3/src/";
+    dotstow = "stow -R -d ~/dotfiles . --dotfiles";
   };
 
   programs.zsh = {
