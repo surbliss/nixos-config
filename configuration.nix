@@ -19,6 +19,7 @@
   nixpkgs.config.permittedInsecurePackages = [
     "electron-27.3.11"
     "adobe-reader-9.5.5"
+    "dotnet-sdk-7.0.410" # Remove when SU is done!
   ];
 
   # TODO: Make per package

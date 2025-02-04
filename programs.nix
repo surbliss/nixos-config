@@ -270,7 +270,7 @@
     # gdb
     rars
     # fsharp
-    dotnet-sdk
+    dotnet-sdk_7
     dotnet-runtime
     dotnet-aspnetcore
     dotnet-repl

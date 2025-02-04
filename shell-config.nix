@@ -15,6 +15,7 @@
   environment.sessionVariables = {
     #   # For jEdit to work!
     _JAVA_AWT_WM_NONREPARENTING = 1;
+    DOTNET_CLI_TELEMETRY_OPTOUT = 1;
     #   AOCD_DIR = "$HOME/aocd/";
   };
 
