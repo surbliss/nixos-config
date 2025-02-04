@@ -106,6 +106,8 @@
     noto-fonts
     lato
     font-awesome
+    fira-sans
+    julia-mono
 
     # nerd-fonts.NerdFontsSymbolsOnly
     nerd-fonts._0xproto
@@ -294,6 +296,7 @@
         stablePkgs.aocd
         # lark
         pyparsing
+        pytest
       ]
     ))
     # rust
@@ -305,6 +308,7 @@
     #FIX: Configure this with 'programs.texlive.enable' instead
     texlive.combined.scheme-full
     texliveTeTeX
+    texlivePackages.powerdot
 
     # nodejs
     # Fonts:
@@ -419,7 +423,12 @@
     # fsautocomplete
 
     # cudaPackages.cuda_gdb
+    # For futhark
     cudatoolkit
+    linuxKernel.packages.linux_6_6.nvidia_x11
+    opencl-headers
+    ocl-icd
+    rocmPackages.clr
 
     zoxide
     eza
@@ -482,6 +491,7 @@
         numpy
         scikit-learn
         matplotlib
+        ipython
         # sklearn-deap
 
         ### LSP-stuff:
@@ -510,6 +520,28 @@
     # Til futhark
     jemalloc
     numactl
+
+    vscode
+    imagemagick
+
+    # PDF med form-filling
+    evince
+    okular
+    xournalpp
+    masterpdfeditor
+    qpdfview
+
+    clang
+
+    vlc
+
+    mpv-unwrapped
+
+    android-studio
+    inkscape
+
+    # Zen browser
+    inputs.zen-browser.packages."${system}".specific
   ];
 
 }

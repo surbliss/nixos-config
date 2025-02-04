@@ -18,6 +18,7 @@
   # FIX:
   nixpkgs.config.permittedInsecurePackages = [
     "electron-27.3.11"
+    "adobe-reader-9.5.5"
   ];
 
   # TODO: Make per package
@@ -144,6 +145,13 @@
         "zathura.desktop"
         "firefox.desktop"
       ];
+
+      # "video/mp4" = [ "vlc.desktop" ];
+      # "video/x-matroska" = [ "vlc.desktop" ];
+      # "video/mpeg" = [ "vlc.desktop" ];
+      # "video/quicktime" = [ "vlc.desktop" ];
+      # "video/webm" = [ "vlc.desktop" ];
+      # "video/x-msvideo" = [ "vlc.desktop" ];
     };
   };
 

@@ -140,9 +140,9 @@
   services.picom = {
     enable = true;
     package = pkgs.picom-pijulius;
-    inactiveOpacity = 0.95;
-    menuOpacity = 1.0;
-    fadeDelta = 1000;
+    # inactiveOpacity = 0.95;
+    # menuOpacity = 1.0;
+    # fadeDelta = 1000;
     backend = "glx";
     settings = {
       corner-radius = 8; # or whatever
@@ -150,11 +150,11 @@
       # these are required!
       experimental-backends = true;
       # backend = "glx";
-      blur = {
-        method = "gaussian";
-        size = 10;
-        deviation = 5.0;
-      };
+      # blur = {
+      #   method = "gaussian";
+      #   size = 10;
+      #   deviation = 5.0;
+      # };
     };
   };
 

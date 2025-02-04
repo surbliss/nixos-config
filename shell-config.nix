@@ -12,11 +12,11 @@
   #
   # };
   # For after login
-  # environment.sessionVariables = {
-  #   # For jEdit to work!
-  #   _JAVA_AWT_WM_NONREPARENTING = 1;
-  #   AOCD_DIR = "$HOME/aocd/";
-  # };
+  environment.sessionVariables = {
+    #   # For jEdit to work!
+    _JAVA_AWT_WM_NONREPARENTING = 1;
+    #   AOCD_DIR = "$HOME/aocd/";
+  };
 
   environment.shellAliases = {
     ls = "eza --group-directories-first --icons=auto";

@@ -3,7 +3,7 @@ import Control.Arrow ((>>>))
 import Control.Monad (when)
 import Control.Monad.RWS (MonadWriter (pass))
 import Data.Function ((&))
-import Data.Map qualified as M
+import qualified Data.Map as M
 import XMonad
 import XMonad.Actions.CycleRecentWS
 
@@ -26,7 +26,7 @@ import XMonad.Hooks.WindowSwallowing
 import XMonad.Layout.FixedColumn (FixedColumn (FixedColumn))
 import XMonad.Layout.LimitWindows (limitWindows)
 import XMonad.Layout.Magnifier (magnifiercz')
-import XMonad.Layout.Magnifier qualified as Mag
+import qualified XMonad.Layout.Magnifier as Mag
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle as MT (Toggle (..))
 import XMonad.Layout.MultiToggle.Instances (StdTransformers (NBFULL))
@@ -39,7 +39,7 @@ import XMonad.Layout.ThreeColumns
 -- import XMonad.Layout.ToggleLayouts (ToggleLayout (Toggle, ToggleLayout), toggleLayouts)
 import XMonad.ManageHook (composeAll)
 import XMonad.Operations
-import XMonad.StackSet qualified as W
+import qualified XMonad.StackSet as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Hacks (trayerPaddingXmobarEventHook, windowedFullscreenFixEventHook)
 import XMonad.Util.SpawnOnce
@@ -267,7 +267,11 @@ myManageHook =
           title =? "Oracle VM VirtualBox Manager" --> doCenterFloat
         , -- title =? "Extension: (Bitwarden Password Manager) - Bitwarden \033%G\342\200\224\033%@ Mozilla Firefox" --> doCenterFloat,
           -- title =? "isabelle-jedit-JEdit_Main" --> doShift (myWorkspaces !! 5),
-          className =? "SDL_App" --> doFloat
+          -- className =? "SDL_App" --> doFloat
+          -- className =? "firefox" <&&> resource =? "Dialog" --> doF W.shiftMaster,
+          -- className =? "firefox" <&&> isDialog --> doFloat <+> doRaise
+          -- className =? "firefox" --> doRaise
+          transience' -- Handle dialog windows from parent applications
         , return True --> doF W.swapDown -- Makes new windows not spawn as master pane
         ]
 
@@ -283,7 +287,7 @@ myConfig =
         , -- , workspaces = myWorkspaces
           focusFollowsMouse = myFocusFollowsMouse
         , clickJustFocuses = myClickJustFocuses
-        , manageHook = myManageHook -- <+> manageDocks
+        , manageHook = myManageHook <+> manageHook def -- <+> manageDocks
         , startupHook = myStartupHook
         , mouseBindings = myMouseBindings
         , handleEventHook =

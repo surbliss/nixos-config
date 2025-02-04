@@ -23,7 +23,8 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
 )
 
 (defalias
-  amo (tap-hold-release-timeout $tt $ht a lalt lalt) ;; Helps with accidental ALTS
+  ;;amo (tap-hold-release-timeout $tt $ht a lalt lalt) ;; Helps with accidental ALTS
+  amo a
   smo (tap-hold-release $tt $ht s lmet)
   dmo (tap-hold-release $tt $ht d lctl)
   fmo (tap-hold-release $tt $ht f lsft)
@@ -31,7 +32,8 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   kmo (tap-hold-release $tt $ht k rctl)
   lmo (tap-hold-release $tt $ht l rmet)
   ;; ralt=altgr, so want lalt instead.
-  ;mo (tap-hold-release $tt $ht ; lalt)
+  ;;;mo (tap-hold-release $tt $ht ; lalt)
+  ;mo ;
   sym (tap-hold-release $tt $ht spc (layer-toggle symbols))
   lef (tap-hold-release $tt $ht left _)
   dow (tap-hold-release $tt $ht down _)
