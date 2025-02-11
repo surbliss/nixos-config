@@ -557,6 +557,8 @@
     ltex-ls
 
     dunst
+
+    direnv
   ];
 
 }

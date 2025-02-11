@@ -12,6 +12,10 @@
   #
   # };
   # For after login
+
+  # Set later in boot-process than sessionVariables, and doesn't allow '"'.
+  # environment.variables = {}
+
   environment.sessionVariables = {
     #   # For jEdit to work!
     _JAVA_AWT_WM_NONREPARENTING = 1;
@@ -20,23 +24,8 @@
     #   AOCD_DIR = "$HOME/aocd/";
   };
 
-  environment.shellAliases = {
-    ls = "eza --group-directories-first --icons=auto";
-    l = "eza -l --total-size --no-permissions -h --git --icons=auto";
-    cp = "cp -i"; # Interactive
-    df = "df -h";
-    free = "free -m";
-    bc = "bc -l";
-    # hms = "home-manager switch --flake /etc/nixos"; # opt: #angryluck
-    # hm = "home-manager --flake /etc/nixos"; # opt: #angryluck
-    sudo = "sudo ";
-    nrs = "nixos-rebuild switch";
-    nrt = "nixos-rebuild test";
-    polybar-refresh = "pkill polybar; polybar -c ~/.config/home-manager/polybar/config.ini default&; disown";
-    # Temporarily needed, delete later
-    popcp = "cp mothApp.fsx ../../virtual-box-share/pop-3/src/";
-    dotstow = "stow -R -d ~/dotfiles . --dotfiles";
-  };
+  # environment.shellAliases = {
+  # };
 
   programs.zsh = {
     enable = true;
