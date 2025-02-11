@@ -557,8 +557,11 @@
     ltex-ls
 
     dunst
+    libnotify
 
     direnv
+
+    bash-language-server
   ];
 
 }
