@@ -555,6 +555,8 @@
     # csharpier
 
     ltex-ls
+
+    dunst
   ];
 
 }
