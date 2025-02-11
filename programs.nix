@@ -37,6 +37,7 @@
     enable = true;
     defaultEditor = true;
     vimAlias = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
   };
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -76,14 +77,14 @@
   programs.slock.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    nuget
-    dotnet-sdk
-    dotnet-runtime
-    dotnet-aspnetcore
-    dotnet-repl
-    dotnetPackages.Nuget
-  ];
+  # programs.nix-ld.libraries = with pkgs; [
+  #   nuget
+  #   dotnet-sdk
+  #   dotnet-runtime
+  #   dotnet-aspnetcore
+  #   dotnet-repl
+  #   dotnetPackages.Nuget
+  # ];
   # Also user specific
   users.users.angryluck.packages = with pkgs; [
     stow
@@ -271,6 +272,8 @@
     rars
     # fsharp
     dotnet-sdk_7
+    dotnet-sdk
+    dotnet-sdk_9
     dotnet-runtime
     dotnet-aspnetcore
     dotnet-repl
@@ -306,9 +309,7 @@
     # DIVERSE
     # mpc-cli
     #FIX: Configure this with 'programs.texlive.enable' instead
-    texlive.combined.scheme-full
-    texliveTeTeX
-    texlivePackages.powerdot
+    texlive.combined.scheme-medium # Or 'full'
 
     # nodejs
     # Fonts:
@@ -402,6 +403,7 @@
     # test
     # haskellPackages.misfortune
     # libreoffice
+    libreoffice-qt
 
     lazygit
 
@@ -417,18 +419,18 @@
     SDL2_mixer
     SDL2_sound
     gtk3
-    mesa
+    # mesa
 
     nuget-to-nix
     # fsautocomplete
 
     # cudaPackages.cuda_gdb
     # For futhark
-    cudatoolkit
-    linuxKernel.packages.linux_6_6.nvidia_x11
-    opencl-headers
-    ocl-icd
-    rocmPackages.clr
+    # cudatoolkit
+    # linuxKernel.packages.linux_6_6.nvidia_x11
+    # opencl-headers
+    # ocl-icd
+    # rocmPackages.clr
 
     zoxide
     eza
@@ -541,7 +543,18 @@
     inkscape
 
     # Zen browser
-    inputs.zen-browser.packages."${system}".specific
+    # inputs.zen-browser.packages."${system}".generic
+    inputs.zen-browser.packages."${system}".default
+
+    # csharp lsp
+    # omnisharp-roslyn
+    mono
+    roslyn-ls
+    # msbuild
+
+    # csharpier
+
+    ltex-ls
   ];
 
 }

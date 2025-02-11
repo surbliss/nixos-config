@@ -20,6 +20,8 @@
     "electron-27.3.11"
     "adobe-reader-9.5.5"
     "dotnet-sdk-7.0.410" # Remove when SU is done!
+    "dotnet-sdk-6.0.428"
+    "dotnet-runtime-6.0.36"
   ];
 
   # TODO: Make per package

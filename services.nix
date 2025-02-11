@@ -49,8 +49,10 @@
     windowManager.xmonad = {
       enable = true;
       enableContribAndExtras = true;
+      # Put just config-file in dot-files, and then having this is requirement
+      # for now...
       # enableConfiguredRecompile = true;
-      config = ./xmonad.hs;
+      # config = ./xmonad.hs;
     };
     # displayManager.gdm.enable = true;
     # desktopManager.gnome.enable = true;
