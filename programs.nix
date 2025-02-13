@@ -271,13 +271,13 @@
     # gdb
     rars
     # fsharp
-    dotnet-sdk_7
-    dotnet-sdk
-    dotnet-sdk_9
-    dotnet-runtime
-    dotnet-aspnetcore
-    dotnet-repl
-    dotnetPackages.Nuget
+    # dotnet-sdk_7
+    # dotnet-sdk
+    # dotnet-sdk_9
+    # dotnet-runtime
+    # dotnet-aspnetcore
+    # dotnet-repl
+    # dotnetPackages.Nuget
     # dotnet-sdk
     # dotnetCorePackages.sdk_8_0_1xx
 
