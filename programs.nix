@@ -271,7 +271,7 @@
     # gdb
     rars
     # fsharp
-    # dotnet-sdk_7
+    dotnet-sdk_7
     # dotnet-sdk
     # dotnet-sdk_9
     # dotnet-runtime
@@ -516,7 +516,7 @@
     nodejs
 
     ### Til fsharp
-    # mono
+    mono
     pkg-config
 
     # Til futhark
