@@ -78,6 +78,8 @@
 
   programs.nix-ld.enable = true;
   # programs.nix-ld.libraries = with pkgs; [
+  #   csharp-ls
+  # ];
   #   nuget
   #   dotnet-sdk
   #   dotnet-runtime
@@ -271,7 +273,7 @@
     # gdb
     rars
     # fsharp
-    dotnet-sdk_7
+    # dotnet-sdk_7
     # dotnet-sdk
     # dotnet-sdk_9
     # dotnet-runtime
