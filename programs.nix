@@ -77,24 +77,14 @@
   programs.slock.enable = true;
 
   programs.nix-ld.enable = true;
-  # programs.nix-ld.libraries = with pkgs; [
-  #   csharp-ls
-  # ];
-  #   nuget
-  #   dotnet-sdk
-  #   dotnet-runtime
-  #   dotnet-aspnetcore
-  #   dotnet-repl
-  #   dotnetPackages.Nuget
-  # ];
-  # Also user specific
+  # programs.nix-ld.libraries = with pkgs; [];
+
   users.users.angryluck.packages = with pkgs; [
     stow
   ];
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
-
     ### FONTS
     _0xproto
     font-awesome
@@ -117,14 +107,6 @@
     nerd-fonts.symbols-only
     nerd-fonts.inconsolata
     nerd-fonts.hack
-    # (nerdfonts.override {
-    #   fonts = [
-    #     # "0xProto"
-    #     # "Inconsolata"
-    #     # "Hack"
-    #     "NerdFontsSymbolsOnly"
-    #   ];
-    # })
 
     # Aptos clone
     inter
@@ -180,12 +162,13 @@
     git
     wget
     curl
-    # home-manager
     nix-search-cli
     xclip
+    hello
 
     # Needed for configuring eduroam (but not otherwise)
     networkmanagerapplet
+
     wezterm
 
     # UNFREE PACKAGES:
@@ -195,16 +178,9 @@
 
     # UNFREE END
     gh
-    bitwarden-desktop # FIX: Some build dependency problem, check up on it
-
-    # v1
-    # stablePkgs.bitwarden-desktop
-
-    # v2
-    # inputs.nixpkgs-stable.legacyPackages."x86_64-linux". # Not the best...
+    bitwarden-desktop
 
     ### CLI-tools
-    hello
     neofetch
     trash-cli
     fzf
@@ -287,6 +263,7 @@
     ### -> Must be because you then have two different ghc-versions...
     # ghc
 
+    # FIX: Should be a nix-shell instead
     (python312.withPackages (
       python-pkgs: with python-pkgs; [
         # select Python packages here
@@ -304,33 +281,9 @@
         pytest
       ]
     ))
-    # rust
-    # go
-    # kotlin
 
-    # DIVERSE
-    # mpc-cli
     #FIX: Configure this with 'programs.texlive.enable' instead
     texlive.combined.scheme-medium # Or 'full'
-
-    # nodejs
-    # Fonts:
-    # noto-fonts-emoji
-    # noto-fonts-extra
-    # otf-fira-mono
-    # terminus_font
-    # ttf-0xproto 1.602-1
-    # ttf-0xproto-nerd 3.2.1-2
-    # ttf-aptos 1.0-1
-    # ttf-caladea 20200113-4
-    # ttf-fira-code 6.2-2
-    # ttf-fira-mono 2:3.206-4
-    # ttf-font-awesome 6.6.0-1
-    # ttf-hack 3.003-7
-    # ttf-hack-nerd 3.2.1-2
-    # ttf-inconsolata 1:3.000-4
-    # ttf-inconsolata-nerd 3.2.1-2
-    # ttf-nerd-fonts-symbols 3.2.1-1
 
     # Potential programs, but don't use them right now
     # Emacs (/doom)
@@ -374,23 +327,16 @@
     ### From nvim-health-check (so might need to be moved there)
     xdotool
     ripgrep
-    # libreoffice-still
 
-    kmonad
     evtest
-
-    pinta # Simple image editor
-
-    unrar-free # Unzip rar-files
 
     time # time programs
 
     pdfgrep
 
-    # nix-prefetch # get rev and sha256 of github-projects
-    # nurl # get rev and sha256 of github-projects
-
     futhark
+
+    # ?
     sshfs
 
     openconnect
@@ -423,7 +369,6 @@
     gtk3
     # mesa
 
-    nuget-to-nix
     # fsautocomplete
 
     # cudaPackages.cuda_gdb
