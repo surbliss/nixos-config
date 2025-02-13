@@ -563,9 +563,9 @@
 
     bash-language-server
 
+    nix-prefetch
     nix-prefetch-git
     nix-prefetch-github
-    nix-prefetch-url
   ];
 
 }
