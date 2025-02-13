@@ -271,7 +271,7 @@
     # gdb
     rars
     # fsharp
-    dotnet-sdk_7
+    # dotnet-sdk_7
     # dotnet-sdk
     # dotnet-sdk_9
     # dotnet-runtime
@@ -548,7 +548,7 @@
 
     # csharp lsp
     # omnisharp-roslyn
-    mono
+    # mono
     # roslyn-ls
     # msbuild
 
