@@ -549,7 +549,7 @@
     # csharp lsp
     # omnisharp-roslyn
     mono
-    roslyn-ls
+    # roslyn-ls
     # msbuild
 
     # csharpier
