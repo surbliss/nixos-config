@@ -77,7 +77,11 @@
   programs.slock.enable = true;
 
   programs.nix-ld.enable = true;
-  # programs.nix-ld.libraries = with pkgs; [];
+  programs.nix-ld.libraries = with pkgs; [
+    stdenv.cc.cc.lib # This includes libstdc++
+    xorg.libXrandr # X11 randr support
+    libGL # OpenGL support
+  ];
 
   users.users.angryluck.packages = with pkgs; [
     stow
