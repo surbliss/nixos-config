@@ -77,6 +77,7 @@
   programs.slock.enable = true;
 
   programs.nix-ld.enable = true;
+  # For DIKU-Canvas to work (e.g. SDL2)
   programs.nix-ld.libraries = with pkgs; [
     stdenv.cc.cc.lib # This includes libstdc++
     xorg.libXrandr # X11 randr support
@@ -287,7 +288,14 @@
     ))
 
     #FIX: Configure this with 'programs.texlive.enable' instead
-    texlive.combined.scheme-medium # Or 'full'
+    # texlive.combined.scheme-medium # Or 'full'
+
+    (texlive.combine {
+      inherit (texlive)
+        scheme-medium
+        minted
+        ;
+    })
 
     # Potential programs, but don't use them right now
     # Emacs (/doom)
