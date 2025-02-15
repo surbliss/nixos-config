@@ -290,12 +290,13 @@
     #FIX: Configure this with 'programs.texlive.enable' instead
     # texlive.combined.scheme-medium # Or 'full'
 
-    (texlive.combine {
-      inherit (texlive)
-        scheme-medium
-        minted
-        ;
-    })
+    texlive.combined.scheme-full
+    # (texlive.combine {
+    #   inherit (texlive)
+    #     scheme-medium
+    #     minted
+    #     ;
+    # })
 
     # Potential programs, but don't use them right now
     # Emacs (/doom)
