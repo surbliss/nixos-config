@@ -503,6 +503,7 @@
     inkscape
 
     # Zen browser
+
     # inputs.zen-browser.packages."${system}".generic
     inputs.zen-browser.packages."${system}".default
 
