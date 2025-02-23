@@ -504,9 +504,8 @@
 
     # Zen browser
 
-    # inputs.zen-browser.packages."${system}".generic
     inputs.zen-browser.packages."${system}".twilight
-    # inputs.zen-browser.packages."${system}".twilight-official
+    # inputs.zen-browser.packages.${pkgs.system}.default
 
     # csharp lsp
     # omnisharp-roslyn
