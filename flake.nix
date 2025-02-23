@@ -6,7 +6,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    # zen-browser.url = "github:MarceColl/zen-browser-flake";
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
   };
   outputs =
