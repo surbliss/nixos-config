@@ -527,6 +527,8 @@
     nix-prefetch
     nix-prefetch-git
     nix-prefetch-github
+
+    figma-linux
   ];
 
 }
