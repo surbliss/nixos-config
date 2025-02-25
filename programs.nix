@@ -409,6 +409,10 @@
     # LSPs
     lua-language-server
     stylua
+    lua
+    lua52Packages.tiktoken_core
+    lynx
+
     ### Replaced by nixd
     # nil
     nixd
