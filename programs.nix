@@ -491,11 +491,7 @@
     imagemagick
 
     # PDF med form-filling
-    evince
-    okular
-    xournalpp
     masterpdfeditor
-    qpdfview
 
     clang
 

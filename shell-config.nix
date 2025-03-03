@@ -20,7 +20,8 @@
     #   # For jEdit to work!
     _JAVA_AWT_WM_NONREPARENTING = 1;
     DOTNET_CLI_TELEMETRY_OPTOUT = 1;
-    DOTNET_ROOT = "${pkgs.dotnet-sdk_7}/share/dotnet";
+    # Do this locally (if you must)
+    # DOTNET_ROOT = "${pkgs.dotnet-sdk_7}/share/dotnet";
     #   AOCD_DIR = "$HOME/aocd/";
   };
 
