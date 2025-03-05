@@ -17,7 +17,7 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
 
 (defvar
   tap-time 200
-  hold-time 1000
+  hold-time 200
   tt $tap-time
   ht $hold-time
 )
@@ -39,7 +39,7 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   dow (tap-hold-release $tt $ht down _)
   up (tap-hold-release $tt $ht up _)
   rig (tap-hold-release $tt $ht right _)
-  cw (caps-word 1000)
+  cw (caps-word 5000)
   ;;æ (unicode æ)
   ;;ø (unicode ø)
   ;;å (unicode å)
