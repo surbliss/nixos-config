@@ -529,6 +529,8 @@
     nix-prefetch-github
 
     figma-linux
+
+    obsidian
   ];
 
 }
