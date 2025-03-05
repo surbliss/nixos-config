@@ -75,6 +75,10 @@
     "en_US.UTF-8/UTF-8"
     "da_DK.UTF-8/UTF-8"
   ];
+  i18n.extraLocaleSettings = {
+    LC_MESSAGES = "en_US.UTF-8";
+    LC_TIME = "da_DK.UTF-8";
+  };
   console = {
     font = "${pkgs.terminus_font}/share/consolefonts/ter-u28n.psf.gz";
     useXkbConfig = true; # use xkb.options in tty.
