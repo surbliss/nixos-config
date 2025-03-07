@@ -531,6 +531,8 @@
     figma-linux
 
     obsidian
+
+    betterlockscreen
   ];
 
 }
