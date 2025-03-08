@@ -162,6 +162,13 @@
         "zathura.desktop"
         "firefox.desktop"
       ];
+      "image/jpeg" = [ "feh.desktop" ];
+      "image/png" = [ "feh.desktop" ];
+      "image/gif" = [ "feh.desktop" ];
+      "image/svg+xml" = [ "feh.desktop" ];
+      "image/webp" = [ "feh.desktop" ];
+      "image/tiff" = [ "feh.desktop" ];
+      "image/bmp" = [ "feh.desktop" ];
 
       # "video/mp4" = [ "vlc.desktop" ];
       # "video/x-matroska" = [ "vlc.desktop" ];

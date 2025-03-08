@@ -216,8 +216,11 @@
 
     # Trying stable version
     # Didn't work...
-    # stablePkgs.logseq
-    logseq
+    stablePkgs.logseq
+
+    ### Removed from unstable for now, have to install from elsewhere :/
+    # logseq
+
     # Needed for logseq for some reason
     # glibc
 

@@ -28,7 +28,13 @@
         specialArgs = {
           inherit inputs;
           stablePkgs = import nixpkgs-stable {
-            config.allowUnfree = true;
+            config = {
+              allowUnfree = true;
+              permittedInsecurePackages = [
+                "electron-27.3.11"
+              ];
+            };
+
             inherit system;
           };
         };
