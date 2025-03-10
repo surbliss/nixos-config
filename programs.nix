@@ -271,25 +271,6 @@
     ### -> Must be because you then have two different ghc-versions...
     # ghc
 
-    # FIX: Should be a nix-shell instead
-    (python312.withPackages (
-      python-pkgs: with python-pkgs; [
-        # select Python packages here
-        # pandas
-        # requests
-        torch
-        torchvision
-        numpy
-        scikit-learn
-        matplotlib
-        notebook
-        stablePkgs.aocd
-        # lark
-        pyparsing
-        pytest
-      ]
-    ))
-
     #FIX: Configure this with 'programs.texlive.enable' instead
     # texlive.combined.scheme-medium # Or 'full'
 
@@ -451,18 +432,23 @@
 
     # (python3.withPackages (
     (python3.withPackages (
-      python-pkgs: with python-pkgs; [
+      p: with p; [
         # select Python packages here
         # pandas
         # requests
-        torch
-        torchvision
+        # torch
+        # torchvision
         numpy
-        scikit-learn
+        # scikit-learn
         matplotlib
         ipython
         # sklearn-deap
 
+        # stablePkgs.aocd
+        # lark
+        pyparsing
+        pytest
+        catppuccin
         ### LSP-stuff:
         # python-lsp-server
         # rope
