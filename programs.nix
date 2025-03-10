@@ -82,6 +82,13 @@
     stdenv.cc.cc.lib # This includes libstdc++
     xorg.libXrandr # X11 randr support
     libGL # OpenGL support
+    SDL2
+
+    xorg.libX11 # Basic X11 client
+    xorg.libXcursor # X11 cursor management
+    xorg.libXi # X11 Input Extension
+    xorg.libXinerama # X11 Xinerama extension
+    vulkan-loader # For Vulkan support
   ];
 
   users.users.angryluck.packages = with pkgs; [
