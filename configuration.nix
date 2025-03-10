@@ -153,6 +153,12 @@
   xdg.mime = {
     enable = true;
     defaultApplications = {
+      "text/html" = [ "zen-browser.desktop" ];
+      "x-scheme-handler/http" = [ "zen_twilight.desktop" ];
+      "x-scheme-handler/https" = [ "zen_twilight.desktop" ];
+      "x-scheme-handler/about" = [ "zen_twilight.desktop" ];
+      "x-scheme-handler/unknown" = [ "zen_twilight.desktop" ];
+
       "application/pdf" = [
         "org.pwmt.zathura.desktop"
         "org.pwmt.zathura-pdf-mupdf.desktop"
@@ -160,6 +166,8 @@
         "org.pwmt.zathura-pdf-ps.desktop"
         "org.pwmt.zathura-pdf-cb.desktop"
         "zathura.desktop"
+        "zen_twilight.desktop"
+        "zen.desktop"
         "firefox.desktop"
       ];
       "image/jpeg" = [ "feh.desktop" ];
@@ -170,12 +178,6 @@
       "image/tiff" = [ "feh.desktop" ];
       "image/bmp" = [ "feh.desktop" ];
 
-      # "video/mp4" = [ "vlc.desktop" ];
-      # "video/x-matroska" = [ "vlc.desktop" ];
-      # "video/mpeg" = [ "vlc.desktop" ];
-      # "video/quicktime" = [ "vlc.desktop" ];
-      # "video/webm" = [ "vlc.desktop" ];
-      # "video/x-msvideo" = [ "vlc.desktop" ];
     };
   };
 
@@ -187,4 +189,5 @@
   # https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion.
   system.stateVersion = "24.05"; # Did you read the comment?
 }
+
 # vim: set ts=2 sw=2:
