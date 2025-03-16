@@ -79,16 +79,25 @@
   programs.nix-ld.enable = true;
   # For DIKU-Canvas to work (e.g. SDL2)
   programs.nix-ld.libraries = with pkgs; [
-    stdenv.cc.cc.lib # This includes libstdc++
-    xorg.libXrandr # X11 randr support
-    libGL # OpenGL support
-    SDL2
+    ### See https://github.com/diku-dk/DIKUArcade/blob/master/shell.nix
+    stdenv
+    libGL
+    xorg.libX11
+    xorg.libXext
+    xorg.libXinerama
+    xorg.libXi
+    xorg.libXrandr
 
-    xorg.libX11 # Basic X11 client
-    xorg.libXcursor # X11 cursor management
-    xorg.libXi # X11 Input Extension
-    xorg.libXinerama # X11 Xinerama extension
-    vulkan-loader # For Vulkan support
+    # stdenv.cc.cc.lib # This includes libstdc++
+    # xorg.libXrandr # X11 randr support
+    # libGL # OpenGL support
+
+    # See https://github.com/diku-dk/DIKUArcade/blob/master/shell.nix
+    # xorg.libX11 # Basic X11 client
+    # xorg.libXext # Basic X11 client
+    # xorg.libXinerame # X11 cursor management
+    # xorg.libXi # X11 Input Extension
+    # xorg.libXrandr # X11 Xinerama extension
   ];
 
   users.users.angryluck.packages = with pkgs; [
@@ -398,6 +407,8 @@
     # For neovim:
 
     # LSPs
+    harper
+
     lua-language-server
     stylua
     lua
