@@ -599,7 +599,18 @@ in
 
     picom-jonaburg
 
+    # Other cursors:
+    # - capitaine-cursors
+    # - breeze-cursors
+    # - vanilla-dmz
+    # - numix-cursor-theme
+    bibata-cursors
   ];
+
+  environment.variables = {
+    XCURSOR_THEME = "Bibata-Modern-Classic";
+    XCURSOR_SIZE = "24";
+  };
 
   systemd.user.services.picom-jonaburg = {
     description = "Picom X11 compositor (jonaburg fork)";

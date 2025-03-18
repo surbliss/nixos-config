@@ -117,6 +117,12 @@
   #   angryluck = "--session xmonad";
   # };
 
+  # Custom cursor
+  programs.dconf.enable = true;
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Classic/cursors/left_ptr 24
+  '';
+
   users.users.angryluck = {
     isNormalUser = true;
     home = "/home/angryluck";
