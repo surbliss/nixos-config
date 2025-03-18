@@ -23,6 +23,8 @@
 
   services.xserver = {
     enable = true;
+    # Autorun XDG autostart files
+    desktopManager.runXdgAutostartIfNone = true;
 
     # BUG: Doesn't work...
     # desktopManager.wallpaper.mode = "max";

@@ -118,9 +118,25 @@
   # };
 
   # Custom cursor
-  programs.dconf.enable = true;
-  services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Classic/cursors/left_ptr 24
+  # programs.dconf.enable = true;
+  # services.xserver.displayManager.sessionCommands = ''
+  #   ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice/cursors/left_ptr 24
+  # '';
+
+  environment.etc."X11/Xresources".text = ''
+    Xcursor.theme: Bibata-Modern-Ice
+    Xcursor.size: 24
+  '';
+
+  environment.etc."gtk-3.0/settings.ini".text = ''
+    [Settings]
+    gtk-cursor-theme-name=Bibata-Modern-Ice
+    gtk-cursor-theme-size=24
+  '';
+
+  environment.etc."icons/default/index.theme".text = ''
+    [Icon Theme]
+    Inherits=Bibata-Modern-Ice
   '';
 
   users.users.angryluck = {
