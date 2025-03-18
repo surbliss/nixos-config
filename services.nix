@@ -8,6 +8,19 @@
   services.accounts-daemon.enable = true;
   services.pantheon.apps.enable = false;
   services.displayManager.defaultSession = "none+xmonad";
+  services.displayManager.sddm = {
+    enable = true;
+    # package = pkgs.kdePackages.sddm;
+    # package = pkgs.libsForQt5.sddm;
+    package = pkgs.kdePackages.sddm; # Use Qt6 version
+    extraPackages = [
+      # pkgs.libsForQt5.qt5.qtgraphicaleffects
+      # pkgs.sddm-chili-theme
+      pkgs.catppuccin-sddm
+    ];
+    theme = "catppuccin-mocha";
+  };
+
   services.xserver = {
     enable = true;
 
@@ -27,11 +40,6 @@
 
       layout = "dk-custom,dk";
       options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
-    };
-
-    displayManager.sddm = {
-      enable = true;
-      theme = "chili";
     };
 
     # displayManager.lightdm = {
