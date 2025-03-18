@@ -119,9 +119,19 @@
 
   # Custom cursor
   programs.dconf.enable = true;
-  # services.xserver.displayManager.sessionCommands = ''
-  #   ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice/cursors/left_ptr 24
-  # '';
+  programs.dconf.profiles.user.databases = [
+    {
+      settings = {
+        "org/gnome/desktop/interface" = {
+          cursor-theme = "Bibata-Modern-Ice";
+          cursor-size = lib.gvariant.mkUint32 24; # Use appropriate GVariant type
+        };
+      };
+    }
+  ];
+  services.xserver.displayManager.sessionCommands = ''
+    ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Ice/cursors/left_ptr 24
+  '';
 
   environment.etc."X11/Xresources".text = ''
     Xcursor.theme: Bibata-Modern-Ice
