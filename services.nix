@@ -139,37 +139,37 @@
 
   services.autorandr.enable = true;
 
-  services.picom = {
-    enable = true;
-    package = pkgs.picom-pijulius;
-    # inactiveOpacity = 0.95;
-    # menuOpacity = 1.0;
-    # fadeDelta = 1000;
-    # backend = "glx";
-    # settings = {
-    #   corner-radius = 8;
-    #   # corner-radius = 8;
-    #   round-borders = 1;
-    #
-    #   # rounded-corners-exclude = [
-    #   #   "class_g = 'Rofi'"
-    #   #   "class_g = 'flameshot'"
-    #   # ];
-    #
-    #   # these are required!
-    #   experimental-backends = true;
-    #
-    #   # backend = "glx";
-    #   # blur = {
-    #   #   method = "gaussian";
-    #   #   size = 10;
-    #   #   deviation = 5.0;
-    #   # };
-    # };
-  };
-
-  # Make picom use ~/.config configuration, instead of generated NixOS one.
-  systemd.user.services.picom.serviceConfig.ExecStart = lib.mkForce "picom";
+  # services.picom = {
+  #   enable = true;
+  #   package = pkgs.picom-pijulius;
+  # inactiveOpacity = 0.95;
+  # menuOpacity = 1.0;
+  # fadeDelta = 1000;
+  # backend = "glx";
+  # settings = {
+  #   corner-radius = 8;
+  #   # corner-radius = 8;
+  #   round-borders = 1;
+  #
+  #   # rounded-corners-exclude = [
+  #   #   "class_g = 'Rofi'"
+  #   #   "class_g = 'flameshot'"
+  #   # ];
+  #
+  #   # these are required!
+  #   experimental-backends = true;
+  #
+  #   # backend = "glx";
+  #   # blur = {
+  #   #   method = "gaussian";
+  #   #   size = 10;
+  #   #   deviation = 5.0;
+  #   # };
+  # };
+  # };
+  #
+  # # Make picom use ~/.config configuration, instead of generated NixOS one.
+  # systemd.user.services.picom.serviceConfig.ExecStart = lib.mkForce "picom";
 
   services.syncthing = {
     enable = true;
