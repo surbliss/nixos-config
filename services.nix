@@ -145,41 +145,31 @@
     # inactiveOpacity = 0.95;
     # menuOpacity = 1.0;
     # fadeDelta = 1000;
-    backend = "glx";
-    settings = {
-      corner-radius = 8;
-      # corner-radius = 8;
-      round-borders = 1;
-
-      # rounded-corners-exclude = [
-      #   "class_g = 'Rofi'"
-      #   "class_g = 'flameshot'"
-      # ];
-
-      # these are required!
-      experimental-backends = true;
-
-      transition-length = 301;
-      transition-pow-x = 0.3;
-      transition-pow-y = 0.3;
-      transition-pow-w = 0.3;
-      transition-pow-h = 0.3;
-      size-transition = true;
-
-      fading = true;
-      fade-in-step = 0.05;
-      fade-out-step = 0.05;
-      # fade-exclude = [ "class_g = 'flameshot'" ];
-
-      log-level = "warn";
-      # backend = "glx";
-      # blur = {
-      #   method = "gaussian";
-      #   size = 10;
-      #   deviation = 5.0;
-      # };
-    };
+    # backend = "glx";
+    # settings = {
+    #   corner-radius = 8;
+    #   # corner-radius = 8;
+    #   round-borders = 1;
+    #
+    #   # rounded-corners-exclude = [
+    #   #   "class_g = 'Rofi'"
+    #   #   "class_g = 'flameshot'"
+    #   # ];
+    #
+    #   # these are required!
+    #   experimental-backends = true;
+    #
+    #   # backend = "glx";
+    #   # blur = {
+    #   #   method = "gaussian";
+    #   #   size = 10;
+    #   #   deviation = 5.0;
+    #   # };
+    # };
   };
+
+  # Make picom use ~/.config configuration, instead of generated NixOS one.
+  systemd.user.services.picom.serviceConfig.ExecStart = lib.mkForce "picom";
 
   services.syncthing = {
     enable = true;

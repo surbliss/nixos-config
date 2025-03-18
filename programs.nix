@@ -451,7 +451,7 @@
     # (python3.withPackages (
     (python3.withPackages (
       p: with p; [
-        # select Python packages here
+        ### Select Python packages here
         # pandas
         # requests
         # torch
