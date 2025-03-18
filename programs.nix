@@ -615,6 +615,8 @@ in
       # loginBackground = true;
     })
 
+    gtk4
+
   ];
 
   environment.variables = {
