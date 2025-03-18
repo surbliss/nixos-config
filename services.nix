@@ -29,21 +29,26 @@
       options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
     };
 
-    displayManager.lightdm = {
+    displayManager.sddm = {
       enable = true;
-      # greeters.pantheon.enable = true;
-      #   # background = /home/angryluck/.background-image;
-      background = ./.background-image;
-      # greeter.package = lib.mkForce pkgs.lightdm-gtk-greeter;
-      greeters.pantheon.enable = false;
-      greeters.gtk = {
-        # enable = lib.mkForce true;
-        enable = true;
-        #     # extraConfig = ''
-        #     #   user-background = false
-        #     # '';
-      };
+      theme = "chili";
     };
+
+    # displayManager.lightdm = {
+    #   enable = true;
+    #   # greeters.pantheon.enable = true;
+    #   #   # background = /home/angryluck/.background-image;
+    #   background = ./.background-image;
+    #   # greeter.package = lib.mkForce pkgs.lightdm-gtk-greeter;
+    #   greeters.pantheon.enable = false;
+    #   greeters.gtk = {
+    #     # enable = lib.mkForce true;
+    #     enable = true;
+    #     #     # extraConfig = ''
+    #     #     #   user-background = false
+    #     #     # '';
+    #   };
+    # };
 
     # Doesn't work setting this in home-manager
     windowManager.xmonad = {

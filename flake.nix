@@ -23,26 +23,66 @@
     #   ];
     # in
     {
-      nixosConfigurations."angryluck" = nixpkgs.lib.nixosSystem rec {
-        system = "x86_64-linux";
-        specialArgs = {
-          inherit inputs;
-          stablePkgs = import nixpkgs-stable {
-            config = {
-              allowUnfree = true;
-              permittedInsecurePackages = [
-                "electron-27.3.11"
-              ];
-            };
+      nixosConfigurations = {
+        # Split (potentially) this out into multiple configs, e.g.
+        # 'angryluck-laptop' and 'angryluck-server', ...
+        angryluck = nixpkgs.lib.nixosSystem rec {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            stablePkgs = import nixpkgs-stable {
+              config = {
+                allowUnfree = true;
+                permittedInsecurePackages = [
+                  "electron-27.3.11"
+                ];
+              };
 
-            inherit system;
+              inherit system;
+            };
           };
+          modules = [
+            ./configuration.nix
+            # { nixpkgs.overlays = overlays; }
+          ];
         };
-        modules = [
-          ./configuration.nix
-          # { nixpkgs.overlays = overlays; }
-        ];
       };
     };
 }
+
+# {
+#   nixosConfigurations = let
+#     # Common configuration function
+#     mkSystem = { system ? "x86_64-linux", hostModule, extraModules ? [] }:
+#       let
+#         stablePkgs = import nixpkgs-stable {
+#           config = {
+#             allowUnfree = true;
+#             permittedInsecurePackages = [
+#               "electron-27.3.11"
+#             ];
+#           };
+#           inherit system;
+#         };
+#       in nixpkgs.lib.nixosSystem {
+#         inherit system;
+#         specialArgs = { inherit inputs stablePkgs; };
+#         modules = [
+#           ./modules/common
+#           hostModule
+#         ] ++ extraModules;
+#       };
+#   in {
+#     "laptop" = mkSystem {
+#       hostModule = ./hosts/laptop;
+#       extraModules = [ ./modules/desktop ];
+#     };
+#
+#     "server" = mkSystem {
+#       hostModule = ./hosts/server;
+#       extraModules = [ ./modules/server ];
+#     };
+#   };
+# }
+
 # vim: set sw=2

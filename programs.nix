@@ -7,6 +7,7 @@
 }:
 
 let
+  # Modelled after https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/pi/picom/package.nix#L116
   picom-jonaburg = pkgs.stdenv.mkDerivation {
     # MUST be run with --experimental-backend(s)
     pname = "picom-jonaburg";
@@ -597,8 +598,6 @@ in
     betterlockscreen
 
     picom-jonaburg
-
-    # Modelled after https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/pi/picom/package.nix#L116
 
   ];
 

@@ -108,7 +108,7 @@
   };
 
   # services.xserver.desktopManager.gnome.enable = true;
-  services.xserver.desktopManager.pantheon.enable = true;
+  # services.xserver.desktopManager.pantheon.enable = true;
   # services.xserver.displayManager.lightdm.greeters.gtk.enable = false;
   # Conflicts with tlp
   services.power-profiles-daemon.enable = false;
