@@ -605,6 +605,16 @@ in
     # - vanilla-dmz
     # - numix-cursor-theme
     bibata-cursors
+
+    # For customization:
+    (pkgs.catppuccin-sddm.override {
+      flavor = "mocha";
+      # font = "Noto Sans";
+      # fontSize = "9";
+      # background = "${./.background-image.png}";
+      # loginBackground = true;
+    })
+
   ];
 
   environment.variables = {

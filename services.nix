@@ -13,11 +13,11 @@
     # package = pkgs.kdePackages.sddm;
     # package = pkgs.libsForQt5.sddm;
     package = pkgs.kdePackages.sddm; # Use Qt6 version
-    extraPackages = [
-      # pkgs.libsForQt5.qt5.qtgraphicaleffects
-      # pkgs.sddm-chili-theme
-      pkgs.catppuccin-sddm
-    ];
+    # extraPackages = [
+    #   # pkgs.libsForQt5.qt5.qtgraphicaleffects
+    #   # pkgs.sddm-chili-theme
+    #   pkgs.catppuccin-sddm
+    # ];
     theme = "catppuccin-mocha";
   };
 
