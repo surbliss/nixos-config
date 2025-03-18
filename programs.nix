@@ -541,7 +541,17 @@
 
     betterlockscreen
 
-    picom-pijulius
+    (lib.getDev pkgs.pcre)
+    pkg-config
+    # (picom.overrideAttrs (oldAttrs: {
+    #   src = fetchFromGitHub {
+    #     owner = "jonaburg";
+    #     repo = "picom";
+    #     rev = "65ad706ab8e1d1a8f302624039431950f6d4fb89";
+    #     hash = "sha256-UKqMHUP6X3exG7obhuRPgXWPmwBeaGaqNYNtcBcimNQ=";
+    #   };
+    # }))
+    # picom-pijulius
   ];
 
 }
