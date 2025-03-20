@@ -306,7 +306,6 @@ in
     redshift
     # syncthing
     flameshot
-    # wineWowPackages.stable
     rofi
     rofi-emoji
     # rofi-file-browser
@@ -616,7 +615,6 @@ in
     })
 
     gtk4
-
   ];
 
   environment.variables = {
