@@ -15,7 +15,7 @@
     package = pkgs.kdePackages.sddm; # Use Qt6 version
     settings = {
       Theme = {
-        CursorTheme = "Bibata-Modern-Ice";
+        CursorTheme = "Bibata-Modern-Amber";
       };
     };
     # extraPackages = [

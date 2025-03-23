@@ -615,10 +615,12 @@ in
     })
 
     gtk4
+
+    mermaid-cli
   ];
 
   environment.variables = {
-    XCURSOR_THEME = "Bibata-Modern-Ice";
+    XCURSOR_THEME = "Bibata-Modern-Amber";
     XCURSOR_SIZE = "24";
   };
 
