@@ -99,9 +99,7 @@
       libXrandr
     ]);
 
-  users.users.angryluck.packages = with pkgs; [
-    stow
-  ];
+  users.users.angryluck.packages = with pkgs; [ stow ];
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
@@ -556,14 +554,16 @@
     # - vanilla-dmz
     # - numix-cursor-theme
     bibata-cursors
-    (
-      ### Maybe different? See
-      ### https://github.com/NixOS/nixpkgs/issues/22652
-      pkgs.writeTextDir "share/icons/default/index.theme" ''
-        [Icon Theme]
-        Inherits=Bibata-Modern-Amber
-      ''
-    )
+    ### For user-settings, write a home-manager module that adds index.theme to
+    ### ~/.icons/default/index.theme
+    # (
+    #   ### Maybe different? See
+    #   ### https://github.com/NixOS/nixpkgs/issues/22652
+    #   pkgs.writeTextDir "share/icons/default/index.theme" ''
+    #     [Icon Theme]
+    #     Inherits=Bibata-Modern-Amber
+    #   ''
+    # )
 
     # For customization:
     (pkgs.catppuccin-sddm.override {
@@ -579,6 +579,7 @@
     mermaid-cli
   ];
 
+  ### Seems like a fiine idea to set, and relatively benign
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Amber";
     XCURSOR_SIZE = "24";

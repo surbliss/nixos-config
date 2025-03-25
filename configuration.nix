@@ -118,42 +118,44 @@
   # };
 
   # Custom cursor
-  programs.dconf.enable = true;
-  programs.dconf.profiles.user.databases = [
-    {
-      settings = {
-        "org/gnome/desktop/interface" = {
-          cursor-theme = "Bibata-Modern-Amber";
-          cursor-size = lib.gvariant.mkUint32 24; # Use appropriate GVariant type
-        };
-      };
-    }
-  ];
-  services.xserver.displayManager.sessionCommands = ''
-    ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Amber/cursors/left_ptr 24
-  '';
+  # programs.dconf.enable = true;
+  # programs.dconf.profiles.user.databases = [
+  #   {
+  #     settings = {
+  #       "org/gnome/desktop/interface" = {
+  #         cursor-theme = "Bibata-Modern-Amber";
+  #         cursor-size = lib.gvariant.mkUint32 24; # Use appropriate GVariant type
+  #       };
+  #     };
+  #   }
+  # ];
 
-  environment.etc."X11/Xresources".text = ''
-    Xcursor.theme: Bibata-Modern-Amber
-    Xcursor.size: 24
-  '';
+  # Run after setupCommands
+  # services.xserver.displayManager.sessionCommands = ''
+  #   ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Amber/cursors/left_ptr 24
+  # '';
 
-  environment.etc."gtk-3.0/settings.ini".text = ''
-    [Settings]
-    gtk-cursor-theme-name=Bibata-Modern-Amber
-    gtk-cursor-theme-size=24
-  '';
+  # environment.etc."X11/Xresources".text = ''
+  #   Xcursor.theme: Bibata-Modern-Amber
+  #   Xcursor.size: 24
+  # '';
 
-  environment.etc."gtk-4.0/settings.ini".text = ''
-    [Settings]
-    gtk-cursor-theme-name=Bibata-Modern-Amber
-    gtk-cursor-theme-size=24
-  '';
+  # environment.etc."gtk-3.0/settings.ini".text = ''
+  #   [Settings]
+  #   gtk-cursor-theme-name=Bibata-Modern-Amber
+  #   gtk-cursor-theme-size=24
+  # '';
 
-  environment.etc."icons/default/index.theme".text = ''
-    [Icon Theme]
-    Inherits=Bibata-Modern-Amber
-  '';
+  # environment.etc."gtk-4.0/settings.ini".text = ''
+  #   [Settings]
+  #   gtk-cursor-theme-name=Bibata-Modern-Amber
+  #   gtk-cursor-theme-size=24
+  # '';
+
+  # environment.etc."icons/default/index.theme".text = ''
+  #   [Icon Theme]
+  #   Inherits=Bibata-Modern-Amber
+  # '';
 
   users.users.angryluck = {
     isNormalUser = true;
@@ -178,9 +180,7 @@
     useDefaultShell = true;
 
     # User-specific packages
-    packages = with pkgs; [
-      passh
-    ];
+    packages = with pkgs; [ passh ];
   };
 
   programs.ssh.startAgent = true;
