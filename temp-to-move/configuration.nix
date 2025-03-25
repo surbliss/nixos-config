@@ -155,6 +155,31 @@
     Inherits=Bibata-Modern-Amber
   '';
 
+  environment.etc."X11/xorg.conf.d/00-cursor.conf".text = ''
+    Section "Device"
+      Identifier "all"
+      Option "CursorTheme" "Bibata-Modern-Amber"
+      Option "CursorSize" "24"
+    EndSection
+  '';
+
+  services.xserver.deviceSection = ''
+    Option "CursorTheme" "Bibata-Modern-Amber"
+    Option "CursorSize" "24"
+  '';
+
+  environment.etc."X11/xinit/xinitrc.d/50-cursor.sh" = {
+    text = ''
+      #!/bin/sh
+      export XCURSOR_THEME=Bibata-Modern-Amber
+      export XCURSOR_SIZE=24
+      if [ -x ${pkgs.xorg.xsetroot}/bin/xsetroot ]; then
+        ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${pkgs.bibata-cursors}/share/icons/Bibata-Modern-Amber/cursors/left_ptr 24
+      fi
+    '';
+    mode = "0755";
+  };
+
   users.users.angryluck = {
     isNormalUser = true;
     home = "/home/angryluck";
@@ -178,9 +203,7 @@
     useDefaultShell = true;
 
     # User-specific packages
-    packages = with pkgs; [
-      passh
-    ];
+    packages = with pkgs; [ passh ];
   };
 
   programs.ssh.startAgent = true;
