@@ -6,7 +6,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
+    zen-browser.url = "github:0xc000022070/zen-browser-flake"; # Best one
     # zen-browser.url = "github:quantum9innovation/zen-browser-twilight-flake";
     # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -33,9 +33,7 @@
             stablePkgs = import nixpkgs-stable {
               config = {
                 allowUnfree = true;
-                permittedInsecurePackages = [
-                  "electron-27.3.11"
-                ];
+                permittedInsecurePackages = [ "electron-27.3.11" ];
               };
 
               inherit system;
