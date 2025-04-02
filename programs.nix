@@ -7,18 +7,20 @@
 }:
 {
   ### Adds the custom packages (includes picom-jonaburg)
-  ### Should be passed higher up!
   nixpkgs.overlays = [ (import ./pkgs/default.nix) ];
 
-  programs.firefox.enable = true;
+  ### Don't "enable", seems to set firefox as default for multiple things
+  # programs.firefox.enable = true;
 
   programs.git = {
     enable = true;
     config = {
+      # TODO: Move to local config, and use own email
       user = {
         name = "Thomas H. Surlykke";
         email = "54353246+angryluck@users.noreply.github.com";
       };
+      # TODO: Remove these (except qp) untill very confident with git
       alias = {
         a = "add .";
         cm = "commit -m";
@@ -35,6 +37,23 @@
       # pull.rebase = "false";
     };
   };
+
+  ### To *enable* garbage collection for a project, just delete the .direnv
+  # folder,
+  # see https://www.reddit.com/r/NixOS/comments/17574l3/nixdirenv_and_garbage_collection/
+  # Automatically enables nix-direnv
+  ### For checking gc-root links to remove, run
+  # `nix-store --gc --print-roots | grep "direnv"`
+  # then delete .direnvc folder of paths listed (and .envrc too, so they aren't
+  # automatically created again)
+  programs.direnv.enable = true;
+
+  ### nix-direnv changes the config path, would be fine if home-manager was used
+  # instead.
+  environment.etc."direnv/direnv.toml".text = ''
+    [global]
+    hide_env_diff = true
+  '';
 
   programs.neovim = {
     enable = true;
@@ -175,6 +194,9 @@
     ];
 
   environment.systemPackages = with pkgs; [
+    # FIX: REMOVE AGAIN
+    # direnv
+
     # nano # installed by default
     vim
     git
@@ -221,7 +243,9 @@
     file
     # Set in configuration.nix insted
     # brillo
-    direnv
+
+    ### Using nix-direnv instead, enabled above
+    # direnv
 
     ### Applications
     nautilus
@@ -238,8 +262,10 @@
     # glibc
 
     # Didn't work on unstable
-    stablePkgs.isabelle
-    stablePkgs.isabelle-components.isabelle-linter
+    isabelle
+    isabelle-components.isabelle-linter
+    # stablePkgs.isabelle
+    # stablePkgs.isabelle-components.isabelle-linter
 
     # virtualbox
 
@@ -325,8 +351,8 @@
     # iwd (shouldn't be needed)
     # jupyterlab
     # libreoffice-fresh
-    # ly?
     # networkmanager (in configuration.nix)
+    # ly
     # nextcloud? (need own server first)
     # obsidian
     # p7zip
@@ -402,7 +428,7 @@
     polybarFull
 
     tree
-    chromium
+    ungoogled-chromium
     zathura
     mupdf
 
@@ -564,6 +590,9 @@
     #     Inherits=Bibata-Modern-Amber
     #   ''
     # )
+
+    # Cast remarkable to screen
+    rmview
 
     # For customization:
     (pkgs.catppuccin-sddm.override {

@@ -10,6 +10,17 @@
   services.displayManager.defaultSession = "none+xmonad";
   # Source: https://github.com/sddm/sddm/issues/1894. Should be fixed at some point...
   # Last line: Hack to prevent brief black cursor
+  /*
+    Copilot:
+    No, using `xrdb` on NixOS won't cause conflicts as long as you reference it properly with the store path (`${pkgs.xorg.xrdb}/bin/xrdb`) as shown in the example.
+
+    This approach:
+    1. Uses NixOS's proper referencing mechanism to ensure the right version is called
+    2. Runs during X initialization when SDDM starts up
+    3. Is a standard way to set X resources in display manager configurations
+
+    The setup script is specifically designed for this kind of customization, so it's safe to use `xrdb` this way.
+  */
   services.xserver.displayManager.setupCommands = ''
     echo 'Xcursor.theme: Bibata-Modern-Amber' | ${pkgs.xorg.xrdb}/bin/xrdb -nocpp -merge
     echo 'Xcursor.size: 24' | ${pkgs.xorg.xrdb}/bin/xrdb -nocpp -merge
@@ -20,17 +31,6 @@
     # package = pkgs.kdePackages.sddm;
     # package = pkgs.libsForQt5.sddm;
     package = pkgs.kdePackages.sddm; # Use Qt6 version
-    /*
-      Copilot:
-      No, using `xrdb` on NixOS won't cause conflicts as long as you reference it properly with the store path (`${pkgs.xorg.xrdb}/bin/xrdb`) as shown in the example.
-
-      This approach:
-      1. Uses NixOS's proper referencing mechanism to ensure the right version is called
-      2. Runs during X initialization when SDDM starts up
-      3. Is a standard way to set X resources in display manager configurations
-
-      The setup script is specifically designed for this kind of customization, so it's safe to use `xrdb` this way.
-    */
     # setupScript = ''
     #   echo 'Xcursor.theme: Bibata-Modern-Amber' | ${pkgs.xorg.xrdb}/bin/xrdb -nocpp -merge
     #   echo 'Xcursor.size: 24' | ${pkgs.xorg.xrdb}/bin/xrdb -nocpp -merge

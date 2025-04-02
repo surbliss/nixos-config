@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}:
+{ pkgs, ... }:
 {
 
   users.defaultUserShell = pkgs.zsh;
@@ -29,12 +26,22 @@
   # environment.shellAliases = {
   # };
 
+  # programs.git.prompt.enable = true;
+
   programs.zsh = {
     enable = true;
     autosuggestions.enable = true;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
+    ### Old prompt:
+    # PROMPT='%F{green}[%F{white}%B%3~%b%F{green}]%(!.#.$) %f'
+    ### Another time maybe
+    # promptInit = "source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme";
     # Plugins
+    promptInit = ''
+      source ${pkgs.zsh-git-prompt}/share/zsh-git-prompt/zshrc.sh
+    '';
+
     interactiveShellInit = ''
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       eval "$(zoxide init --cmd j zsh)"
