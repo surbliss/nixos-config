@@ -5,73 +5,22 @@
   stablePkgs,
   ...
 }:
-
-let
-  # Modelled after https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/by-name/pi/picom/package.nix#L116
-  picom-jonaburg = pkgs.stdenv.mkDerivation {
-    # MUST be run with --experimental-backend(s)
-    pname = "picom-jonaburg";
-    version = "8";
-
-    src = pkgs.fetchFromGitHub {
-      owner = "jonaburg";
-      repo = "picom";
-      rev = "65ad706ab8e1d1a8f302624039431950f6d4fb89";
-      hash = "sha256-UKqMHUP6X3exG7obhuRPgXWPmwBeaGaqNYNtcBcimNQ=";
-      fetchSubmodules = true;
-    };
-
-    nativeBuildInputs = with pkgs; [
-      asciidoctor
-      asciidoc # Program a2x missing
-      docbook_xml_dtd_45
-      docbook_xsl
-      makeWrapper
-      meson
-      ninja
-      pkg-config
-    ];
-
-    buildInputs = with pkgs; [
-      pcre.dev # libpcre missing error
-      dbus
-      libconfig
-      libdrm
-      libev
-      libGL
-      libepoxy
-      xorg.libX11
-      xorg.libxcb
-      libxdg_basedir
-      xorg.libXext
-      libxml2
-      libxslt
-      pcre2
-      pixman
-      uthash
-      xorg.xcbutil
-      xorg.xcbutilimage
-      xorg.xcbutilrenderutil
-      xorg.xorgproto
-    ];
-
-    mesonFlags = [
-      "-Dwith_docs=true"
-    ];
-  };
-
-in
 {
+  ### Adds the custom packages (includes picom-jonaburg)
+  nixpkgs.overlays = [ (import ./pkgs/default.nix) ];
 
-  programs.firefox.enable = true;
+  ### Don't "enable", seems to set firefox as default for multiple things
+  # programs.firefox.enable = true;
 
   programs.git = {
     enable = true;
     config = {
+      # TODO: Move to local config, and use own email
       user = {
         name = "Thomas H. Surlykke";
         email = "54353246+angryluck@users.noreply.github.com";
       };
+      # TODO: Remove these (except qp) untill very confident with git
       alias = {
         a = "add .";
         cm = "commit -m";
@@ -88,6 +37,23 @@ in
       # pull.rebase = "false";
     };
   };
+
+  ### To *enable* garbage collection for a project, just delete the .direnv
+  # folder,
+  # see https://www.reddit.com/r/NixOS/comments/17574l3/nixdirenv_and_garbage_collection/
+  # Automatically enables nix-direnv
+  ### For checking gc-root links to remove, run
+  # `nix-store --gc --print-roots | grep "direnv"`
+  # then delete .direnvc folder of paths listed (and .envrc too, so they aren't
+  # automatically created again)
+  programs.direnv.enable = true;
+
+  ### nix-direnv changes the config path, would be fine if home-manager was used
+  # instead.
+  environment.etc."direnv/direnv.toml".text = ''
+    [global]
+    hide_env_diff = true
+  '';
 
   programs.neovim = {
     enable = true;
@@ -133,32 +99,26 @@ in
   programs.slock.enable = true;
 
   programs.nix-ld.enable = true;
-  # For DIKU-Canvas to work (e.g. SDL2)
-  programs.nix-ld.libraries = with pkgs; [
-    ### See https://github.com/diku-dk/DIKUArcade/blob/master/shell.nix
-    stdenv
-    libGL
-    xorg.libX11
-    xorg.libXext
-    xorg.libXinerama
-    xorg.libXi
-    xorg.libXrandr
+  ### For DIKU-Canvas to work.
+  ### Everything here seems not needed - it worked earlier, but stopped working,
+  ### and now the nix-shell has been made to fix it.
+  programs.nix-ld.libraries =
+    (with pkgs; [
+      ### See https://github.com/diku-dk/DIKUArcade/blob/master/shell.nix
+      stdenv
+      libGL
+      # stdenv.cc.cc.lib # This includes libstdc++
+      # xorg.libXrandr # X11 randr support
+    ])
+    ++ (with pkgs.xorg; [
+      libX11
+      libXext
+      libXinerama
+      libXi
+      libXrandr
+    ]);
 
-    # stdenv.cc.cc.lib # This includes libstdc++
-    # xorg.libXrandr # X11 randr support
-    # libGL # OpenGL support
-
-    # See https://github.com/diku-dk/DIKUArcade/blob/master/shell.nix
-    # xorg.libX11 # Basic X11 client
-    # xorg.libXext # Basic X11 client
-    # xorg.libXinerame # X11 cursor management
-    # xorg.libXi # X11 Input Extension
-    # xorg.libXrandr # X11 Xinerama extension
-  ];
-
-  users.users.angryluck.packages = with pkgs; [
-    stow
-  ];
+  users.users.angryluck.packages = with pkgs; [ stow ];
 
   fonts.enableDefaultPackages = true;
   fonts.packages = with pkgs; [
@@ -234,6 +194,9 @@ in
     ];
 
   environment.systemPackages = with pkgs; [
+    # FIX: REMOVE AGAIN
+    # direnv
+
     # nano # installed by default
     vim
     git
@@ -244,7 +207,7 @@ in
     hello
 
     # Needed for configuring eduroam (but not otherwise)
-    networkmanagerapplet
+    # networkmanagerapplet
 
     wezterm
 
@@ -280,7 +243,9 @@ in
     file
     # Set in configuration.nix insted
     # brillo
-    direnv
+
+    ### Using nix-direnv instead, enabled above
+    # direnv
 
     ### Applications
     nautilus
@@ -297,8 +262,10 @@ in
     # glibc
 
     # Didn't work on unstable
-    stablePkgs.isabelle
-    stablePkgs.isabelle-components.isabelle-linter
+    isabelle
+    isabelle-components.isabelle-linter
+    # stablePkgs.isabelle
+    # stablePkgs.isabelle-components.isabelle-linter
 
     # virtualbox
 
@@ -306,16 +273,24 @@ in
     redshift
     # syncthing
     flameshot
-    rofi
-    rofi-emoji
-    # rofi-file-browser
-    rofimoji
-    rofi-calc
-    # rofi-unwrapped
-    # rofi-file-browser
+    (pkgs.rofi.override {
+      plugins = [
+        pkgs.rofimoji
+        pkgs.rofi-emoji
+        pkgs.rofi-calc
+        pkgs.rofi-file-browser
+      ];
+    })
+    pkgs.rofi-power-menu
     # rofi-emoji
+    # # rofi-file-browser
     # rofimoji
-    rofi-power-menu
+    # rofi-calc
+    # # rofi-unwrapped
+    # # rofi-file-browser
+    # # rofi-emoji
+    # # rofimoji
+    # rofi-power-menu
     # rofi-calc
 
     # Terminal
@@ -376,8 +351,8 @@ in
     # iwd (shouldn't be needed)
     # jupyterlab
     # libreoffice-fresh
-    # ly?
     # networkmanager (in configuration.nix)
+    # ly
     # nextcloud? (need own server first)
     # obsidian
     # p7zip
@@ -453,7 +428,7 @@ in
     polybarFull
 
     tree
-    chromium
+    ungoogled-chromium
     zathura
     mupdf
 
@@ -578,6 +553,7 @@ in
     # csharpier
 
     ltex-ls
+    jdk
 
     dunst
     libnotify
@@ -596,7 +572,7 @@ in
 
     betterlockscreen
 
-    picom-jonaburg
+    custom.picom-jonaburg
 
     # Other cursors:
     # - capitaine-cursors
@@ -604,6 +580,19 @@ in
     # - vanilla-dmz
     # - numix-cursor-theme
     bibata-cursors
+    ### For user-settings, write a home-manager module that adds index.theme to
+    ### ~/.icons/default/index.theme
+    # (
+    #   ### Maybe different? See
+    #   ### https://github.com/NixOS/nixpkgs/issues/22652
+    #   pkgs.writeTextDir "share/icons/default/index.theme" ''
+    #     [Icon Theme]
+    #     Inherits=Bibata-Modern-Amber
+    #   ''
+    # )
+
+    # Cast remarkable to screen
+    rmview
 
     # For customization:
     (pkgs.catppuccin-sddm.override {
@@ -619,6 +608,7 @@ in
     mermaid-cli
   ];
 
+  ### Seems like a fiine idea to set, and relatively benign
   environment.variables = {
     XCURSOR_THEME = "Bibata-Modern-Amber";
     XCURSOR_SIZE = "24";
@@ -631,7 +621,7 @@ in
     after = [ "graphical-session-pre.target" ];
 
     serviceConfig = {
-      ExecStart = "${picom-jonaburg}/bin/picom --experimental-backends";
+      ExecStart = "${pkgs.custom.picom-jonaburg}/bin/picom --experimental-backends";
       Restart = "always";
       RestartSec = 3;
       Environment = "DISPLAY=:0"; # On all screens
