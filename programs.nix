@@ -12,31 +12,34 @@
   ### Don't "enable", seems to set firefox as default for multiple things
   # programs.firefox.enable = true;
 
-  programs.git = {
-    enable = true;
-    config = {
-      # TODO: Move to local config, and use own email
-      user = {
-        name = "Thomas H. Surlykke";
-        email = "54353246+angryluck@users.noreply.github.com";
-      };
-      # TODO: Remove these (except qp) untill very confident with git
-      alias = {
-        a = "add .";
-        cm = "commit -m";
-        acm = "!git add . && git commit -m";
-        ca = "!git add . && git commit -m 'empty'"; # commit with no msg
-        st = "status";
-        br = "branch";
-        co = "checkout"; # Still not sure what this does...
-        qp = "!git add . && git commit -m 'quick-commit' && git push"; # quick-push
-        # acp = "!git add . && git commit -m 'empty' && git push";
-      };
-      push.autoSetupRemote = "true";
-      init.defaultBranch = "master";
-      # pull.rebase = "false";
-    };
-  };
+  # Hope mozilla not too bad...
+  programs.thunderbird.enable = true;
+
+  # programs.git = {
+  #   enable = true;
+  #   config = {
+  #     # TODO: Move to local config, and use own email
+  #     user = {
+  #       name = "Thomas H. Surlykke";
+  #       email = "54353246+angryluck@users.noreply.github.com";
+  #     };
+  #     # TODO: Remove these (except qp) untill very confident with git
+  #     alias = {
+  #       a = "add .";
+  #       cm = "commit -m";
+  #       acm = "!git add . && git commit -m";
+  #       ca = "!git add . && git commit -m 'empty'"; # commit with no msg
+  #       st = "status";
+  #       br = "branch";
+  #       co = "checkout"; # Still not sure what this does...
+  #       qp = "!git add . && git commit -m 'quick-commit' && git push"; # quick-push
+  #       # acp = "!git add . && git commit -m 'empty' && git push";
+  #     };
+  #     push.autoSetupRemote = "true";
+  #     # init.defaultBranch = "master";
+  #     # pull.rebase = "false";
+  #   };
+  # };
 
   ### To *enable* garbage collection for a project, just delete the .direnv
   # folder,
@@ -194,6 +197,7 @@
     ];
 
   environment.systemPackages = with pkgs; [
+    git
     # FIX: REMOVE AGAIN
     # direnv
 
@@ -520,10 +524,6 @@
     mono
     pkg-config
 
-    # Til futhark
-    jemalloc
-    numactl
-
     vscode
     imagemagick
 
@@ -606,6 +606,12 @@
     gtk4
 
     mermaid-cli
+
+    # Instead of cat
+    bat
+
+    # Get wifi-name (iwgetid -r)
+    wirelesstools
   ];
 
   ### Seems like a fiine idea to set, and relatively benign

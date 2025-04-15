@@ -33,7 +33,7 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   lmo (tap-hold-release $tt $ht l rmet)
   ;; ralt=altgr, so want lalt instead.
   ;;;mo (tap-hold-release $tt $ht ; lalt)
-  ;mo ;
+  ;;;mo ;
   sym (tap-hold-release $tt $ht spc (layer-toggle symbols))
   lef (tap-hold-release $tt $ht left _)
   dow (tap-hold-release $tt $ht down _)
@@ -59,21 +59,21 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   6mo (tap-hold-release $tt $ht 6 lsft)
 )
 
-(defchords caps-word 100
-  (a  ) @amo
-  (  ;) @;mo
-  (a ;) @cw
-)
+;;(defchords caps-word 100
+;;  (a  ) @amo
+;;  (  ;) @;mo
+;;  (a ;) @cw
+;;)
 
-(defalias
-  a (chord caps-word a)
-  ; (chord caps-word ;)
-)
+;;(defalias
+;;  a (chord caps-word a)
+;;  ; (chord caps-word ;)
+;;)
 
 (deflayer base
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
-_	@a	@smo	@dmo	@fmo	_	_	@jmo	@kmo	@lmo	@;	_	_
+_	_	@smo	@dmo	@fmo	_	_	@jmo	@kmo	@lmo	_	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_			@sym			_	_	_
 )
