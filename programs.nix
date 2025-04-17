@@ -612,6 +612,8 @@
 
     # Get wifi-name (iwgetid -r)
     wirelesstools
+
+    fd # better find (files)
   ];
 
   ### Seems like a fiine idea to set, and relatively benign
