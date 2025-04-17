@@ -445,8 +445,8 @@
 
     lua-language-server
     stylua
-    lua
-    lua52Packages.tiktoken_core
+    # lua
+    # lua52Packages.tiktoken_core
     lynx
 
     ### Replaced by nixd
@@ -460,7 +460,7 @@
     # fsautocomplete
 
     # For copilot
-    luajitPackages.tiktoken_core
+    # luajitPackages.tiktoken_core
 
     ### To fix haskell-lsp for xmonad
     (haskellPackages.ghcWithPackages (
