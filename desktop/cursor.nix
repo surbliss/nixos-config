@@ -58,6 +58,14 @@ in
         fi
       '';
     environment.systemPackages = [ cfg.package ];
+
+    ### Might not be needed
+    # environment.sessionVariables = {
+    #   XCURSOR_THEME = "Bibata-Modern-Amber";
+    #   XCURSOR_SIZE = "24";
+    # };
+    #
+    # environment.pathsToLink = [ "/share/icons/default" ];
   };
 
 }

@@ -1,100 +1,150 @@
-# Just return a list -- allows to pass them to home-manager for systems other
-# than nixos
-{ pkgs }:
-### Terminal tools
-## Idea: Config module, with 'packages' attribute!
-with pkgs;
-[
-  git # Very important
+{ pkgs, inputs, ... }:
+{
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+    # viAlias = true;
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 
-  wget # Download stuff
-  curl
+    # Can also set some default options here, but unsure how they conflict with
+    # local configuration
+  };
+  # For nixd lsp-server
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
-  vim # Edit files
-  ### Needed for neovim
-  xclip # Manage clipboard
-  xdotool
-  ripgrep
+  programs.yazi = {
+    enable = true;
+    settings = {
+      yazi.opener.open = [
+        {
+          run = "xdg-open \"$1\"";
+          orphan = true; # Allows closing yazi, after opening a file (e.g. pdf)
+          desc = "Open";
+          for = "linux";
+        }
+        {
+          run = "open \"$@\"";
+          desc = "Open";
+          for = "macos";
+        }
+        {
+          run = "start \"\" \"%1\"";
+          orphan = true;
+          desc = "Open";
+          for = "windows";
+        }
+      ];
+      keymap.manager.prepend_keymap = [
+        {
+          on = "T";
+          run = "shell \"$SHELL\"  --confirm --block --orphan";
+          desc = "Open shell here";
+        }
+      ];
+    };
+  };
 
-  ## LSPs for neovim:
+  programs.direnv.enable = true;
+  environment.etc."direnv/direnv.toml".text = ''
+    [global]
+    hide_env_diff = true
+  '';
 
-  harper
+  ### Terminal tools
+  custom.packages-installed = with pkgs; [
+    git # Very important
 
-  lua-language-server
-  stylua
-  lua
-  lua52Packages.tiktoken_core
-  lynx
+    stow # For dotfiles
 
-  ### Replaced by nixd
-  # nil
-  nixd
-  nixfmt-rfc-style
-  # For copilot
-  luajitPackages.tiktoken_core
+    wget # Download stuff
+    curl
 
-  ### To fix haskell-lsp for xmonad
-  haskellPackages.fourmolu
-  haskellPackages.hoogle
-  haskellPackages.haskell-language-server
+    vim # Edit files
+    ### Needed for neovim
+    xclip # Manage clipboard
+    xdotool
+    ripgrep
 
-  # ccls
-  clang-tools_19 # clangd + clang-format
-  clang
+    ## LSPs for neovim:
 
-  ltex-ls
-  bash-language-server
+    harper
 
-  zoxide
-  eza
-  # nix-search-cli # Search nixpkgs
+    lua-language-server
+    stylua
+    # lua52Packages.tiktoken_core
+    # For copilot
+    luajitPackages.tiktoken_core
 
-  # neofetch
-  trash-cli
-  fzf
-  bc
-  htop
+    ### Replaced by nixd
+    # nil
+    nixd
+    nixfmt-rfc-style
 
-  # cowsay
+    ### To fix haskell-lsp for xmonad
+    haskellPackages.fourmolu
+    haskellPackages.hoogle
+    haskellPackages.haskell-language-server
 
-  zip
-  unzip
+    # ccls
+    clang-tools_19 # clangd + clang-format
+    clang
 
-  ### Not needed (should just be run with 'nix run' instead)
-  # xcolor
-  # killall
-  # file
+    ltex-ls
+    bash-language-server
 
-  xorg.xev
-  xorg.xkill
-  xorg.xprop
+    zoxide
+    eza
+    # nix-search-cli # Search nixpkgs
 
-  texlive.combined.scheme-full
+    # neofetch
+    trash-cli
+    fzf
+    bc
+    htop
 
-  time # time programs
+    # cowsay
 
-  ### Programming languages and tools
-  # C + RISC-V
-  gcc14
-  gnumake
-  valgrind
-  rars
-  # jdk
+    zip
+    unzip
 
-  ### Nix helpers
-  nix-prefetch
-  nix-prefetch-git
-  nix-prefetch-github
+    ### Not needed (should just be run with 'nix run' instead)
+    # xcolor
+    # killall
+    # file
 
-  mermaid-cli
+    xorg.xev
+    xorg.xkill
+    xorg.xprop
 
-  # Instead of cat
-  bat
+    texlive.combined.scheme-full
 
-  # Get wifi-name (iwgetid -r)
-  wirelesstools
+    time # time programs
 
-]
+    ### Programming languages and tools
+    # C + RISC-V
+    gcc14
+    gnumake
+    valgrind
+    rars
+    # jdk
+
+    ### Nix helpers
+    nix-prefetch
+    nix-prefetch-git
+    nix-prefetch-github
+
+    mermaid-cli
+
+    # Instead of cat
+    bat
+
+    # Get wifi-name (iwgetid -r)
+    wirelesstools
+
+    lazygit
+  ];
+}
 
 # Might be useful later
 ### Citations
