@@ -143,6 +143,8 @@
     wirelesstools
 
     lazygit
+
+    evtest
   ];
 }
 

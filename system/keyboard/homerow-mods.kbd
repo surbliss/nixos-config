@@ -2,9 +2,11 @@
 ;; TO EXIT (if keyboard is unusable): space + left control + esc, before
 ;; remapping
 
-;;(defcfg
-;;  process-unmapped-keys yes
-;;)
+(defcfg
+  ;; Only laptop-keyboard
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd 
+  ;;process-unmapped-keys yes
+)
 
 ;; Uses ';' because that is what is on an american keyboard there...
 (defsrc

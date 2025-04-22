@@ -20,7 +20,11 @@
   # Special keybindings
   services.kanata = {
     enable = true;
-    keyboards.homerow-mods.configFile = ./keyboard/homerow-mods.kbd;
+    keyboards.homerow-mods = {
+      configFile = ./keyboard/homerow-mods.kbd;
+      ### Doesn't work when 'configFile' is set
+      # devices = [ ];
+    };
   };
 
   # Touchpad

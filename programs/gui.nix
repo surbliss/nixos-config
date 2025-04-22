@@ -42,6 +42,8 @@
       android-studio
       inkscape
       figma-linux
+
+      discord
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
