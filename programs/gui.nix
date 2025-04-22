@@ -44,6 +44,8 @@
       figma-linux
 
       discord
+
+      ungoogled-chromium
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
