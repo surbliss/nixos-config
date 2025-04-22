@@ -5,7 +5,8 @@ xkb_symbols "dk-custom" {
     name[Group1]="Danish (no dead keys)";
 
     // key <TLDE>  { [     onehalf,    asciitilde,     section,   paragraph ] };
-    key <TLDE>	{[ asciitilde,	onehalf,	section,	paragraph	]};
+    // key <TLDE>	{[ asciitilde,	onehalf,	section,	paragraph	]};
+    key <TLDE>	{[ asciitilde,	section,	onehalf,	paragraph	]};
     key <AE12>	{[ slash,		bar,		grave,		acute		]};
     key <AD11>	{[ less,		at,			aring,		Aring		]};
     key <AD12>  {[ greater,		asciicircum,asciitilde,	macron		]};	
