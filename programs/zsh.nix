@@ -2,6 +2,7 @@
 # Shouldn't be in /programs, not a program?
 {
   users.defaultUserShell = pkgs.zsh;
+  users.users.angryluck.shell = pkgs.zsh;
 
   # Set later in boot-process than sessionVariables, and doesn't allow '"'.
   # environment.variables = {}

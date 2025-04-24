@@ -33,6 +33,7 @@ in
   imports = [
     ./cli.nix # ## Split up cli
     ./gui.nix
+    ./sql.nix
     ./zsh.nix
     ./utilities.nix
   ];

@@ -17,6 +17,9 @@
   # TODO: Make username an argument from flake
   users.users.angryluck.extraGroups = [ "uinput" ];
 
+  # Enables necesarry udev rules
+  hardware.keyboard.zsa.enable = true;
+
   # Special keybindings
   services.kanata = {
     enable = true;
