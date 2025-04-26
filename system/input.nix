@@ -8,8 +8,9 @@
       symbolsFile = ./keyboard/dk-custom;
     };
 
-    layout = "dk-custom,dk";
-    options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
+    layout = "dk,dk-custom";
+    # options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
+    options = "caps:escape,grp:win_space_toggle";
   };
 
   users.groups.uinput = { };

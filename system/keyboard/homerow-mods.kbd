@@ -28,10 +28,10 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   ;;amo (tap-hold-release-timeout $tt $ht a lalt lalt) ;; Helps with accidental ALTS
   amo a
   smo (tap-hold-release $tt $ht s lmet)
-  dmo (tap-hold-release $tt $ht d lctl)
-  fmo (tap-hold-release $tt $ht f lsft)
-  jmo (tap-hold-release $tt $ht j rsft)
-  kmo (tap-hold-release $tt $ht k rctl)
+  dmo (tap-hold-release $tt $ht d lsft)
+  fmo (tap-hold-release $tt $ht f lctl)
+  jmo (tap-hold-release $tt $ht j rctl)
+  kmo (tap-hold-release $tt $ht k rsft)
   lmo (tap-hold-release $tt $ht l rmet)
   ;; ralt=altgr, so want lalt instead.
   ;;;mo (tap-hold-release $tt $ht ; lalt)
@@ -41,7 +41,7 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   dow (tap-hold-release $tt $ht down _)
   up (tap-hold-release $tt $ht up _)
   rig (tap-hold-release $tt $ht right _)
-  cw (caps-word 5000)
+  ;;cw (caps-word 5000)
   ;;æ (unicode æ)
   ;;ø (unicode ø)
   ;;å (unicode å)
@@ -57,8 +57,8 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
   ;;ø AG-'
   ;;å AG-[
   4mo (tap-hold-release $tt $ht 4 lmet)
-  5mo (tap-hold-release $tt $ht 5 lctl)
-  6mo (tap-hold-release $tt $ht 6 lsft)
+  5mo (tap-hold-release $tt $ht 5 lsft)
+  6mo (tap-hold-release $tt $ht 6 lctl)
 )
 
 ;;(defchords caps-word 100
