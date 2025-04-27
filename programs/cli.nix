@@ -149,6 +149,12 @@
     lazygit
 
     evtest
+
+    fd # find files
+
+    tree-sitter
+
+    pstree # for vimtex
   ];
 }
 

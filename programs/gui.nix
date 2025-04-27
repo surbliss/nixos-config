@@ -9,6 +9,16 @@
 
   programs.thunderbird.enable = true;
 
+  # Settings for chromium, doesn't install the package
+  programs.chromium = {
+    enable = true;
+    extensions = [
+      "epcnnfbjfcgphgdmggkamkmgojdagdnn" # ublock orign
+    ];
+    defaultSearchProviderEnabled = true;
+    defaultSearchProviderSearchURL = "https://www.startpage.com/do/search?query=eurKey";
+  };
+
   custom.packages-installed =
     [
       ### Not from 'pkgs'
