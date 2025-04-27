@@ -1,6 +1,5 @@
 {
   pkgs,
-  stablePkgs,
   inputs,
   system,
   ...
@@ -22,11 +21,11 @@
   custom.packages-installed =
     [
       ### Not from 'pkgs'
-      stablePkgs.logseq
       inputs.zen-browser.packages."${system}".twilight
     ]
     ++ (with pkgs; [
       ### Lightweight
+      logseq # Trying unstable version
       feh # Images
       zathura # PDF
       mpv-unwrapped # Simple video player
