@@ -157,6 +157,10 @@
     pstree # for vimtex
 
     tree # Better file listing
+
+    typst # Better latex?
+    tinymist
+    typstyle
   ];
 }
 
