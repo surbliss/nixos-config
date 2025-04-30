@@ -94,7 +94,7 @@
     clang-tools_19 # clangd + clang-format
     clang
 
-    ltex-ls
+    ltex-ls-plus # Supposedly more updated
     bash-language-server
 
     zoxide
