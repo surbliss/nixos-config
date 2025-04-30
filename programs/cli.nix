@@ -155,6 +155,8 @@
     tree-sitter
 
     pstree # for vimtex
+
+    tree # Better file listing
   ];
 }
 
