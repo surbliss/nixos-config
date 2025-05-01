@@ -3,14 +3,15 @@
   # Keyboard
   services.xserver.xkb = {
     extraLayouts.dk-custom = {
-      description = "Danish layout, but æøå swapped with more usefull keys";
+      description = "Danish layout, but æøå swapped with more useful keys";
       languages = [ "dan" ];
       symbolsFile = ./keyboard/dk-custom;
     };
 
     layout = "dk,dk-custom";
+    variant = "nodeadkeys";
     # options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
-    options = "caps:escape,grp:win_space_toggle";
+    options = "caps:escape,grp:win_space_toggle,compose:menu,shift:breaks_caps";
   };
 
   users.groups.uinput = { };
