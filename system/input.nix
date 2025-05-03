@@ -9,7 +9,7 @@
     };
 
     layout = "dk,dk-custom";
-    variant = "nodeadkeys";
+    variant = "nodeadkeys,nodeadkeys";
     # options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
     options = "caps:escape,grp:win_space_toggle,compose:menu,shift:breaks_caps";
   };
