@@ -161,6 +161,8 @@
     typst # Better latex?
     tinymist
     typstyle
+
+    watchexec
   ];
 }
 
