@@ -57,5 +57,7 @@
     nerd-fonts.symbols-only
     nerd-fonts.inconsolata
     nerd-fonts.hack
+
+    # Su style:
   ];
 }

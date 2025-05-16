@@ -79,6 +79,8 @@
     # lua52Packages.tiktoken_core
     # For copilot
     luajitPackages.tiktoken_core
+    luajitPackages.jsregexp # For LuaSnip
+    luajitPackages.luarocks # For LuaSnip
 
     ### Replaced by nixd
     # nil
@@ -86,7 +88,8 @@
     nixfmt-rfc-style
 
     ### To fix haskell-lsp for xmonad
-    haskellPackages.fourmolu
+    # haskellPackages.fourmolu
+    haskellPackages.ormolu
     haskellPackages.hoogle
     haskellPackages.haskell-language-server
 

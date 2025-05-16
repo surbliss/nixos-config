@@ -28,6 +28,7 @@
       logseq # Trying unstable version
       feh # Images
       zathura # PDF
+      sioyek
       mpv-unwrapped # Simple video player
       wezterm # Idk if terminal is lightweight...
 
@@ -55,6 +56,13 @@
       discord
 
       ungoogled-chromium
+
+      zoom-us
+
+      zotero
+
+      # pgadmin4
+      # pgadmin4-desktopmode
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
