@@ -13,8 +13,10 @@
     "nix-command"
     "flakes"
   ];
-  nix.optimise.automatic = true;
-  nix.settings.auto-optimise-store = true;
+  # Got errors saying paths cannot be repaired, trying to disable this.
+  # See https://github.com/NixOS/nix/issues/1281
+  nix.optimise.automatic = false;
+  nix.settings.auto-optimise-store = false;
   nix.gc = {
     automatic = true;
     dates = "weekly";
