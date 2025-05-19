@@ -1,4 +1,4 @@
-{ inputs, nixpkgs, ... }:
+{ inputs, ... }:
 {
   # FIX: (And put in appropriate place)
   nixpkgs.config.permittedInsecurePackages = [
@@ -17,18 +17,12 @@
   # See https://github.com/NixOS/nix/issues/1281
   nix.optimise.automatic = false;
   nix.settings.auto-optimise-store = false;
+
+  # See https://nixos-and-flakes.thiscute.world/best-practices/nix-path-and-flake-registry
   nix.channel.enable = false;
-
-  # Pin 'nixpkgs' flake registry to system registry, to (hopefully) reduce
-  # number of different versions of packages.
-  # See https://nixos.wiki/wiki/flakes
-  # nix.registry.nixpkgs.to = {
-  #   type = "path";
-  #   path = pkgs.path;
-  # };
-
-  # Alternative version, see https://yusef.napora.org/blog/pinning-nixpkgs-flake/
-  nix.registry.nixpkgs.flake = nixpkgs;
+  # nixpkgs.flake.source = nixpkgs;
+  nixpkgs.flake.setFlakeRegistry = true;
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
   nix.gc = {
     automatic = true;
