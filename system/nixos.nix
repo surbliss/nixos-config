@@ -17,6 +17,7 @@
   # See https://github.com/NixOS/nix/issues/1281
   nix.optimise.automatic = false;
   nix.settings.auto-optimise-store = false;
+  nix.channel.enable = false;
   nix.gc = {
     automatic = true;
     dates = "weekly";
