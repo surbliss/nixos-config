@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, nixpkgs, ... }:
 {
   # FIX: (And put in appropriate place)
   nixpkgs.config.permittedInsecurePackages = [
@@ -18,6 +18,18 @@
   nix.optimise.automatic = false;
   nix.settings.auto-optimise-store = false;
   nix.channel.enable = false;
+
+  # Pin 'nixpkgs' flake registry to system registry, to (hopefully) reduce
+  # number of different versions of packages.
+  # See https://nixos.wiki/wiki/flakes
+  # nix.registry.nixpkgs.to = {
+  #   type = "path";
+  #   path = pkgs.path;
+  # };
+
+  # Alternative version, see https://yusef.napora.org/blog/pinning-nixpkgs-flake/
+  nix.registry.nixpkgs.flake = nixpkgs;
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
