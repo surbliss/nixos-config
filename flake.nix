@@ -3,6 +3,8 @@
   description = "AngryLuck's personal flake for NixOS + Home Manager";
 
   inputs = {
+    ### Should: Use implicit flake for local packages, but excplicit for flakes
+    # part of a git repo
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
