@@ -61,6 +61,8 @@
 
       zotero
 
+      keymapp
+
       # pgadmin4
       # pgadmin4-desktopmode
     ]);
