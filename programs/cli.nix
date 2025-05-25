@@ -149,6 +149,9 @@
     # Get wifi-name (iwgetid -r)
     wirelesstools
 
+    rbw
+    pinentry-curses
+
     lazygit
 
     evtest
