@@ -26,6 +26,8 @@
   };
   boot.consoleLogLevel = 3;
   boot.initrd.verbose = false;
+  # https://nixos.wiki/wiki/AMD_GPU
+  boot.initrd.kernelModules = [ "amdgpu" ];
   boot.kernelParams = [
     "quiet"
     "splash"

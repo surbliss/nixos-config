@@ -11,6 +11,7 @@ in
   ];
   custom.cursor.enable = true;
 
+  # TODO: Move this to system/video.nix
   services.displayManager.sddm = {
     enable = true;
     package = pkgs.kdePackages.sddm; # Use Qt6 version
@@ -27,6 +28,7 @@ in
 
   services.xserver = {
     enable = true;
+    videoDrivers = [ "amdgpu" ];
     # Autorun XDG autostart files
     # desktopManager.runXdgAutostartIfNone = true;
     dpi = 120;
