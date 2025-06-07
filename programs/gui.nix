@@ -7,7 +7,6 @@
 {
 
   programs.thunderbird.enable = true;
-
   # Settings for chromium, doesn't install the package
   programs.chromium = {
     enable = true;
@@ -62,9 +61,6 @@
       zotero
 
       keymapp
-
-      # pgadmin4
-      # pgadmin4-desktopmode
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
