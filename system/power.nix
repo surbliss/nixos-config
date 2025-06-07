@@ -56,6 +56,13 @@
   services.logind.lidSwitchExternalPower = "lock";
   services.logind.lidSwitchDocked = "ignore";
 
+  # Lock screen?
+  services.physlock = {
+    enable = true;
+    allowAnyUser = true;
+    lockOn.suspend = true;
+    lockOn.hibernate = true;
+  };
   # See https://nixos.wiki/wiki/Power_Management
   # systemd.sleep.extraConfig = ''
   #   AllowSuspendThenHibernate=no
