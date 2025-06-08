@@ -60,6 +60,7 @@
   services.physlock = {
     enable = true;
     allowAnyUser = true;
+    lockMessage = "Thomas Surlykke's Laptop, LOCKED";
     lockOn.suspend = true;
     lockOn.hibernate = true;
   };
