@@ -1,12 +1,45 @@
 
 ;; TO EXIT (if keyboard is unusable): space + left control + esc, before
 ;; remapping
-
 (defcfg
   ;; Only laptop-keyboard
   linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd 
   ;;process-unmapped-keys yes
+  override-release-on-activation yes   ;; needed to override shift-behavior
 )
+
+;; Swap or define characters, when key is shifted
+
+(defoverrides
+  (grv) (lsft =) 
+  (lsft grv) (ralt ])
+  (rsft grv) (ralt ])
+  (lsft 2) (ralt 2)
+  (rsft 2) (ralt 2)
+  (ralt 2) (lsft 2)
+  (lmeta lsft 2) (lmeta lsft 2)
+  (lmeta rsft 2) (lmeta rsft 2)
+  (rmeta lsft 2) (rmeta lsft 2)
+  (rmeta rsft 2) (rmeta rsft 2)
+  (ralt 2) (lsft 2)
+  (=) (ralt lsgt)
+  (lsft =) (ralt =)
+  (rsft =) (ralt =)
+  (ralt =) (=)
+  (]) (lsft \)
+  (lsft ]) (lsft ])
+  (rsft ]) (lsft ])
+  (ralt ]) (])
+  (lsft \) (lsft 2)
+  (rsft \) (lsft 2)
+  ;;(/) (lsft /)
+  ;;(lsft /) (/) 
+  ;;(rsft /) (/) 
+
+  ;; And making sure it doesn't mess up defaults
+  ;; TODO:
+)
+
 
 ;; Uses ';' because that is what is on an american keyboard there...
 (defsrc

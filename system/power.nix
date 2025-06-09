@@ -52,8 +52,8 @@
   # Conflicts with tlp
   services.power-profiles-daemon.enable = false;
 
-  services.logind.lidSwitch = "hibernate";
-  services.logind.lidSwitchExternalPower = "lock";
+  services.logind.lidSwitch = "suspend";
+  services.logind.lidSwitchExternalPower = "suspend";
   services.logind.lidSwitchDocked = "ignore";
 
   # Lock screen?
@@ -65,7 +65,9 @@
     lockOn.hibernate = true;
   };
   # See https://nixos.wiki/wiki/Power_Management
-  # systemd.sleep.extraConfig = ''
-  #   AllowSuspendThenHibernate=no
-  # '';
+  # AllowSuspendThenHibernate=no
+  systemd.sleep.extraConfig = ''
+    IdleAction=ignore
+    SleepOperation=suspend
+  '';
 }

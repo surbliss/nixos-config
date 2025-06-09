@@ -38,5 +38,6 @@
   # Hide the OS choice for bootloaders.
   # It's still possible to open the bootloader list by pressing any key
   # It will just not appear on screen unless a key is pressed
-  boot.loader.timeout = 0;
+  # NOTE: Cannot make it come up, if not set higher than 0
+  boot.loader.timeout = 1;
 }
