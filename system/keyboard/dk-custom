@@ -18,4 +18,4 @@ xkb_symbols "dk-custom" {
     key <AE04>  {[ 4,			dollar,		currency,	onequarter  ]};
     key <LSGT>  {[ backslash,	bar,		acute					]};
 };
-// vim: set noexpandtab ts=4:
+// vim: set noexpandtab ts=4 ft=c:

@@ -7,9 +7,15 @@
       languages = [ "dan" ];
       symbolsFile = ./keyboard/dk-custom;
     };
+    extraLayouts.dk-fixed = {
+      description = "Small tweaks to danish layout, making it a bit closer to US
+      layout (but not much)";
+      languages = [ "dan" ];
+      symbolsFile = ./keyboard/dk-fixed.xkb;
+    };
 
-    layout = "dk,dk-custom";
-    variant = "nodeadkeys,";
+    layout = "dk-fixed,dk-custom";
+    # variant = "nodeadkeys,";
     # options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
     options = "caps:escape,grp:win_space_toggle,compose:menu,shift:breaks_caps";
   };

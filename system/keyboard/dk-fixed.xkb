@@ -1,0 +1,11 @@
+xkb_symbols "dk-fixed" {
+  include "dk(basic)"
+  name[Group1]="Danish (no dead keys)";
+  key <TLDE> {[ grave,		asciitilde,		onehalf,		section			]};
+  key <AE02> {[ 2,			at,				quotedbl,		twosuperior		]};
+  key <AE04> {[ 4,			dollar,			currency,		onequarter		]};
+  key <AE12> {[ backslash,	bar,			dead_acute,		ogonek			]};
+  key <AD12> {[ asterisk,	asciicircum,	diaeresis,		macron			]};
+  key <BKSL> {[ apostrophe,	quotedbl,		doubleacute,	multiply		]};
+};
+// vim: set noexpandtab softtabstop=0 tabstop=4 shiftwidth=2:
