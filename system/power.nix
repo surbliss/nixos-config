@@ -52,8 +52,9 @@
   # Conflicts with tlp
   services.power-profiles-daemon.enable = false;
 
-  services.logind.lidSwitch = "suspend";
-  services.logind.lidSwitchExternalPower = "suspend";
+  # FIX: Find a way to fix this later, so we can suspend/hibernate
+  services.logind.lidSwitch = "ignore";
+  services.logind.lidSwitchExternalPower = "ignore";
   services.logind.lidSwitchDocked = "ignore";
 
   # Lock screen?
@@ -68,6 +69,5 @@
   # AllowSuspendThenHibernate=no
   systemd.sleep.extraConfig = ''
     IdleAction=ignore
-    SleepOperation=suspend
   '';
 }
