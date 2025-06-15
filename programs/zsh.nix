@@ -20,6 +20,7 @@
 
     interactiveShellInit = ''
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+      source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
       eval "$(zoxide init --cmd j zsh)"
     '';
   };
