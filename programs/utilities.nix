@@ -50,6 +50,7 @@ in
       betterlockscreen
       gtk4
       custom.picom-jonaburg # From overlay
+      (wine.override { wineBuild = "wine64"; })
       # rofi-rbw-x11 # Couldnt write @ , lul
     ]);
 }
