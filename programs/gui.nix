@@ -30,6 +30,7 @@
       sioyek
       mpv-unwrapped # Simple video player
       wezterm # Idk if terminal is lightweight...
+      kitty # Needed for presenterm
 
       ### Desktop-applications
       bitwarden-desktop
