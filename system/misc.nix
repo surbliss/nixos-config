@@ -60,6 +60,7 @@
           "org.pwmt.zathura-pdf-djvu.desktop"
           "org.pwmt.zathura-pdf-ps.desktop"
           "org.pwmt.zathura-pdf-cb.desktop"
+          "sioyek.desktop"
         ] ++ browser;
         "image/jpeg" = [ "feh.desktop" ];
         "image/png" = [ "feh.desktop" ];
