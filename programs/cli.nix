@@ -49,7 +49,6 @@
     enable = true;
     settings.hide_env_diff = true;
   };
-  environment.variables.DIRENV_CONFIG = "/etc/direnv/";
   # environment.etc."direnv/direnv.toml".text = ''
   #   [global]
   #   hide_env_diff = true
