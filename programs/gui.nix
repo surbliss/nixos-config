@@ -62,6 +62,8 @@
       zotero
 
       keymapp
+
+      sleek-todo
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)

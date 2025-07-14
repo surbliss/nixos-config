@@ -168,6 +168,8 @@
     typstyle
 
     watchexec
+
+    todo-txt-cli
   ];
 }
 
