@@ -110,6 +110,16 @@ lctl	lmet	lalt			spc			ralt	comp	rctl
 ;;  ; (chord caps-word ;)
 ;;)
 
+
+(deflayer disabled
+_  _  _  _  _  _  _  _  _  _  _  _  _  _
+_  _  _  _  _  _  _  _  _  _  _  _  _  _  
+_  _  _  _  _  _  _  _  _  _  _  _  _
+_  _  _  _  _  _  _  _  _  _  _  _  _
+_  _  _        _        _  _  _
+)
+
+
 (deflayer base
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
 _	_	_	_	_	_	_	_	_	_	_	_	_	_
