@@ -67,7 +67,7 @@
 
       zettlr
 
-      albert
+      ulauncher
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
