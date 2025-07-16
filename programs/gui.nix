@@ -64,6 +64,10 @@
       keymapp
 
       sleek-todo
+
+      zettlr
+
+      albert
     ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
