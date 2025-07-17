@@ -170,6 +170,8 @@
     watchexec
 
     todo-txt-cli
+
+    helix
   ];
 }
 
