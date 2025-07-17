@@ -31,7 +31,7 @@ in
     videoDrivers = [ "amdgpu" ];
     # Autorun XDG autostart files
     # desktopManager.runXdgAutostartIfNone = true;
-    # dpi = 120;
+    dpi = 120;
   };
 
   services.xserver.windowManager.xmonad = {
