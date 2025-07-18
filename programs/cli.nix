@@ -171,7 +171,25 @@
 
     todo-txt-cli
 
+    just
+
     helix
+    # Default lsp-s for helix
+    # TODO Make a separate nixos-module
+    texlab
+    bibtex-tidy
+    omnisharp-roslyn
+    neocmakelsp
+    # vscode-css-languageserver
+    vscode-langservers-extracted
+    just-lsp
+    marksman
+    markdown-oxide
+    nil
+    systemd-lsp
+    taplo
+    tombi
+    yaml-language-server
   ];
 }
 
