@@ -3,8 +3,8 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    vimAlias = true;
-    viAlias = true;
+    # vimAlias = true;
+    # viAlias = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
 
     # Can also set some default options here, but unsure how they conflict with

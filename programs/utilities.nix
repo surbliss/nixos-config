@@ -2,6 +2,7 @@
 let
   rofi-custom = pkgs.rofi.override {
     plugins = with pkgs; [
+
       rofimoji
       rofi-emoji
       rofi-calc
@@ -42,7 +43,7 @@ in
     ]
     ++ (with pkgs; [
       ### Utilities
-      redshift
+      # nixpkgs-stable.redshift
       flameshot
       rofi-power-menu
       polybarFull

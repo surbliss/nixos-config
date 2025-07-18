@@ -15,4 +15,5 @@
     ## configuring
     # config = ./xmonad.hs;
   };
+  services.redshift.enable = true;
 }
