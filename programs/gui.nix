@@ -6,7 +6,7 @@
 }:
 {
 
-  programs.thunderbird.enable = true;
+  # programs.thunderbird.enable = true;
   # Settings for chromium, doesn't install the package
   programs.chromium = {
     enable = true;
@@ -15,6 +15,13 @@
     ];
     defaultSearchProviderEnabled = true;
     defaultSearchProviderSearchURL = "https://www.startpage.com/do/search?query=eurKey";
+  };
+
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
   custom.packages-installed =
