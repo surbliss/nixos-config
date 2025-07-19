@@ -21,6 +21,7 @@
     interactiveShellInit = ''
       source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
+      export _ZO_EXCLUDE_DIRS=$HOME/.config"
       eval "$(zoxide init --cmd j zsh)"
     '';
   };
