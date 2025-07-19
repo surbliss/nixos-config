@@ -19,11 +19,13 @@
 
   programs.steam = {
     enable = true;
+    gamescopeSession.enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  programs.gamemode.enable = true;
   custom.packages-installed =
     [
       ### Not from 'pkgs'
@@ -31,6 +33,7 @@
     ]
     ++ (with pkgs; [
       ### Lightweight
+      mangohud
       logseq # Trying unstable version
       feh # Images
       zathura # PDF
