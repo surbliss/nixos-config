@@ -1,0 +1,3 @@
+[[language]]
+name = "scheme"
+file-types = [{glob = "*.kbd"}]
