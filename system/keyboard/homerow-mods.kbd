@@ -18,7 +18,7 @@
   (lsft grv) (ralt ])
   (rsft grv) (ralt ])
   (lsft 4) (ralt 4)
-  (ralt 4) (lsfd 4)
+  (ralt 4) (lsft 4)
   (rsft 4) (ralt 4)
   ;;(lsft 2) (ralt 2)
   ;;(rsft 2) (ralt 2)
