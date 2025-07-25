@@ -26,59 +26,59 @@
   };
 
   programs.gamemode.enable = true;
-  custom.packages-installed =
-    [
-      ### Not from 'pkgs'
-      inputs.zen-browser.packages."${system}".twilight
-    ]
-    ++ (with pkgs; [
-      ### Lightweight
-      mangohud
-      logseq # Trying unstable version
-      feh # Images
-      zathura # PDF
-      sioyek
-      mpv-unwrapped # Simple video player
-      wezterm # Idk if terminal is lightweight...
-      kitty # Needed for presenterm
+  custom.packages-installed = [
+    ### Not from 'pkgs'
+    inputs.zen-browser.packages."${system}".twilight
+  ]
+  ++ (with pkgs; [
+    ### Lightweight
+    mangohud
+    logseq # Trying unstable version
+    feh # Images
+    zathura # PDF
+    sioyek
+    mpv-unwrapped # Simple video player
+    wezterm # Idk if terminal is lightweight...
+    kitty # Needed for presenterm
 
-      ### Desktop-applications
-      bitwarden-desktop
-      isabelle
-      ### Wrong place
-      isabelle-components.isabelle-linter
-      libreoffice-qt # Spreadsheets
-      # hunspell
-      # hunspellDicts.da_DK
-      # hunspellDicts.en_US
-      # hunspellDicts.en_GB-large
-      # ungoogled-chromium
-      vscode
-      vlc # Video-player
-      obsidian
-      rmview # Haven't made work yet...
+    ### Desktop-applications
+    bitwarden-desktop
+    isabelle
+    ### Wrong place
+    isabelle-components.isabelle-linter
+    libreoffice-qt # Spreadsheets
+    # hunspell
+    # hunspellDicts.da_DK
+    # hunspellDicts.en_US
+    # hunspellDicts.en_GB-large
+    # ungoogled-chromium
+    vscode
+    vlc # Video-player
+    obsidian
+    rmview # Haven't made work yet...
 
-      ### Unsure about these
-      android-studio
-      inkscape
-      figma-linux
+    ### Unsure about these
+    android-studio
+    inkscape
+    figma-linux
 
-      discord
+    discord
 
-      ungoogled-chromium
+    ungoogled-chromium
 
-      zoom-us
+    zoom-us
 
-      zotero
+    zotero
 
-      keymapp
+    keymapp
 
-      sleek-todo
+    sleek-todo
 
-      zettlr
+    zettlr
 
-      ulauncher
-    ]);
+    ulauncher
+    zulip
+  ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
 }
