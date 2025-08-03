@@ -10,7 +10,29 @@
   programs.zsh = {
     enable = true;
     ### Consider moving this to .zshrc...
-    autosuggestions.enable = true;
+    autosuggestions = {
+      enable = true;
+      # extraConfig = {
+      #   "ZSH_AUTOSUGGEST_CLEAR_WIDGETS" = ''
+      #     (
+      #        zhm_history_prev
+      #        zhm_history_next
+      #        zhm_prompt_accept
+      #        zhm_accept
+      #        zhm_accept_or_insert_newline
+      #      )
+      #   '';
+
+      #   "ZSH_AUTOSUGGEST_ACCEPT_WIDGETS" = ''( zhm_move_right )'';
+
+      #   "ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS" = ''
+      #     (
+      #       zhm_move_next_word_start
+      #       zhm_move_next_word_end
+      #     )
+      #   '';
+      # };
+    };
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     # Plugins
@@ -19,28 +41,13 @@
     '';
 
     # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-    loginShellInit = ''
-      ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
-        zhm_history_prev
-        zhm_history_next
-        zhm_prompt_accept
-        zhm_accept
-        zhm_accept_or_insert_newline
-      )
-      ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
-        zhm_move_right
-      )
-      ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
-        zhm_move_next_word_start
-        zhm_move_next_word_end
-      )
-    '';
+    # for autocomplete, see https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/zsh/zsh-autosuggestions.nix
     interactiveShellInit = ''
       source ${inputs.zsh-helix-mode}/zsh-helix-mode.plugin.zsh
-      source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
-      export _ZO_EXCLUDE_DIRS="$HOME/.config"
-      eval "$(zoxide init --cmd j zsh)"
+      source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
 
+      export _ZO_EXCLUDE_DIRS="$HOME/.config/*"
+      eval "$(zoxide init --cmd j zsh)"
     '';
   };
 
