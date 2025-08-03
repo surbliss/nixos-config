@@ -15,10 +15,13 @@
     #   symbolsFile = ./keyboard/dk-fixed.xkb;
     # };
 
-    layout = "dk,dk-custom";
-    variant = "nodeadkeys,";
+    # layout = "dk,dk-custom";
+    # variant = "nodeadkeys,";
+    layout = "us,dk";
+    variant = "intl,nodeadkeys";
     # options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
-    options = "caps:escape,grp:win_space_toggle,compose:menu,shift:breaks_caps";
+    # options = "caps:escape,grp:win_space_toggle,compose:menu,shift:breaks_caps";
+    options = "grp:win_space_toggle,compose:menu,shift:breaks_caps";
   };
 
   users.groups.uinput = { };

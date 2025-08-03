@@ -1,0 +1,155 @@
+
+;; TO EXIT (if keyboard is unusable): space + left control + esc, before
+;; remapping
+(defcfg
+  ;; Only laptop-keyboard
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd 
+  ;;process-unmapped-keys yes
+  override-release-on-activation yes   ;; needed to override shift-behavior
+)
+
+;; Swap or define characters, when key is shifted
+
+(defoverrides
+  (grv) (lsft =) 
+  (ralt grv) (grv)
+  (lsft ralt grv) (lsft grv)
+  (rsft ralt grv) (lsft grv)
+  (lsft grv) (ralt ])
+  (rsft grv) (ralt ])
+  (lsft 4) (ralt 4)
+  (ralt 4) (lsft 4)
+  (rsft 4) (ralt 4)
+  (lsft rmeta 4) (lsft rmeta 4)
+  (rsft rmeta 4) (rsft rmeta 4)
+  (lsft lmeta 4) (lsft lmeta 4)
+  (rsft lmeta 4) (rsft lmeta 4)
+  ;;(lsft 2) (ralt 2)
+  ;;(rsft 2) (ralt 2)
+  ;;(ralt 2) (lsft 2)
+  ;;(lctl lsft 2) (lctl lsft 2)
+  ;;(rctl rsft 2) (rctl rsft 2)
+  ;;(lmeta lsft 2) (lmeta lsft 2)
+  ;;(lmeta rsft 2) (lmeta rsft 2)
+  ;;(rmeta lsft 2) (rmeta lsft 2)
+  ;;(rmeta rsft 2) (rmeta rsft 2)
+  ;;(ralt 2) (lsft 2)
+  (=) (ralt lsgt)
+  (lsft =) (ralt =)
+  (rsft =) (ralt =)
+  (ralt =) (=)
+  (]) (ralt 2)
+  (ralt ]) (])
+  (lsft ]) (lsft ])
+  (rsft ]) (rsft ])
+  ;;(lsft \) (lsft 2)
+  ;;(rsft \) (lsft 2)
+  ;;(/) (lsft /)
+  ;;(lsft /) (/) 
+  ;;(rsft /) (/) 
+
+  ;; And making sure it doesn't mess up defaults
+  ;; TODO:
+)
+
+
+;; Uses ';' because that is what is on an american keyboard there...
+(defsrc
+grv	1	2	3	4	5	6	7	8	9	0	-	=	bspc
+tab	q	w	e	r	t	y	u	i	o	p	[	]	\
+caps	a	s	d	f	g	h	j	k	l	;	'	ret
+lsft	lsgt	z	x	c	v	b	n	m	,	.	/	rsft
+lctl	lmet	lalt			spc			ralt	comp	rctl
+)
+
+(defvar
+  tap-time 200
+  hold-time 200
+  tt $tap-time
+  ht $hold-time
+)
+
+(defalias
+  ;;amo (tap-hold-release-timeout $tt $ht a lalt lalt) ;; Helps with accidental ALTS
+  amo a
+  smo (tap-hold-release $tt $ht s lmet)
+  dmo (tap-hold-release $tt $ht d lsft)
+  fmo (tap-hold-release $tt $ht f lctl)
+  jmo (tap-hold-release $tt $ht j rctl)
+  kmo (tap-hold-release $tt $ht k rsft)
+  lmo (tap-hold-release $tt $ht l rmet)
+  ;; ralt=altgr, so want lalt instead.
+  ;;;mo (tap-hold-release $tt $ht ; lalt)
+  ;;;mo ;
+  sym (tap-hold-release $tt $ht spc (layer-toggle symbols))
+  lef (tap-hold-release $tt $ht left _)
+  dow (tap-hold-release $tt $ht down _)
+  up (tap-hold-release $tt $ht up _)
+  rig (tap-hold-release $tt $ht right _)
+  ;;cw (caps-word 5000)
+  ;;æ (unicode æ)
+  ;;ø (unicode ø)
+  ;;å (unicode å)
+  ;;Æ (unicode Æ)
+  ;;Ø (unicode Ø)
+  ;;Å (unicode Å)
+  ;;_æ (fork @æ @Æ (lsft rsft))
+  ;;_ø (fork @ø @Ø (lsft rsft))
+  ;;_å (fork @å @Å (lsft rsft))
+  ;; Requires mapping to ralt+... in actual keyboard-config...
+  ;;b AG-b
+  ;;æ AG-;
+  ;;ø AG-'
+  ;;å AG-[
+  4mo (tap-hold-release $tt $ht 4 lmet)
+  5mo (tap-hold-release $tt $ht 5 lsft)
+  6mo (tap-hold-release $tt $ht 6 lctl)
+)
+
+;;(defchords caps-word 100
+;;  (a  ) @amo
+;;  (  ;) @;mo
+;;  (a ;) @cw
+;;)
+
+;;(defalias
+;;  a (chord caps-word a)
+;;  ; (chord caps-word ;)
+;;)
+
+
+;;(deflayer disabled
+;;_  _  _  _  _  _  _  _  _  _  _  _  _  _
+;;_  _  _  _  _  _  _  _  _  _  _  _  _  _  
+;;_  _  _  _  _  _  _  _  _  _  _  _  _
+;;_  _  _  _  _  _  _  _  _  _  _  _  _
+;;_  _  _        _        _  _  _
+;;)
+
+
+(deflayer base
+_	_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	@smo	@dmo	@fmo	_	_	@jmo	@kmo	@lmo	_	_	_
+_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	_			@sym			_	_	_
+)
+
+;;(deflayer symbols_old
+;;_	_	_	_	_	_	_	_	_	_	_	_	_	_
+;;_	_	7	8	9	_	_	_	_	_	_	_	_	_
+;;_	_	4	5	6	_	@lef	@dow	@up	@rig	_	_	_
+;;_	0	1	2	3	_	_	_	_	_	_	_	_
+;;_	_	_			_			_	_	_
+;;)
+
+
+;; AG-shortcuts require rebinding the actual keyboard-layout!
+(deflayer symbols
+_	_	_	_	_	_	_	_	_	_	_	_	_	_
+_	_	7	8	9	_	mute	vold	volu	brdn	bru	AG-[	_	_
+_	@amo	@4mo	@5mo	@6mo	_	@lef	@dow	@up	@rig	AG-;	AG-'	_
+_	0	1	2	3	_	_	_	_	_	_	_	_
+_	_	_			_			_	_	_
+)
+;; vim: set tw=0 ts=5 sw=2 sts=5 smarttab noexpandtab:

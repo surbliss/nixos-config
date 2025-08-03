@@ -224,7 +224,8 @@
       "inputs": {
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",
-        "zen-browser": "zen-browser"
+        "zen-browser": "zen-browser",
+        "zsh-helix-mode": "zsh-helix-mode"
       }
     },
     "treefmt-nix": {
@@ -266,6 +267,23 @@
       "original": {
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
+        "type": "github"
+      }
+    },
+    "zsh-helix-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1754236772,
+        "narHash": "sha256-Lfdou5SK/69KqBc7V5pJsGUIlV9EJ1UoM2gxNRzXBHI=",
+        "owner": "multirious",
+        "repo": "zsh-helix-mode",
+        "rev": "7e02a697695c88f9b23ed7f07184dd672be3f4b1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "multirious",
+        "ref": "main",
+        "repo": "zsh-helix-mode",
         "type": "github"
       }
     }

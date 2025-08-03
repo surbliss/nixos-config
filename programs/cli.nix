@@ -174,6 +174,7 @@
     just
 
     helix
+    simple-completion-language-server # completions
     # Default lsp-s for helix
     # TODO Make a separate nixos-module
     texlab

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 # Shouldn't be in /programs, not a program?
 {
   users.defaultUserShell = pkgs.zsh;
@@ -18,8 +18,9 @@
       source ${pkgs.zsh-git-prompt}/share/zsh-git-prompt/zshrc.sh
     '';
 
+    # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
     interactiveShellInit = ''
-      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+      source ${inputs.zsh-helix-mode}/zsh-helix-mode.plugin.zsh
       source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
       export _ZO_EXCLUDE_DIRS="$HOME/.config"
       eval "$(zoxide init --cmd j zsh)"

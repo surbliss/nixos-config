@@ -15,10 +15,15 @@
     # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     # Flake utils?
     # https://ayats.org/blog/no-flake-utils
+    #
+    zsh-helix-mode = {
+      url = "github:multirious/zsh-helix-mode/main";
+      flake = false;
+    };
+
   };
   outputs =
     {
-      self,
       nixpkgs,
       ...
     }@inputs:
