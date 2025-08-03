@@ -24,6 +24,21 @@
       source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
       export _ZO_EXCLUDE_DIRS="$HOME/.config"
       eval "$(zoxide init --cmd j zsh)"
+
+      ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
+        zhm_history_prev
+        zhm_history_next
+        zhm_prompt_accept
+        zhm_accept
+        zhm_accept_or_insert_newline
+      )
+      ZSH_AUTOSUGGEST_ACCEPT_WIDGETS+=(
+        zhm_move_right
+      )
+      ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS+=(
+        zhm_move_next_word_start
+        zhm_move_next_word_end
+      )
     '';
   };
 
