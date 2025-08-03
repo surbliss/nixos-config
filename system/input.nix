@@ -17,8 +17,8 @@
 
     # layout = "dk,dk-custom";
     # variant = "nodeadkeys,";
-    layout = "us,dk";
-    variant = "intl,nodeadkeys";
+    layout = "dk,us";
+    variant = "nodeadkeys,intl";
     # options = "caps:escape,grp:win_space_toggle,shift:breaks_caps";
     # options = "caps:escape,grp:win_space_toggle,compose:menu,shift:breaks_caps";
     options = "grp:win_space_toggle,compose:menu,shift:breaks_caps";

@@ -40,10 +40,10 @@
       source ${pkgs.zsh-git-prompt}/share/zsh-git-prompt/zshrc.sh
     '';
 
-    # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    # source ${inputs.zsh-helix-mode}/zsh-helix-mode.plugin.zsh
     # for autocomplete, see https://github.com/NixOS/nixpkgs/blob/nixos-unstable/nixos/modules/programs/zsh/zsh-autosuggestions.nix
     interactiveShellInit = ''
-      source ${inputs.zsh-helix-mode}/zsh-helix-mode.plugin.zsh
+      source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
       source ${pkgs.zsh-system-clipboard}/share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
 
       export _ZO_EXCLUDE_DIRS="$HOME/.config/*"
