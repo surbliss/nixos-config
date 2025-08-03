@@ -19,12 +19,7 @@
     '';
 
     # source ${pkgs.zsh-vi-mode}/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-    interactiveShellInit = ''
-      source ${inputs.zsh-helix-mode}/zsh-helix-mode.plugin.zsh
-      source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
-      export _ZO_EXCLUDE_DIRS="$HOME/.config"
-      eval "$(zoxide init --cmd j zsh)"
-
+    loginShellInit = ''
       ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(
         zhm_history_prev
         zhm_history_next
@@ -39,6 +34,13 @@
         zhm_move_next_word_start
         zhm_move_next_word_end
       )
+    '';
+    interactiveShellInit = ''
+      source ${inputs.zsh-helix-mode}/zsh-helix-mode.plugin.zsh
+      source ${pkgs.zsh-system-clipboard}/ share/zsh/zsh-system-clipboard/zsh-system-clipboard.zsh
+      export _ZO_EXCLUDE_DIRS="$HOME/.config"
+      eval "$(zoxide init --cmd j zsh)"
+
     '';
   };
 
