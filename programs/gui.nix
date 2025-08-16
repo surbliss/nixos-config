@@ -78,6 +78,8 @@
 
     ulauncher
     zulip
+
+    qutebrowser
   ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
