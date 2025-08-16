@@ -20,8 +20,8 @@
       CPU_MAX_PERF_ON_BAT = 20;
 
       # Top one doesn't work for this laptop, but maybe next one
-      START_CHARGE_THRESH_BAT0 = 40; # % to start charging
-      STOP_CHARGE_THRESH_BAT0 = 80; # % to stop charging
+      # START_CHARGE_THRESH_BAT0 = 40; # % to start charging
+      # STOP_CHARGE_THRESH_BAT0 = 80; # % to stop charging
     };
   };
 
