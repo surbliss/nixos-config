@@ -22,8 +22,12 @@ in
   config = mkIf cfg.enable {
     programs.niri.enable = true;
 
+    networking.firewall.allowedTCPPorts = [ 5900 ];
+
     environment.systemPackages = with pkgs; [
+      kdlfmt
       mako
+      nautilus
       # xdg-desktop-portal-gtk
       # xdg-desktop-portal-gnome
       # gnome-keyring
