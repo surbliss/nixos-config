@@ -119,6 +119,28 @@
         "type": "github"
       }
     },
+    "helix-steel": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1755059889,
+        "narHash": "sha256-HN192SICuqt1UKxEshYdGfJ54FTiwkQI1EP83rBMSQc=",
+        "owner": "mattwparas",
+        "repo": "helix",
+        "rev": "580702a114a02efcc9f8bd6dbbe3348d7c8d1ccc",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattwparas",
+        "ref": "steel-event-system",
+        "repo": "helix",
+        "type": "github"
+      }
+    },
     "hercules-ci-effects": {
       "inputs": {
         "flake-parts": "flake-parts_2",
@@ -222,10 +244,32 @@
     },
     "root": {
       "inputs": {
+        "helix-steel": "helix-steel",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixpkgs": "nixpkgs",
         "zen-browser": "zen-browser",
         "zsh-helix-mode": "zsh-helix-mode"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "helix-steel",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1740623427,
+        "narHash": "sha256-3SdPQrZoa4odlScFDUHd4CUPQ/R1gtH4Mq9u8CBiK8M=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "d342e8b5fd88421ff982f383c853f0fc78a847ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "treefmt-nix": {

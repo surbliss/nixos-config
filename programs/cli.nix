@@ -177,7 +177,10 @@
 
     just
 
-    helix
+    # helix
+    inputs.helix-steel.packages.${pkgs.system}.default
+    steel
+
     simple-completion-language-server # completions
     # Default lsp-s for helix
     # TODO Make a separate nixos-module
