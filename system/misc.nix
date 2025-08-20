@@ -61,7 +61,8 @@
           "org.pwmt.zathura-pdf-ps.desktop"
           "org.pwmt.zathura-pdf-cb.desktop"
           "sioyek.desktop"
-        ] ++ browser;
+        ]
+        ++ browser;
         "image/jpeg" = [ "feh.desktop" ];
         "image/png" = [ "feh.desktop" ];
         "image/gif" = [ "feh.desktop" ];
@@ -76,7 +77,7 @@
   hardware.brillo.enable = true;
 
   # ssh
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
 
   # User-settings
   users.users.angryluck = {
