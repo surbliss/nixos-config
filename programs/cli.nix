@@ -2,7 +2,7 @@
 {
   programs.neovim = {
     enable = true;
-    defaultEditor = true;
+    # defaultEditor = true;
     # vimAlias = true;
     # viAlias = true;
     package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.default;
@@ -12,6 +12,10 @@
   };
   # For nixd lsp-server
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+
+  environment.sessionVariables = {
+    EDITOR = "hx";
+  };
 
   programs.yazi = {
     enable = true;
