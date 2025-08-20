@@ -1,0 +1,116 @@
+
+;; TO EXIT (if keyboard is unusable): space + left control + esc, before
+;; remapping
+(defcfg
+  ;; Only laptop-keyboard
+  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd 
+  process-unmapped-keys yes
+  ;; override-release-on-activation yes   ;; needed to override shift-behavior
+)
+
+
+;; Uses ';' because that is what is on an american keyboard there...
+(defsrc
+grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
+tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
+caps    a    s    d    f    g    h    j    k    l    ;    '    ret
+lsft    lsgt z    x    c    v    b    n    m    ,    .    /    rsft
+lctl    lmet      lalt           spc            ralt comp rctl   
+)   
+
+(defvar
+  tap-time 200
+  hold-time 200
+  tt $tap-time
+  ht $hold-time
+)
+
+(defalias
+  ;; amo (tap-hold-release-timeout $tt $ht a lalt lalt) ;; Helps with accidental ALTS
+  ;; amo a
+
+  lsft (multi lsft (layer-while-held shifted))
+  rsft (multi rsft (layer-while-held shifted))
+
+
+  amo (tap-hold-release $tt $ht a lalt)
+  smo (tap-hold-release $tt $ht s lmet)
+  dmo (tap-hold-release $tt $ht d @lsft)
+  fmo (tap-hold-release $tt $ht f lctl)
+  jmo (tap-hold-release $tt $ht j rctl)
+  kmo (tap-hold-release $tt $ht k @rsft)
+  lmo (tap-hold-release $tt $ht l rmet)
+  ;; ralt=altgr, so want lalt instead.
+  ;mo (tap-hold-release $tt $ht S-, lalt)
+
+  sys (tap-hold-release $tt $ht spc (layer-toggle system))
+)
+
+;;(defchords caps-word 100
+;;  (a  ) @amo
+;;  (  ;) @;mo
+;;  (a ;) @cw
+;;)
+
+;;(defalias
+;;  a (chord caps-word a)
+;;  ; (chord caps-word ;)
+;;)
+
+
+
+
+(defalias
+ gr S-=
+ [ AG-8
+ ] AG-9
+ qu \
+ bs AG-lsgt
+)
+
+
+(deflayer base
+@gr  _    _    _    _    _    _    _    _    _    _    _    _    _
+_    _    _    _    _    _    _    _    _    _    _    @[   @]   S-\
+esc  @amo @smo @dmo @fmo _    _    @jmo @kmo @lmo @;mo @qu   _
+@lsft @bs  _    _    _    _    _    _    _    _    _    _    @rsft
+_    _         _             @sys            _    _    _    
+)
+
+
+(defalias
+  lbr (unshift ralt 7)
+  rbr (unshift ralt 0)
+  lt (unshift lsgt)
+  pip (unshift ralt =)
+  sqi (unshift ralt ])
+)
+
+(deflayer shifted
+@sqi _    _    _    _    _    _    _    _    _    _    _    _    _
+_    _    _    _    _    _    _    _    _    _    _    @lbr @rbr ]
+_    _    _    _    _    _    _    _    _    _    .    2    _
+_    @pip _    _    _    _    _    _    _    @lt lsgt    _    _
+_    _         _              _              _    _    _    
+)
+
+
+
+(deflayer system
+_    _    _    _    _    _    _    _    _    _    _    _    _    _
+_    _    _    _    _    _    mute vold volu brdn bru  [    _    _
+_    ralt lmet lsft lctl _    left down up   right ;   '    _
+_    _    _    _    _    _    _    _    _    _    _    _    _
+_    _         _              _              _    _    _    
+)
+
+
+
+;; AG-shortcuts require rebinding the actual keyboard-layout!
+;; (deflayer symbols
+;; _ _ _ _ _ _ _ _ _ _ _ _ _ _
+;; _ _ 7 8 9 _ mute vold volu brdn bru     [  _ _
+;; _ @amo @4mo @5mo @6mo _ @lef @dow @up @rig ; ' _
+;; _ 0 1 2 3 _ _ _ _ _ _ _ _
+;; _ _ _ _ _ _ _
+;; vim: set tw=0 ts=5 sw=2 sts=5 smarttab noexpandtab:
