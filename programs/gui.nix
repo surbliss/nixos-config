@@ -76,7 +76,6 @@
 
     zettlr
 
-    ulauncher
     zulip
 
     qutebrowser
