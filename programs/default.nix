@@ -33,6 +33,7 @@ in
   imports = [
     ./cli.nix # ## Split up cli
     ./gui.nix
+    ./nushell.nix
     ./sql.nix
     ./zsh.nix
     ./utilities.nix
@@ -51,9 +52,7 @@ in
 
   config = {
     # Install all packages
-    environment.systemPackages = mkIf (
-      !cfg.only-home-manager
-    ) cfg.packages-installed;
+    environment.systemPackages = mkIf (!cfg.only-home-manager) cfg.packages-installed;
 
     ### Right now doesn't allow rebuilding, fix later...
     # home-manager.users.TODOUSERNAME.home.packages =
