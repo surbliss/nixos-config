@@ -178,8 +178,9 @@
     just
 
     # helix
-    inputs.helix-steel.packages.${pkgs.system}.default
-    steel
+    # inputs.helix-steel.packages.${pkgs.system}.default
+    # steel
+    helix
 
     simple-completion-language-server # completions
     # Default lsp-s for helix
