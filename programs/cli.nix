@@ -180,7 +180,7 @@
     # helix
     # inputs.helix-steel.packages.${pkgs.system}.default
     # steel
-    helix
+    inputs.helix-master.packages.${pkgs.system}.default
 
     simple-completion-language-server # completions
     # Default lsp-s for helix

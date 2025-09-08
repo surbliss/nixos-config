@@ -16,6 +16,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    helix-master = {
+      url = "github:helix-editor/helix/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # zen-browser.url = "github:quantum9innovation/zen-browser-twilight-flake";
     # zen-browser.inputs.nixpkgs.follows = "nixpkgs";
     # Flake utils?
