@@ -32,28 +32,28 @@ in
     };
   };
 
-  custom.packages-installed =
-    [
-      ### Outside 'with pkgs;' scope
-      rofi-custom
-      ### No clue where to put this
-      # For customization:
-      # catppuccin-sddm-custom
-      xmonad-with-contrib
-    ]
-    ++ (with pkgs; [
-      ### Utilities
-      # nixpkgs-stable.redshift
-      flameshot
-      rofi-power-menu
-      polybarFull
-      dunst
-      betterlockscreen
-      gtk4
-      custom.picom-jonaburg # From overlay
-      wineWowPackages.full
-      # rofi-rbw-x11 # Couldnt write @ , lul
-    ]);
+  custom.packages-installed = [
+    ### Outside 'with pkgs;' scope
+    rofi-custom
+    ### No clue where to put this
+    # For customization:
+    # catppuccin-sddm-custom
+    xmonad-with-contrib
+  ]
+  ++ (with pkgs; [
+    ### Utilities
+    # nixpkgs-stable.redshift
+    flameshot
+    devenv
+    rofi-power-menu
+    polybarFull
+    dunst
+    betterlockscreen
+    gtk4
+    custom.picom-jonaburg # From overlay
+    wineWowPackages.full
+    # rofi-rbw-x11 # Couldnt write @ , lul
+  ]);
 }
 
 ### Dont need:
