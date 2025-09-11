@@ -44,7 +44,7 @@ in
     ### Utilities
     # nixpkgs-stable.redshift
     flameshot
-    devenv
+    # devenv
     rofi-power-menu
     polybarFull
     dunst

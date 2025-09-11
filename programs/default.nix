@@ -32,6 +32,7 @@ in
 {
   imports = [
     ./cli.nix # ## Split up cli
+    ./devenv.nix
     ./gui.nix
     ./nushell.nix
     ./sql.nix
@@ -51,6 +52,7 @@ in
   };
 
   config = {
+    custom.devenv.enable = true;
     # Install all packages
     environment.systemPackages = mkIf (!cfg.only-home-manager) cfg.packages-installed;
 
