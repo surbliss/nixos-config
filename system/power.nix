@@ -53,9 +53,9 @@
   services.power-profiles-daemon.enable = false;
 
   # FIX: Find a way to fix this later, so we can suspend/hibernate
-  services.logind.lidSwitch = "ignore";
-  services.logind.lidSwitchExternalPower = "ignore";
-  services.logind.lidSwitchDocked = "ignore";
+  services.logind.settings.Login.HandleLidSwitch = "ignore";
+  services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
+  services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
 
   # Lock screen?
   services.physlock = {
