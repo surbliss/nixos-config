@@ -20,6 +20,10 @@
       url = "github:helix-editor/helix/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    starship-jj = {
+      url = "gitlab:lanastara_foss/starship-jj/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # zen-browser.url = "github:quantum9innovation/zen-browser-twilight-flake";
     # zen-browser.inputs.nixpkgs.follows = "nixpkgs";

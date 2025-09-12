@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 {
   users.defaultUserShell = pkgs.zsh;
   users.users.angryluck.shell = pkgs.zsh;
@@ -6,6 +6,8 @@
     git # Needed for zinit plugin-manager
     zoxide # Better cd
     eza # Better ls
+    starship
+    inputs.starship-jj.packages.${pkgs.system}.default
   ];
 
   # Needed to git nix-store path infos
