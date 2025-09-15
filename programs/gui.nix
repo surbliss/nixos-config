@@ -39,6 +39,7 @@
     sioyek
     mpv-unwrapped # Simple video player
     wezterm # Idk if terminal is lightweight...
+    foot # Alacritty + font ligatures?
     kitty # Needed for presenterm
 
     ### Desktop-applications
