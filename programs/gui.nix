@@ -80,6 +80,7 @@
     zulip
 
     qutebrowser
+    dorion
   ]);
   ### Not needed
   # networkmanagerapplet # (For logging into eduroam)
