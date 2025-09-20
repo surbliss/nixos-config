@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   # services.greetd = {
   #   enable = true;
@@ -17,7 +17,17 @@
   #   };
   #   useTextGreeter = true;
   # };
+  #
+  # environment.systemPackages = [ pkgs.canta-theme ];
 
-  programs.regreet.enable = true;
+  programs.regreet = {
+    # theme = {
+    #   package = pkgs.canta-theme;
+    #   name = "Canta";
+    # };
+    # cursorTheme set in cursor module
+    enable = true;
+    settings.GTK.application_prefer_dark_theme = true;
+  };
 
 }

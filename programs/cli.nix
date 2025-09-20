@@ -177,6 +177,11 @@
 
     just
 
+    nim
+    nimlsp
+    nph
+    nimlangserver
+
     # helix
     # inputs.helix-steel.packages.${pkgs.system}.default
     # steel

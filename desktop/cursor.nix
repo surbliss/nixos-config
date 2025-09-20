@@ -40,7 +40,7 @@ in
 
   config = mkIf cfg.enable {
     # Consider setting this in separate display-manager module...
-    services.displayManager.sddm.settings.Theme.CursorTheme = cfg.theme;
+    # services.displayManager.sddm.settings.Theme.CursorTheme = cfg.theme;
     # Top two lines here might not be necessary
     services.xserver.displayManager.setupCommands =
       let
@@ -58,6 +58,13 @@ in
         fi
       '';
     environment.systemPackages = [ cfg.package ];
+
+    # Display manager
+    programs.regreet.cursorTheme = {
+      package = pkgs.bibata-cursors;
+      name = "Bibata-Modern-Amber";
+
+    };
 
     ### Might not be needed
     # environment.sessionVariables = {
