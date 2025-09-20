@@ -1,7 +1,7 @@
 { pkgs, ... }: # Anything relating to theming, or visuals?
-let
-  catppuccin-sddm = pkgs.catppuccin-sddm.override { flavor = "mocha"; };
-in
+# let
+#   catppuccin-sddm = pkgs.catppuccin-sddm.override { flavor = "mocha"; };
+# in
 {
   # This should just be merged in, but leaving it there, as a good example of
   # how to construct a module
@@ -9,23 +9,24 @@ in
     ./cursor.nix
     ./fonts.nix
     ./niri.nix
+    ./display-manager.nix
   ];
   custom.cursor.enable = true;
   custom.niri.enable = true;
 
   # TODO: Move this to system/video.nix
-  services.displayManager.sddm = {
-    enable = true;
-    wayland.enable = true;
-    package = pkgs.kdePackages.sddm; # Use Qt6 version
-    # extraPackages = [ ]; # Can't be set here, has to be set below!
-    theme = "catppuccin-mocha";
-  };
+  # services.displayManager.sddm = {
+  #   enable = true;
+  #   wayland.enable = true;
+  #   package = pkgs.kdePackages.sddm; # Use Qt6 version
+  #   # extraPackages = [ ]; # Can't be set here, has to be set below!
+  #   theme = "catppuccin-mocha";
+  # };
 
-  environment.systemPackages = [
-    catppuccin-sddm
-    # pkgs.sddm-chili-theme
-  ];
+  # environment.systemPackages = [
+  #   catppuccin-sddm
+  #   # pkgs.sddm-chili-theme
+  # ];
 
   #   services.displayManager.defaultSession = "none+xmonad";
 
