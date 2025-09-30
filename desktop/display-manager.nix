@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   # services.greetd = {
   #   enable = true;
@@ -21,13 +21,15 @@
   # environment.systemPackages = [ pkgs.canta-theme ];
 
   programs.regreet = {
-    # theme = {
-    #   package = pkgs.canta-theme;
-    #   name = "Canta";
-    # };
     # cursorTheme set in cursor module
     enable = true;
-    settings.GTK.application_prefer_dark_theme = true;
+    settings = {
+      GTK.application_prefer_dark_theme = true;
+      default_session = {
+        command = "niri --config ${./regreet-niri.kdl}";
+        user = "greeter";
+      };
+    };
   };
 
 }

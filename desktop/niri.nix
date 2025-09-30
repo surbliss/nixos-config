@@ -59,6 +59,11 @@ in
       ];
     };
 
+    programs.waybar = {
+      enable = true;
+      systemd.target = "niri.service";
+    };
+    # systemd.user.units."niri.service".wantedBy = "mako.service";
     # Chromium + Electron without Xwayland
     environment.sessionVariables.NIXOS_OZONE_WL = "1";
     environment.systemPackages = wayland-tools ++ other;
