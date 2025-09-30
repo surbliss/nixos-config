@@ -95,6 +95,7 @@
     haskellPackages.ormolu
     haskellPackages.hoogle
     haskellPackages.haskell-language-server
+    ghcid
 
     # ccls
     clang-tools_19 # clangd + clang-format
