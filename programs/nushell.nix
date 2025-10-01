@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = [ pkgs.nushell ];
+  environment.systemPackages = with pkgs; [
+    nushell
+    nufmt
+  ];
 }
