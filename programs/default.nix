@@ -1,6 +1,6 @@
 {
   config,
-  # pkgs,
+  pkgs,
   # stablePkgs,
   lib,
   ...
@@ -53,6 +53,10 @@ in
 
   config = {
     custom.devenv.enable = true;
+    # TODO: MOVE BOTH SHELL CONFIGS INTO shell.nix ???
+    #
+    users.defaultUserShell = pkgs.nushell;
+    users.users.angryluck.shell = pkgs.nushell;
     # Install all packages
     environment.systemPackages = mkIf (!cfg.only-home-manager) cfg.packages-installed;
 

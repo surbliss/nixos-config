@@ -2,7 +2,8 @@
 {
   environment.systemPackages = with pkgs; [
     nushell
-    nufmt
-    oh-my-posh # shell
+    zoxide # Better cd
+    # nufmt # Broken af, maybe later?
+    oh-my-posh # prompt
   ];
 }
