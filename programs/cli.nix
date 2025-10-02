@@ -205,6 +205,7 @@
     taplo
     tombi
     yaml-language-server
+    yamlfmt
     jujutsu
   ];
 }
