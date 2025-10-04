@@ -8,11 +8,12 @@
         "Noto Color Emoji"
         # "NerdFontSymbolsOnly"
         "Symbols Nerd Font"
-        "Symbols Nerd Font Mono"
+        # "Symbols Nerd Font Mono"
       ];
       monospace = [
-        "0xProto Nerd Font Mono"
-        "0xProto"
+        # "0xProto Nerd Font Mono"
+        "0xProto Nerd Font"
+        "Font Awesome 7 Free Solid"
       ];
       sansSerif = [ "Lato" ];
       serif = [ "Noto Serif" ];
