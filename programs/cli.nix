@@ -39,7 +39,7 @@
           for = "windows";
         }
       ];
-      keymap.manager.prepend_keymap = [
+      keymap.mgr.prepend_keymap = [
         {
           on = "T";
           run = "shell \"$SHELL\"  --confirm --block --orphan";
