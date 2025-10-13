@@ -6,9 +6,22 @@
 
   outputs =
     inputs:
-    inputs.flake-parts.lib.mkFlake {
-      inherit inputs;
-    } (inputs.import-tree ./modules);
+    let
+      inherit (inputs) import-tree;
+    in
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        (import-tree ./modules)
+        # Allows using the flake-parts module system
+        inputs.flake-parts.flakeModules.modules
+        # nixos-configurations
+        (import-tree ./hosts)
+      ];
+
+      # List of _all_ systems to build for. In a specific nixosConfiguration,
+      # pick one of these.
+      systems = [ "x86_64-linux" ];
+    };
 
   # Consider:
   # _module.args.rootPath =./.;

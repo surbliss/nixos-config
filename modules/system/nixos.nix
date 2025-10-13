@@ -1,6 +1,6 @@
 { inputs, ... }:
 {
-  flake.modules.nixos.nixos = {
+  flake.modules.nixos.system = {
 
     # FIX: (And put in appropriate place)
     nixpkgs.config.permittedInsecurePackages = [

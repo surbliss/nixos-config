@@ -1,9 +1,3 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
 # https://teu5us.github.io/nix-lib.html#attribute-set-functions
 let
   cursor = pkgs: pkgs.bibata-cursors;

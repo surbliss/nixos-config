@@ -2,7 +2,7 @@
 {
   ### TODO: File broken, pls fix
   # Alternative if many udev-rules: services.udev.packages
-  flake.modules.nixos.udev =
+  flake.modules.nixos.system =
     { pkgs, ... }:
     let
       custom = config.flake.packages.${pkgs.system};

@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.input = {
+  flake.modules.nixos.system = {
     # Keyboard
     services.xserver.xkb = {
       extraLayouts.dk-custom = {

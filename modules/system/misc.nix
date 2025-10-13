@@ -1,6 +1,9 @@
 {
-  flake.modules.nixos.misc =
-    { pkgs, ... }:
+  flake.modules.nixos.system =
+    { pkgs, lib, ... }:
+    let
+      inherit (lib) mkDefault;
+    in
     {
 
       ### Idk bout this
@@ -29,50 +32,25 @@
       # Default apps
       xdg.mime = {
         enable = true;
-        defaultApplications =
-          let
-            browser = [
-              # Zen
-              "zen-twilight.desktop" # Should be correct
-              "zen_twilight.desktop"
-              "zen.desktop"
-              "zen-browser.desktop"
-              # Firefox
-              "firefox.desktop"
-              "org.mozilla.firefox.desktop"
-              "mozilla-firefox.desktop"
-              "firefox-esr.desktop"
-              "firefox-developer-edition.desktop"
-              "firefox-nightly.desktop"
-              # Chrome
-              "chromium-browser.desktop"
-              "chromium.desktop"
-            ];
-          in
-          {
-            "text/html" = browser;
-            "x-scheme-handler/http" = browser;
-            "x-scheme-handler/https" = browser;
-            "x-scheme-handler/about" = browser;
-            "x-scheme-handler/unknown" = browser;
+        defaultApplications = {
+          "application/pdf" = [
+            "org.pwmt.zathura.desktop"
+            "org.pwmt.zathura-pdf-mupdf.desktop"
+            "org.pwmt.zathura-pdf-djvu.desktop"
+            "org.pwmt.zathura-pdf-ps.desktop"
+            "org.pwmt.zathura-pdf-cb.desktop"
+            "sioyek.desktop"
+          ];
 
-            "application/pdf" = [
-              "org.pwmt.zathura.desktop"
-              "org.pwmt.zathura-pdf-mupdf.desktop"
-              "org.pwmt.zathura-pdf-djvu.desktop"
-              "org.pwmt.zathura-pdf-ps.desktop"
-              "org.pwmt.zathura-pdf-cb.desktop"
-              "sioyek.desktop"
-            ]
-            ++ browser;
-            "image/jpeg" = [ "feh.desktop" ];
-            "image/png" = [ "feh.desktop" ];
-            "image/gif" = [ "feh.desktop" ];
-            "image/svg+xml" = [ "feh.desktop" ];
-            "image/webp" = [ "feh.desktop" ];
-            "image/tiff" = [ "feh.desktop" ];
-            "image/bmp" = [ "feh.desktop" ];
-          };
+          # TODO: Move to separate modules
+          "image/jpeg" = [ "feh.desktop" ];
+          "image/png" = [ "feh.desktop" ];
+          "image/gif" = [ "feh.desktop" ];
+          "image/svg+xml" = [ "feh.desktop" ];
+          "image/webp" = [ "feh.desktop" ];
+          "image/tiff" = [ "feh.desktop" ];
+          "image/bmp" = [ "feh.desktop" ];
+        };
       };
 
       # Brightness control

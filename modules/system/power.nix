@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.power = {
+  flake.modules.nixos.system = {
     # Battery, see https://nixos.wiki/wiki/Laptop
     powerManagement.enable = true;
     services.upower.enable = true; # Battery info

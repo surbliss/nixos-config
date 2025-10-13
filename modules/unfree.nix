@@ -2,17 +2,32 @@
 # Does couple the remaining packages with this, but personally I think that tradeoff
 # is worth, for in exchange having control of all unfree packages in one place.
 
-let
-  allowed-unfree = [
-    "discord"
-    "steam"
-    "zoom-us"
-  ];
-in
 {
   flake.modules.nixos.unfree =
-    { lib, ... }:
+    { lib, config, ... }:
+    let
+      cfg = config.allowed-unfree;
+      isIn = p: builtins.elem (getName p);
+      inherit (lib)
+        mkEnableOption
+        mkOption
+        mkIf
+        getName
+        types
+        ;
+    in
     {
-      nixpkgs.config.allowUnfreePredicate = p: builtins.elem (lib.getName p) allowed-unfree;
+      options.allowed-unfree = {
+        enable = mkEnableOption "allowed unfree packages";
+        packages = mkOption {
+          type = lib.types.listOf types.string;
+          default = [ ];
+          description = "The unfree packages to allow";
+        };
+      };
+      config = mkIf cfg.enable {
+        nixpkgs.config.allowedUnfreePredicate = isIn cfg.packages;
+
+      };
     };
 }

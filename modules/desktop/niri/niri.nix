@@ -1,6 +1,6 @@
 {
   # TODO: Split this up a bit
-  flake.modules.nixos.niri =
+  flake.modules.nixos.desktop =
     { pkgs, ... }:
     {
       # Display manager

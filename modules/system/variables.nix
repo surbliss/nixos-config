@@ -1,5 +1,6 @@
 {
-  flake.modules.nixos.variables =
+  # Should definitely be moved to the place they relate to (dotnet + Isabelle)
+  flake.modules.nixos.system =
     { pkgs, ... }:
     {
       ### Should just be put in the relevant file, not globally...

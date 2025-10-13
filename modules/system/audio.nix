@@ -1,5 +1,5 @@
 {
-  flake.modules.nixos.audio = {
+  flake.modules.nixos.system = {
     security.rtkit.enable = true; # For pipewire (optional)
     hardware.bluetooth = {
       enable = true;

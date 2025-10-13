@@ -1,6 +1,6 @@
 # { config, ... }:
 {
-  flake.modules.nixos.shell =
+  flake.modules.nixos.cli =
     { pkgs, ... }:
     # let
     #   custom = config.flake.packages.${pkgs.system};

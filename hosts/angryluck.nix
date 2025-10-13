@@ -1,9 +1,34 @@
-{ inputs, config, ... }:
 {
+  inputs,
+  config,
+  ...
+}:
+{
+  # The ASUS laptop (should probably have been called that instead of angryluck...)
+  flake.modules.nixos.angryluck = {
+    imports = [
+      _generated/angryluck-hardware-configuration.nix
+    ];
+    allowed-unfree.packages = [
+      "discord"
+      "steam"
+      "zoom-us"
+    ];
+  };
   flake.nixosConfigurations.angryluck = inputs.nixpkgs.lib.nixosSystem {
-
     system = [ "x86_64-linux" ];
-    modules = builtins.attrValues config.flake.modules.nixos;
+    # Write this manually
+    modules = with config.flake.modules.nixos; [
+      cli
+      desktop
+      gui
+      gaming
+      system
+      unfree
+      angryluck
+      fonts
+    ];
+
     # To check outputs of the above:
     # > nix repl (in /etc/nixos/ dir)
     # > :lf . (loads flake in . directory)
