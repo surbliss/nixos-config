@@ -5,27 +5,35 @@
 }:
 {
   # The ASUS laptop (should probably have been called that instead of angryluck...)
-  flake.modules.nixos.angryluck = {
-    imports = [
-      _generated/angryluck-hardware-configuration.nix
-    ];
-    allowed-unfree.packages = [
-      "discord"
-      "steam"
-      "zoom-us"
-    ];
-  };
+  flake.modules.nixos.angryluck =
+    { lib, ... }:
+    {
+      imports = [
+        _generated/angryluck-hardware-configuration.nix
+      ];
+      nixpkgs.config.allowUnfreePredicate =
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          "discord"
+          "steam"
+          "zoom"
+          "obsidian"
+          "android-studio-stable"
+          "android-studio"
+          "keymapp"
+          "steam-unwrapped"
+        ];
+    };
   flake.nixosConfigurations.angryluck = inputs.nixpkgs.lib.nixosSystem {
     system = [ "x86_64-linux" ];
     # Write this manually
     modules = with config.flake.modules.nixos; [
+      angryluck
       cli
       desktop
       gui
       gaming
       system
-      unfree
-      angryluck
       fonts
     ];
 

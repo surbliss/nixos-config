@@ -24,7 +24,7 @@
         isabelle-components.isabelle-linter # Wrong place?
         libreoffice-qt # Spreadsheets
 
-        vscode
+        # vscode
         obsidian
         rmview # Haven't made work yet...
 
