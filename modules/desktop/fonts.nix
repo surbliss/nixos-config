@@ -14,12 +14,29 @@
             # "Symbols Nerd Font Mono"
           ];
           monospace = [
-            # "0xProto Nerd Font Mono"
-            "0xProto Nerd Font"
+            "0xProto"
             "Font Awesome 7 Free Solid"
+            "Font Awesome 7 Free"
+            "Font Awesome 7 Brands"
+            "0xProto Nerd Font"
+
           ];
-          sansSerif = [ "Lato" ];
-          serif = [ "Noto Serif" ];
+          sansSerif = [
+            "Lato"
+            "Font Awesome 7 Free Solid"
+            "Font Awesome 7 Free"
+            "Font Awesome 7 Brands"
+            "0xProto Nerd Font"
+
+          ];
+          serif = [
+            "Noto Serif"
+            "Font Awesome 7 Free Solid"
+            "Font Awesome 7 Free"
+            "Font Awesome 7 Brands"
+            "0xProto Nerd Font"
+
+          ];
         };
       };
 
