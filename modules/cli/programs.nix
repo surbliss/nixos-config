@@ -112,6 +112,7 @@
         # steel
 
         jujutsu
+        wl-color-picker
       ];
     };
 }

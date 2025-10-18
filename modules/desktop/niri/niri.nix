@@ -46,6 +46,7 @@
         wl-clipboard
         wl-clipboard-x11
         wl-clip-persist
+        cliphist
         fuzzel # Application picker
         wofi
         wofi-power-menu
