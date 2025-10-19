@@ -78,6 +78,7 @@
         nerd-fonts.symbols-only
         nerd-fonts.inconsolata
         nerd-fonts.hack
+        nerd-fonts.dejavu-sans-mono
 
         # Su style:
       ];
