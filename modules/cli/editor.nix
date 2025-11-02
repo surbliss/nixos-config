@@ -37,7 +37,7 @@
         haskellPackages.haskell-language-server
         haskellPackages.ormolu
 
-        clang-tools_19 # clangd + clang-format
+        llvmPackages_20.clang-tools
 
         ltex-ls-plus # Supposedly more updated
 
