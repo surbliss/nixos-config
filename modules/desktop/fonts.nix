@@ -80,7 +80,12 @@
         nerd-fonts.hack
         nerd-fonts.dejavu-sans-mono
 
-        # Su style:
+        # Fonts for polylux slides (metropolus)
+        fira
+        fira-math
+        nerd-fonts.fira-code
+        fira-sans
+        texlivePackages.lete-sans-math # Lato-based
       ];
     };
 }
