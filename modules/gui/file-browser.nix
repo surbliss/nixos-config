@@ -5,10 +5,19 @@
     programs.thunar.enable = true;
     xdg.mime = {
       enable = true;
-      defaultApplications = {
-        "inode/directory" = "Thunar.desktop";
-        "application/x-directory" = "Thunar.desktop";
-      };
+      defaultApplications =
+        let
+          files = [
+            # "yazi.desktop"
+            "thunar.desktop"
+            "org.gnome.Nautilus.desktop"
+            "kitty-open.desktop"
+          ];
+        in
+        {
+          "inode/directory" = files;
+          "application/x-directory" = files;
+        };
     };
   };
 

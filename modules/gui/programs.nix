@@ -15,9 +15,6 @@
         mpv-unwrapped
         vlc
 
-        wezterm
-        alacritty
-
         ### Desktop-applications
         bitwarden-desktop
         isabelle # Also adds jedit
@@ -51,8 +48,7 @@
 
         # TODO: Delete
         mangohud
-        foot
-        kitty # Needed for presenterm
+        pdfpc
       ];
       ### Not needed
       # networkmanagerapplet # (For logging into eduroam)

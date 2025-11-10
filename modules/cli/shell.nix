@@ -1,34 +1,47 @@
-# { config, ... }:
+##################################################
+# Terminal + Shell config
+##################################################
 {
   flake.modules.nixos.cli =
     { pkgs, ... }:
-    # let
-    #   custom = config.flake.packages.${pkgs.system};
-    # in
     {
       users.defaultUserShell = pkgs.nushell;
-      # Name definitions should probably be done somewhere else?
+      # TODO: As it refers to 'angryluck' should probably be set in another way
       users.users.angryluck.shell = pkgs.nushell;
-
+      # NOTE: NixOS wiki recommends enabling zsh this way
       programs.zsh.enable = true;
+
+      # Default terminal-opener
+      xdg.mime.enable = true;
+      xdg.mime.defaultApplications =
+        let
+          terminal = [
+            "Alacritty.desktop"
+            "org.wezfurlong.wezterm.desktop"
+            "kitty.desktop"
+            "kitty-open.desktop"
+          ];
+        in
+        {
+          "x-scheme-handler/terminal" = terminal;
+          "application/x-terminal-emulator" = terminal;
+        };
 
       environment.systemPackages = with pkgs; [
         nushell
-        zoxide # Better cd
-        # nufmt # Broken af, maybe later?
-
+        # nufmt # NOTE: Very broken formatter, wait for it to mature more
         git # Needed for zinit plugin-manager
-        zoxide # Better cd
-        eza # Better ls
+        zoxide
+        eza
         starship
-        # custom.starship-jj
-        # inputs.starship-jj.packages.${pkgs.system}.default
-        oh-my-posh # Todo: Replace starship prompt by oh-my-posh
+        # TODO: Update to version >=26.24.0 that supports JJ!
+        oh-my-posh
+
+        # Terminals
+        wezterm
+        alacritty
+        kitty
+        foot
       ];
     };
-  # perSystem =
-  #   { inputs', ... }:
-  #   {
-  #     packages.starship-jj = inputs'.starship-jj.packages.default;
-  #   };
 }
