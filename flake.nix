@@ -4,38 +4,17 @@
 {
   description = "Thomas's personal flake for NixOS";
 
+  ### Imports all modules without '_' prefix
   outputs =
-    inputs:
-    let
-      inherit (inputs) import-tree;
-    in
-    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [
-        (import-tree ./modules)
-        # Allows using the flake-parts module system
-        inputs.flake-parts.flakeModules.modules
-        # nixos-configurations
-        (import-tree ./hosts)
-      ];
+    inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./configuration);
 
-      # List of _all_ systems to build for. In a specific nixosConfiguration,
-      # pick one of these.
-      systems = [ "x86_64-linux" ];
-    };
-
-  # Consider:
-  # _module.args.rootPath =./.;
   inputs = {
     ### The Dentritic stuff
     flake-parts.url = "github:hercules-ci/flake-parts";
     import-tree.url = "github:vic/import-tree";
-    ## Maybe later
-    # flake-file.url = "github:vic/flake-file";
-    # systems.url = "github:nix-systems/default";
 
     ### Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     ### Other inputs
     neovim-nightly-overlay = {
@@ -54,39 +33,5 @@
     #   url = "github:helix-editor/helix/master";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
-    # starship-jj = {
-    #   url = "gitlab:lanastara_foss/starship-jj/main";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # zsh-helix-mode = {
-    #   url = "github:multirious/zsh-helix-mode/main";
-    #   flake = false;
-    # };
-
   };
-
-  # inputs:
-  # inputs.flake-parts.lib.mkFlake {
-  #   inherit inputs;
-  # } (inputs.import-tree ./modules);
-
-  # outputs =
-  #   {
-  #     nixpkgs,
-  #     ...
-  #   }@inputs:
-  #   {
-  #     nixosConfigurations = {
-  #       angryluck = nixpkgs.lib.nixosSystem rec {
-  #         system = "x86_64-linux";
-  #         specialArgs = {
-  #           inherit inputs;
-  #           inherit system;
-  #         };
-  #         modules = [
-  #           ./configuration.nix
-  #         ];
-  #       };
-  #     };
-  #   };
 }
