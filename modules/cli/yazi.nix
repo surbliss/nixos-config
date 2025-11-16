@@ -29,6 +29,11 @@
             run = "shell \"$SHELL\"  --confirm --block --orphan";
             desc = "Open shell here";
           }
+          {
+            on = "a";
+            run = "create --dir";
+            desc = "Create directory";
+          }
         ];
       };
     };
