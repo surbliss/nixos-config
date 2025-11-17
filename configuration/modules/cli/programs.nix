@@ -113,6 +113,9 @@
 
         jujutsu
         wl-color-picker
+
+        ### Git pager
+        delta
       ];
     };
 }
