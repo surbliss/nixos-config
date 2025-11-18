@@ -4,7 +4,8 @@
   flake.modules.nixos.cli =
     { pkgs, ... }:
     let
-      custom = config.flake.packages.${pkgs.system};
+      # not called 'system' anymore
+      custom = config.flake.packages.${pkgs.stdenv.hostPlatform.system};
     in
     {
       programs.vim.enable = true;
