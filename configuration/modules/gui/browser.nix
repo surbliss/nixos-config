@@ -1,11 +1,8 @@
-{ config, ... }:
-{
-  flake.modules.nixos.gui =
+{ moduleWithSystem, ... }:
+let
+  module =
+    { self', ... }: # perSystem
     { pkgs, lib, ... }:
-    let
-      inherit (lib) mkDefault;
-      custom = config.flake.packages.${pkgs.system};
-    in
     {
       # Settings for chromium, doesn't install the package
       programs.chromium = {
@@ -19,7 +16,7 @@
 
       environment.systemPackages = with pkgs; [
         ungoogled-chromium
-        custom.zen-browser-twilight
+        self'.packages.zen-browser-twilight
         qutebrowser
       ];
 
@@ -27,9 +24,10 @@
         enable = true;
         defaultApplications =
           let
+            inherit (lib) mkDefault;
             browser = [
               # Zen
-              "zen-twilight.desktop" # Should be correct
+              "zen-twilight.desktop" # Should be the correct version
               "zen_twilight.desktop"
               "zen.desktop"
               "zen-browser.desktop"
@@ -55,6 +53,8 @@
 
             "application/pdf" = mkDefault browser;
 
+            # mkDefault, as there might be better candidates
+            # mkForce does not work for mime-types
             "video/mp4" = mkDefault browser;
             "video/webm" = mkDefault browser;
             "video/ogg" = mkDefault browser;
@@ -73,6 +73,9 @@
       };
 
     };
+in
+{
+  flake.modules.nixos.gui = moduleWithSystem module;
 
   perSystem =
     { inputs', ... }:

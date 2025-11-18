@@ -1,30 +1,28 @@
-{ inputs, config, ... }:
-
 {
-  flake.modules.nixos.cli =
+  moduleWithSystem,
+  inputs,
+  ...
+}:
+
+let
+  module =
+    { self', ... }:
     { pkgs, ... }:
-    let
-      # not called 'system' anymore
-      custom = config.flake.packages.${pkgs.stdenv.hostPlatform.system};
-    in
     {
       programs.vim.enable = true;
-
       programs.neovim = {
         enable = true;
-        package = custom.neovim-nightly;
+        package = self'.packages.neovim-nightly;
       };
 
       environment.sessionVariables = {
         EDITOR = "hx";
       };
-
       # To let lsps get info about nixpkgs
       nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
       environment.systemPackages = with pkgs; [
-        # Helix!
-        custom.helix-steel
+        self'.packages.helix-steel
 
         # Lsps and formatters
         harper
@@ -78,6 +76,9 @@
 
       ];
     };
+in
+{
+  flake.modules.nixos.cli = moduleWithSystem module;
 
   perSystem =
     { inputs', ... }:

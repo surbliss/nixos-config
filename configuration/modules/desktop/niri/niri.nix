@@ -1,11 +1,9 @@
 {
-  # TODO: Split this up a bit
   flake.modules.nixos.desktop =
     { pkgs, ... }:
     {
       # Display manager
       programs.regreet = {
-        # cursorTheme set in cursor module
         enable = true;
         settings = {
           GTK.application_prefer_dark_theme = true;
@@ -34,7 +32,7 @@
         enable = true;
         systemd.target = "niri.service";
       };
-      # systemd.user.units."niri.service".wantedBy = "mako.service";
+
       # Chromium + Electron without Xwayland
       environment.sessionVariables.NIXOS_OZONE_WL = "1";
       environment.systemPackages = with pkgs; [
@@ -52,6 +50,7 @@
         wofi-power-menu
         wofi-emoji
         wlr-randr # Monitor-info
+
         # Casting/sharing screen
         wayvnc
         wf-recorder
@@ -59,7 +58,6 @@
         wbg # Set background
 
         # Other
-
         nautilus # Default file picker
         alacritty # Defauls niri terminal, in case config is messed up
         kdlfmt # Formatter for niri config

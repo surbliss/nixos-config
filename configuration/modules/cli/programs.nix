@@ -107,10 +107,6 @@
 
         nim
 
-        # helix
-        # inputs.helix-steel.packages.${pkgs.system}.default
-        # steel
-
         jujutsu
         wl-color-picker
 

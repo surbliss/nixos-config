@@ -1,28 +1,12 @@
 { inputs, ... }:
 {
   flake.modules.nixos.system = {
-
-    # FIX: (And put in appropriate place)
-    nixpkgs.config.permittedInsecurePackages = [
-      "electron-27.3.11"
-      "dotnet-sdk-7.0.410" # Remove when SU is done!
-    ];
-
-    # TODO: Make per package
-    # nixpkgs.config.allowUnfree = true;
-
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-    # Got errors saying paths cannot be repaired, trying to disable this.
     # See https://github.com/NixOS/nix/issues/1281
-    nix.optimise.automatic = false;
-    nix.settings.auto-optimise-store = false;
+    nix.optimise.automatic = true;
+    nix.settings.auto-optimise-store = true;
 
     # See https://nixos-and-flakes.thiscute.world/best-practices/nix-path-and-flake-registry
     nix.channel.enable = false;
-    # nixpkgs.flake.source = nixpkgs;
     nixpkgs.flake.setFlakeRegistry = true;
     nix.registry.nixpkgs.flake = inputs.nixpkgs;
 
