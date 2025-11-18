@@ -1,9 +1,6 @@
 {
   flake.modules.nixos.system =
-    { pkgs, lib, ... }:
-    let
-      inherit (lib) mkDefault;
-    in
+    { pkgs, ... }:
     {
 
       ### Idk bout this
@@ -24,10 +21,6 @@
         };
         openFirewall = true;
       };
-
-      # VirtualBox
-      virtualisation.virtualbox.host.enable = true;
-      users.extraGroups.vboxusers.members = [ "angryluck" ];
 
       # Default apps
       xdg.mime = {
@@ -60,34 +53,6 @@
       # programs.ssh.startAgent = true;
 
       # User-settings
-      users.users.angryluck = {
-        isNormalUser = true;
-        home = "/home/angryluck";
-        description = "Mr. Surlykke's profile";
-        extraGroups = [
-          "wheel"
-          "networkmanager"
-          "video"
-          "audio"
-          "input"
-          "uinput"
-          # "nixos-editor" # Allowed to edit /etc/nixos/ without sudo
-          # "vboxusers"
-        ];
-        # Maybe in home-manager instead?
-        openssh.authorizedKeys.keys = [
-          # Replace with your own public key
-          # NEED PRIVATE KEY IN .ssh/ (And need to chmod 600 it)!
-          # Don't put here, allows me to ssh into anyone cloning this...
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj" # Can, optionally, add email after public ssh-key
-        ];
-        useDefaultShell = true;
-        # User-specific packages:
-        # packages = with pkgs; [ passh ];
-      };
-
-      networking.hostName = "angryluck"; # Define your hostname.
-      networking.networkmanager.enable = true;
 
       time.timeZone = "Europe/Copenhagen";
       # i18n.defaultLocale = "en_US.UTF-8";

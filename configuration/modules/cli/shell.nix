@@ -6,8 +6,6 @@
     { pkgs, ... }:
     {
       users.defaultUserShell = pkgs.nushell;
-      # TODO: As it refers to 'angryluck' should probably be set in another way
-      users.users.angryluck.shell = pkgs.nushell;
       # NOTE: NixOS wiki recommends enabling zsh this way
       programs.zsh.enable = true;
 

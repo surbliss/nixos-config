@@ -16,6 +16,11 @@
     ### Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     ### Other inputs
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
@@ -29,9 +34,5 @@
       url = "github:mattwparas/helix/steel-event-system";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # helix-master = {
-    #   url = "github:helix-editor/helix/master";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 }

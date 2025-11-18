@@ -24,11 +24,7 @@
       options = "grp:win_space_toggle,compose:menu,shift:breaks_caps";
     };
 
-    users.groups.uinput = { };
-    services.udev.extraRules = ''KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'';
-    # TODO: Make username an argument from flake
-    users.users.angryluck.extraGroups = [ "uinput" ];
-
+    ### NOTE: uinput udev rule moved to 'angryluck.nix'. Todo to move back!
     # Enables necesarry udev rules
     hardware.keyboard.zsa.enable = true;
 
