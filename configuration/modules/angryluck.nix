@@ -8,10 +8,6 @@ in
     # But! Probably makes sense to move to a user-local config anyways!
     users.groups.uinput = { };
     services.udev.extraRules = ''KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"'';
-    users.users.${username}.extraGroups = [
-      "docker"
-      "uinput" # Custom keyboard layouts?
-    ];
 
     # VirtualBox
     virtualisation.virtualbox.host.enable = true;
@@ -30,18 +26,14 @@ in
         "uinput"
         # "nixos-editor" # Allowed to edit /etc/nixos/ without sudo
         # "vboxusers"
+        "docker"
+        "uinput" # Custom keyboard layouts?
       ];
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj" # Can, optionally, add email after public ssh-key
       ];
       useDefaultShell = true;
     };
-
-    networking.hostName = username;
-    networking.networkmanager.enable = true;
-
   };
-
-  flake.modules.homeManager.${username} = {
-  };
+  flake.modules.homeManager.${username} = { };
 }

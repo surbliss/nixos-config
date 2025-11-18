@@ -1,7 +1,10 @@
 { inputs, self, ... }:
+let
+  hostname = "asus21";
+in
 {
   # The ASUS laptop (should probably have been called that instead of angryluck...)
-  flake.modules.nixos.asus21 =
+  flake.modules.nixos.${hostname} =
     { lib, ... }:
     {
       imports = [
@@ -19,6 +22,8 @@
           "keymapp"
           "steam-unwrapped"
         ];
+      networking.hostName = hostname;
+      networking.networkmanager.enable = true;
     };
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
