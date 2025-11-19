@@ -16,7 +16,7 @@ clean:
     sudo nix-collect-garbage --delete-older-than 14w
 
 fmt:
-    nix run .#formatter -- treefmt
+    nix fmt
 
 # Query for a list of mime/types, for setting new defaults.
 # Combine with grep to find

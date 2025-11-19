@@ -6,7 +6,10 @@
 
   ### Imports all modules without '_' prefix
   outputs =
-    inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } (inputs.import-tree ./configuration);
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      inputs.import-tree ./configuration
+    );
 
   inputs = {
     ### The Dentritic stuff

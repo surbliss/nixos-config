@@ -89,7 +89,5 @@ stdenv.mkDerivation {
     xorg.xorgproto
   ];
 
-  mesonFlags = [
-    "-Dwith_docs=true"
-  ];
+  mesonFlags = [ "-Dwith_docs=true" ];
 }

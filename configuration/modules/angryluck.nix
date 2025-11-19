@@ -39,9 +39,7 @@ in
     { pkgs, ... }:
     {
       # TEMP: Just for testing user-install of home-manager:
-      home.packages = [
-        pkgs.hello
-      ];
+      home.packages = [ pkgs.hello ];
       home.username = username;
       home.homeDirectory = /home/${username};
     };

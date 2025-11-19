@@ -1,8 +1,4 @@
-{
-  moduleWithSystem,
-  inputs,
-  ...
-}:
+{ moduleWithSystem, inputs, ... }:
 
 let
   module =

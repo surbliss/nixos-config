@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
-  packages = with pkgs; [
-    hello
-  ];
+  packages = with pkgs; [ hello ];
 
   # inputsFrom = with pkgs;[ ];
 
