@@ -30,9 +30,7 @@ in
   flake.modules.nixos.${hostname} =
     { lib, ... }:
     {
-      imports = [
-        _generated/asus21-hardware-configuration.nix
-      ];
+      imports = [ _generated/asus21-hardware-configuration.nix ];
       # TODO: Find better global place for this!
       nix.settings.experimental-features = [
         "nix-command"

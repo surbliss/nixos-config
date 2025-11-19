@@ -15,9 +15,10 @@ update:
 clean:
     sudo nix-collect-garbage --delete-older-than 14w
 
-
+fmt:
+    nix run .#formatter -- treefmt
 
 # Query for a list of mime/types, for setting new defaults.
 # Combine with grep to find
-mime: 
+mime:
     fd -e desktop . /run/current-system/sw/share/applications/
