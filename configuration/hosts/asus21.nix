@@ -4,10 +4,13 @@
   self,
   ...
 }:
+# To check outputs of modules:
+# > nix repl (in /etc/nixos/ dir)
+# > :lf . (loads flake in . directory)
+# > builtins.attrNames outputs.<whatever>
 let
   hostname = "asus21";
   hostSystem = "x86_64-linux";
-  # TODO: Make this work?
   moduleList = [
     "asus21"
     "angryluck"
@@ -58,10 +61,18 @@ in
     modules = getModules self.modules.nixos;
 
   };
-  # To check outputs of the above:
-  # > nix repl (in /etc/nixos/ dir)
-  # > :lf . (loads flake in . directory)
-  # > builtins.attrNames outputs.<whatever>
+
+  flake.modules.homeManager.${hostname} =
+    { pkgs, ... }:
+    {
+      nix.package = pkgs.nix;
+      nix.settings.experimental-features = [
+        "nix-command"
+        "flakes"
+        "pipe-operators"
+      ];
+
+    };
 
   flake.homeConfigurations.angryluck = withSystem hostSystem (
     { pkgs, ... }:

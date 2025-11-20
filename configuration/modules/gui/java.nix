@@ -1,14 +1,19 @@
 {
-  flake.modules.nixos.cli =
+  flake.modules.nixos.gui = {
+    environment.sessionVariables = {
+      # Better font rendering
+      _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
+    };
+  };
+
+  flake.modules.homeManager.gui =
     { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs; [
-        eclipses.eclipse-java
-        jdk
+      home.packages = with pkgs; [
+        jdk11
+        jetbrains.idea-community
+        ant
       ];
-      environment.sessionVariables = {
-        # Better font rendering
-        _JAVA_OPTIONS = "-Dawt.useSystemAAFontSettings=lcd";
-      };
+      programs.eclipse.enable = true;
     };
 }

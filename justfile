@@ -22,3 +22,6 @@ fmt:
 # Combine with grep to find
 mime:
     fd -e desktop . /run/current-system/sw/share/applications/
+
+home:
+    home-manager switch --flake .
