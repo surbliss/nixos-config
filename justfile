@@ -25,3 +25,14 @@ mime:
 
 home:
     home-manager switch --flake .
+
+pwd:
+    echo {{justfile_directory()}}
+
+
+# "" in case path contains folder with spaces in it
+link-home:
+    ln -s "{{justfile_directory()}}" ~/.config/home-manager
+
+link-system:
+    ln -s "{{justfile_directory()}}" /etc/nixos
