@@ -11,7 +11,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        jdk11
+        jdk15
         jetbrains.idea-community
         ant
       ];
