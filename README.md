@@ -10,7 +10,6 @@ require sudo-privileges.
 Souce: https://www.youtube.com/watch?v=20BN4gqHwaQ
 1. Configure git username/email (in home-manager)
 2. Configure SSH: Either copy existing private and public ssh-key to `.ssh` and add the public SSH-key to `user.users.<username>.openssh.authorizedKeys.keys = []` in `configuration.nix`, or create a new key with `ssh-keygen`, and add the public key to Github (or what else you are using).
-    
 3. Make `.git` folder: `sudo mkdir .git` in `/etc/nixos`
 4. Remove `sudo` requirement: `sudo chown <user-name>:users .git` (replace `<user-name>` with the system's username).
 5. Run `git init`.
