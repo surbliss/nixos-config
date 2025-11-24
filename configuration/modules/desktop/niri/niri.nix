@@ -15,9 +15,6 @@
       };
       programs.niri.enable = true;
 
-      # For vnc casting to iPad
-      networking.firewall.allowedTCPPorts = [ 5900 ];
-
       # For integration with Gnome-wayland tools
       services.gnome.gnome-keyring.enable = true;
       xdg.portal = {

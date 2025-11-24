@@ -53,7 +53,6 @@ in
           "steam-unwrapped"
         ];
       networking.hostName = hostname;
-      networking.networkmanager.enable = true;
     };
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {

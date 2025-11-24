@@ -50,7 +50,5 @@
         mangohud
         pdfpc
       ];
-      ### Not needed
-      # networkmanagerapplet # (For logging into eduroam)
     };
 }
