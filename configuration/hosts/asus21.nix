@@ -2,6 +2,7 @@
   inputs,
   withSystem,
   self,
+  lib,
   ...
 }:
 # To check outputs of modules:
@@ -30,30 +31,29 @@ in
 {
 
   # The ASUS zenbook
-  flake.modules.nixos.${hostname} =
-    { lib, ... }:
-    {
-      imports = [ _generated/asus21-hardware-configuration.nix ];
-      # TODO: Find better global place for this!
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-        "pipe-operators"
+  flake.modules.nixos.${hostname} = {
+    imports = [ _generated/asus21-hardware-configuration.nix ];
+    # TODO: Find better global place for this!
+    nix.settings.experimental-features = [
+      "nix-command"
+      "flakes"
+      "pipe-operators"
+    ];
+    nixpkgs.config.allowUnfreePredicate =
+      pkg:
+      builtins.elem (lib.getName pkg) [
+        "discord"
+        "steam"
+        "zoom"
+        "obsidian"
+        "android-studio-stable"
+        "android-studio"
+        "keymapp"
+        "steam-unwrapped"
+        "idea-ultimate"
       ];
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "discord"
-          "steam"
-          "zoom"
-          "obsidian"
-          "android-studio-stable"
-          "android-studio"
-          "keymapp"
-          "steam-unwrapped"
-        ];
-      networking.hostName = hostname;
-    };
+    networking.hostName = hostname;
+  };
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
     # inherit system; # Not technically needed, as defined in hardware config
@@ -71,6 +71,19 @@ in
         "pipe-operators"
       ];
 
+      nixpkgs.config.allowUnfreePredicate =
+        pkg:
+        builtins.elem (lib.getName pkg) [
+          "discord"
+          "steam"
+          "zoom"
+          "obsidian"
+          "android-studio-stable"
+          "android-studio"
+          "keymapp"
+          "steam-unwrapped"
+          "idea-ultimate"
+        ];
     };
 
   flake.homeConfigurations.angryluck = withSystem hostSystem (
