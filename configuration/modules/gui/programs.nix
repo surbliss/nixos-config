@@ -44,7 +44,7 @@
 
         zulip
 
-        dorion
+        # dorion
 
         # TODO: Delete
         mangohud
