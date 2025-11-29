@@ -30,9 +30,14 @@ pwd:
     echo {{justfile_directory()}}
 
 
-# "" in case path contains folder with spaces in it
+link: link-home link-system
+
+# Both below use "" in case path contains folder with spaces in it
+
+# Make sure ~/.config/home-manager does not exist first!
 link-home:
     ln -s "{{justfile_directory()}}" ~/.config/home-manager
 
+# Make sure /etc/nixos does not exist first!
 link-system:
-    ln -s "{{justfile_directory()}}" /etc/nixos
+    sudo ln -s "{{justfile_directory()}}" /etc/nixos
