@@ -10,6 +10,7 @@
 # > :lf . (loads flake in . directory)
 # > builtins.attrNames outputs.<whatever>
 let
+  inherit (lib) mkDefault;
   hostname = "asus21";
   hostSystem = "x86_64-linux";
   moduleList = [
@@ -27,12 +28,17 @@ let
     moduleList
     |> map (name: cont.${name} or null)
     |> builtins.filter (m: m != null);
+  nixosModules = getModules self.modules.nixos;
+  homeModules = getModules self.modules.homeManager;
 in
 {
 
   # The ASUS zenbook
   flake.modules.nixos.${hostname} = {
-    imports = [ _generated/asus21-hardware-configuration.nix ];
+    imports = [
+      inputs.home-manager.nixosModules.home-manager
+      _generated/asus21-hardware-configuration.nix
+    ];
     # TODO: Find better global place for this!
     nix.settings.experimental-features = [
       "nix-command"
@@ -53,18 +59,21 @@ in
         "idea-ultimate"
       ];
     networking.hostName = hostname;
+    home-manager.users.angryluck = {
+      imports = homeModules;
+    };
   };
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
-    # inherit system; # Not technically needed, as defined in hardware config
-    modules = getModules self.modules.nixos;
-
+    # No need to set 'system', as it is define in hardware config
+    modules = nixosModules;
   };
 
   flake.modules.homeManager.${hostname} =
     { pkgs, ... }:
     {
-      nix.package = pkgs.nix;
+      # mkDefault, or conflicts with nixos-def
+      nix.package = mkDefault pkgs.nix;
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"
@@ -90,11 +99,7 @@ in
     { pkgs, ... }:
     inputs.home-manager.lib.homeManagerConfiguration {
       inherit pkgs;
-      modules = getModules self.modules.homeManager;
-      # with self.modules.homeManager; [
-      #   angryluck
-      #   system
-      # ];
+      modules = homeModules;
     }
   );
 }

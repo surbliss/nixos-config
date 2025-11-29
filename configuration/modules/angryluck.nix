@@ -1,6 +1,8 @@
+{ lib, ... }:
 # User-configuration, see https://vic.github.io/dendrix/Dendritic.html
 let
   username = "angryluck";
+  inherit (lib) mkDefault;
 in
 {
   flake.modules.nixos.${username} = {
@@ -40,7 +42,8 @@ in
     {
       # TEMP: Just for testing user-install of home-manager:
       home.packages = [ pkgs.hello ];
-      home.username = username;
-      home.homeDirectory = /home/${username};
+      # mkDefault, or conflicts with system-def
+      home.username = mkDefault username;
+      home.homeDirectory = mkDefault /home/${username};
     };
 }
