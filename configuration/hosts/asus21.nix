@@ -35,10 +35,7 @@ in
 
   # The ASUS zenbook
   flake.modules.nixos.${hostname} = {
-    imports = [
-      inputs.home-manager.nixosModules.home-manager
-      _generated/asus21-hardware-configuration.nix
-    ];
+    imports = [ _generated/asus21-hardware-configuration.nix ];
     # TODO: Find better global place for this!
     nix.settings.experimental-features = [
       "nix-command"
@@ -59,9 +56,6 @@ in
         "idea-ultimate"
       ];
     networking.hostName = hostname;
-    home-manager.users.angryluck = {
-      imports = homeModules;
-    };
   };
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
