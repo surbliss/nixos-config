@@ -16,7 +16,14 @@
     { pkgs, ... }:
     let
       inherit (pkgs) rPackages rstudioWrapper;
-      packages = with rPackages; [ tinytex ];
+      packages = with rPackages; [
+        tinytex
+        rmarkdown
+        # Other stuff for R Markdown
+        magrittr
+        stringi
+        stringr
+      ];
       rstudio-with-packages = rstudioWrapper.override { inherit packages; };
     in
     {
