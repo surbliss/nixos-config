@@ -1,4 +1,5 @@
 # Helpful shorthands for nixos configuration
+default: switch home
 
 
 switch:
