@@ -25,7 +25,9 @@ mime:
     fd -e desktop . /run/current-system/sw/share/applications/
 
 home:
-    home-manager switch --flake .
+    home-manager switch
+    # If not linked yet:
+    # home-manager switch --flake .
 
 pwd:
     echo {{justfile_directory()}}
