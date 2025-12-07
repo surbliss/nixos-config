@@ -1,8 +1,8 @@
 {
   flake.modules.homeManager.gui =
-    { pkgs, ... }:
+    # { pkgs, ... }:
     {
       programs.vesktop.enable = true;
-      home.packages = [ pkgs.dorion ];
+      # home.packages = [ pkgs.dorion ];
     };
 }
