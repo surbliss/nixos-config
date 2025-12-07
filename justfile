@@ -33,7 +33,7 @@ pwd:
     echo {{justfile_directory()}}
 
 
-link: link-home link-system
+link: link-home link-system link-dotfiles
 
 # Both below use "" in case path contains folder with spaces in it
 
@@ -44,3 +44,6 @@ link-home:
 # Make sure /etc/nixos does not exist first!
 link-system:
     sudo ln -s "{{justfile_directory()}}" /etc/nixos
+
+link-dotfiles:
+    ln -s "{{justfile_directory()}}/dotfiles" ~/.dotfiles
