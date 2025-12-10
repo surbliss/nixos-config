@@ -3,8 +3,6 @@
     { pkgs, ... }:
     {
       environment.systemPackages = with pkgs; [
-        git # Very important
-
         stow # For dotfiles
 
         wget # Download stuff
@@ -87,8 +85,6 @@
         rbw
         pinentry-curses
 
-        lazygit
-
         evtest
 
         fd # find files
@@ -107,11 +103,8 @@
 
         nim
 
-        jujutsu
         wl-color-picker
 
-        ### Git pager
-        delta
       ];
     };
 }
