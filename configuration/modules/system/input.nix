@@ -1,10 +1,12 @@
 {
   flake.modules.nixos.system = {
     # Keyboard
+    # NOTE: Does nothing on wayland (or at least on Niri)
     services.xserver.xkb = {
       layout = "dk";
       variant = "nodeadkeys";
-      options = "caps:escape,compose:menu,shift:breaks_caps";
+      # NOTE: shift:breaks_caps makes both shifts simultaniously enable capslock...
+      options = "caps:escape,compose:menu";
     };
 
     # Enables necesarry udev rules for Voyager keyboard
