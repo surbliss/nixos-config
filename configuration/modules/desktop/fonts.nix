@@ -86,6 +86,8 @@
         nerd-fonts.fira-code
         fira-sans
         texlivePackages.lete-sans-math # Lato-based
+        # Latex base-font
+        newcomputermodern
       ];
     };
 }
