@@ -6,13 +6,12 @@
     {
       templates.minimal = {
         path = ./minimal;
-        description = "Minamal dev-shell";
+        description = "Minimal development shell";
         welcomeText = ''
-          Personal minamal dev-shell
+          Minimal development shell
           ==========================
-          - Remember to run `direnv allow`.
-          - Edit default.nix to add packages.
-          - Make jj repo with `jj git init`
+          1. Add packages to default.nix
+          2. Run `direnv allow` for automatic shell-entering
         '';
       };
 

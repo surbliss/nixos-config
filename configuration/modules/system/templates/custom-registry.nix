@@ -1,10 +1,11 @@
 {
   flake.modules.nixos.system = {
-    # Can repurpose it later and rename this file to "custom-registry",
-    # but for now only purpose is templates
-    nix.registry.custom.to = {
+    # Can add more later for other custom shells in registry
+
+    # For dev-shells
+    nix.registry.devshell.to = {
       type = "path";
-      path = ./_custom;
+      path = ./_devshell;
     };
   };
 }
