@@ -36,5 +36,9 @@
       };
     };
 
+    ### QMK
+    # Note: Install the qmk-cli locally in a shell (for easier updating)
+    # Enable necesary udev-rules, for sudo-less flashing
+    hardware.keyboard.qmk.enable = true;
   };
 }
