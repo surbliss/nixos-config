@@ -20,6 +20,11 @@
           tinytex
           knitr
           rmarkdown
+          # RStudio says rmarkdown needs newest version of these packages
+          magrittr
+          stringi
+          stringr
+
         ];
       };
     };
