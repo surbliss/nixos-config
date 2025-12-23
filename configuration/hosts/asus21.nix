@@ -53,7 +53,7 @@ in
         "android-studio"
         "keymapp"
         "steam-unwrapped"
-        "idea-ultimate"
+        "idea"
       ];
     networking.hostName = hostname;
   };
@@ -85,7 +85,7 @@ in
           "android-studio"
           "keymapp"
           "steam-unwrapped"
-          "idea-ultimate"
+          "idea"
         ];
     };
 
