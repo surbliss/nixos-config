@@ -27,7 +27,7 @@ let
         stylua
 
         nixd
-        nixfmt-rfc-style
+        nixfmt
 
         haskellPackages.haskell-language-server
         haskellPackages.ormolu

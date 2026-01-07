@@ -1,8 +1,8 @@
 {
-  flake.modules.nixos.cli =
+  flake.modules.homeManager.cli =
     { pkgs, ... }:
     {
-      environment.systemPackages = with pkgs; [
+      home.packages = with pkgs; [
         stow # For dotfiles
 
         wget # Download stuff
@@ -105,6 +105,35 @@
 
         wl-color-picker
 
+      ];
+    };
+
+  flake.modules.homeManager.gui =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        ### Desktop-applications
+        bitwarden-desktop
+        isabelle # Also adds jedit
+        isabelle-components.isabelle-linter # Wrong place?
+        libreoffice-qt # Spreadsheets
+
+        # vscode
+
+        ### Unsure about these
+        android-studio
+        inkscape
+        figma-linux
+
+        zotero
+
+        keymapp
+
+        # dorion
+
+        # TODO: Delete
+        mangohud
+        pdfpc
       ];
     };
 }

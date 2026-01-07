@@ -1,4 +1,17 @@
 # Modules
+## Philosophy
+Every file in `modules/` is a stand-alone file that can work on its own.
+That is, no file in `modules/` is allowed to depend on another file in `modules/`.
+Top-level functionality that all modules are allowed to depend on and utilize is defined in the `configuration/` folder.
+
+## Module-groupings:
+`desktop/`: Desktop configuration, including UI, window-manager, cursor, ui-services, etc. Could consider combining this with `system/` (but keep the flake-parts desktop/system split)
+`system/`: Core system configuration, like audio, udev-rules, inputs, core services, etc.
+`programs/`: Any applications that can be run, either cli tools or GUI applications.
+  Includes `tools/` for background-stuff other programs might rely on, and `langs/` for programming-language installations.
+
+
+
 ## Specialized packages
 To define custom packages (say, through some flake input), add a `perSystem` attribute to the file. As an example:
 ```nix

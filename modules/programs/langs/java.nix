@@ -3,7 +3,7 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        jetbrains.idea-ultimate
+        jetbrains.idea
         ant
         jdt-language-server
       ];
