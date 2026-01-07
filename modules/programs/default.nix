@@ -63,7 +63,7 @@
 
         ### Programming languages and tools
         # C + RISC-V
-        gcc14
+        # gcc14
         gnumake
         valgrind
         rars
@@ -114,8 +114,8 @@
       home.packages = with pkgs; [
         ### Desktop-applications
         bitwarden-desktop
-        isabelle # Also adds jedit
-        isabelle-components.isabelle-linter # Wrong place?
+        # isabelle # Also adds jedit
+        # isabelle-components.isabelle-linter # Wrong place?
         libreoffice-qt # Spreadsheets
 
         # vscode
