@@ -6,8 +6,6 @@
       ### Idk bout this
       services.accounts-daemon.enable = true;
 
-      services.autorandr.enable = true;
-
       services.syncthing = {
         enable = true;
       };
