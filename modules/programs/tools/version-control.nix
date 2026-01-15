@@ -4,10 +4,9 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        # Necessary!
         difftastic
         jujutsu
-        git
+        git # Necessary!
         ### Git pager
         delta
         lazygit

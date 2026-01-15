@@ -17,6 +17,7 @@ let
     "asus21"
     "angryluck"
     "cli"
+    "default"
     "desktop"
     "gui"
     "gaming"
