@@ -1,13 +1,18 @@
 {
   flake.modules.homeManager.gui =
-    { pkgs, ... }:
+    { pkgs, custom-link, ... }:
     {
+      ### Zettlekasten cli-tool
+
       home.packages = with pkgs; [
+        zk
         sleek-todo
         zettlr
         obsidian
         rmview # Haven't made work yet...
-        logseq # Trying unstable version
+        logseq
       ];
+
+      xdg.configFile = custom-link "zk";
     };
 }

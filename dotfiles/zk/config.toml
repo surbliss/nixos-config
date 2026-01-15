@@ -1,0 +1,6 @@
+# NOTEBOOK SETTINGS
+[notebook]
+dir = "~/JD/00-09_Meta/03_Program-data/zk-zettlekasten"
+
+[note]
+language = "da"

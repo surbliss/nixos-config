@@ -33,6 +33,7 @@ pwd:
     echo {{justfile_directory()}}
 
 
+# Links entire directory, so no need to rerun when adding new files
 link: link-home link-system link-dotfiles
 
 # Both below use "" in case path contains folder with spaces in it
