@@ -9,8 +9,15 @@
     inputs:
     inputs.flake-parts.lib.mkFlake { inherit inputs; } (
       inputs.import-tree [
+        ### Contains
+        # A: Setup necessary for dendritic config to function, and common
+        #   functionality modules in features/ are allowed to rely on.
+        # B: Host-setups, which _relies_ on specific modules in features/ to
+        #   function
         ./configuration
-        ./modules
+
+        # Self-contained modules, with not inter-dependencies
+        ./features
       ]
     );
 
