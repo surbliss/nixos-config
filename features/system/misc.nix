@@ -20,30 +20,6 @@
         openFirewall = true;
       };
 
-      # Default apps
-      xdg.mime = {
-        enable = true;
-        defaultApplications = {
-          "application/pdf" = [
-            "org.pwmt.zathura.desktop"
-            "org.pwmt.zathura-pdf-mupdf.desktop"
-            "org.pwmt.zathura-pdf-djvu.desktop"
-            "org.pwmt.zathura-pdf-ps.desktop"
-            "org.pwmt.zathura-pdf-cb.desktop"
-            "sioyek.desktop"
-          ];
-
-          # TODO: Move to separate modules
-          "image/jpeg" = [ "feh.desktop" ];
-          "image/png" = [ "feh.desktop" ];
-          "image/gif" = [ "feh.desktop" ];
-          "image/svg+xml" = [ "feh.desktop" ];
-          "image/webp" = [ "feh.desktop" ];
-          "image/tiff" = [ "feh.desktop" ];
-          "image/bmp" = [ "feh.desktop" ];
-        };
-      };
-
       # Brightness control
       hardware.brillo.enable = true;
 
