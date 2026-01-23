@@ -1,0 +1,23 @@
+layout {
+    tab name="1" hide_floating_panes=true {
+        pane size=1 borderless=true {
+            plugin location="tab-bar"
+        }
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
+        pane size=1 borderless=true {
+            plugin location="status-bar"
+        }
+
+        floating_panes {
+            pane {
+                y "10%"
+                height "80%"
+                x "10%"
+                width "80%"
+            }
+        }
+    }
+}
