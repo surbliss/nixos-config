@@ -8,7 +8,7 @@ let
       programs.vim.enable = true;
       programs.neovim = {
         enable = true;
-        package = self'.packages.neovim-nightly;
+        # package = self'.packages.neovim-nightly;
       };
 
       environment.sessionVariables = {
@@ -79,7 +79,7 @@ in
   perSystem =
     { inputs', ... }:
     {
-      packages.neovim-nightly = inputs'.neovim-nightly-overlay.packages.default;
+      # packages.neovim-nightly = inputs'.neovim-nightly-overlay.packages.default;
       packages.helix-steel = inputs'.helix-steel.packages.default;
     };
 }

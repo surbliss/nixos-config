@@ -27,12 +27,12 @@
 
       environment.systemPackages = with pkgs; [
         nushell
+        carapace # completions for nushell
         # nufmt # NOTE: Very broken formatter, wait for it to mature more
         git # Needed for zinit plugin-manager
         zoxide
         eza
         starship
-        # TODO: Update to version >=26.24.0 that supports JJ!
         oh-my-posh
 
         # Terminals
