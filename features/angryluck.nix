@@ -26,9 +26,8 @@ in
         "audio"
         "input"
         "uinput"
-        # "nixos-editor" # Allowed to edit /etc/nixos/ without sudo
         # "vboxusers"
-        "docker"
+        # "docker"
         "uinput" # Custom keyboard layouts?
       ];
       openssh.authorizedKeys.keys = [
