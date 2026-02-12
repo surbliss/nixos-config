@@ -44,5 +44,8 @@ in
       # mkDefault, or conflicts with system-def
       home.username = mkDefault username;
       home.homeDirectory = mkDefault /home/${username};
+
+      # Required, probably best to match with NixOS state-version?
+      home.stateVersion = "24.05";
     };
 }

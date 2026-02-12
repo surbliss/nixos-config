@@ -9,7 +9,6 @@
 # > :lf . (loads flake in . directory)
 # > builtins.attrNames outputs.<whatever>
 let
-  inherit (lib) mkDefault;
   hostname = "asus21";
   moduleList = [
     "asus21"
@@ -55,49 +54,6 @@ in
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
     # No need to set 'system', as it is define in hardware config
-    modules = nixosModules ++ [
-      inputs.home-manager.nixosModules.home-manager
-      {
-        home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-        home-manager.users.angryluck = {
-          imports = [ self.modules.homeManager.angryluck ];
-        };
-      }
-    ];
+    modules = nixosModules;
   };
-
-  # flake.modules.homeManager.${hostname} =
-  #   { pkgs, ... }:
-  #   {
-  #     # mkDefault, or conflicts with nixos-def
-  #     nix.package = mkDefault pkgs.nix;
-  #     nix.settings.experimental-features = [
-  #       "nix-command"
-  #       "flakes"
-  #       "pipe-operators"
-  #     ];
-
-  #     nixpkgs.config.allowUnfreePredicate =
-  #       pkg:
-  #       builtins.elem (lib.getName pkg) [
-  #         "discord"
-  #         "steam"
-  #         "zoom"
-  #         "obsidian"
-  #         "android-studio-stable"
-  #         "android-studio"
-  #         "keymapp"
-  #         "steam-unwrapped"
-  #         "idea"
-  #       ];
-  #   };
-
-  # flake.homeConfigurations.angryluck = withSystem hostSystem (
-  #   { pkgs, ... }:
-  #   inputs.home-manager.lib.homeManagerConfiguration {
-  #     inherit pkgs;
-  #     modules = homeModules;
-  #   }
-  # );
 }
