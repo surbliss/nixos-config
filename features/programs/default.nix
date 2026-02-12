@@ -53,9 +53,9 @@
         # killall
         # file
 
-        xorg.xev
-        xorg.xkill
-        xorg.xprop
+        xev
+        xkill
+        xprop
 
         texlive.combined.scheme-full
 

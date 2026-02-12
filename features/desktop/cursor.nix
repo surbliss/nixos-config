@@ -16,11 +16,11 @@ in
           cursor_path = "${cursor pkgs}/share/icons/${theme}/cursors/left_ptr";
         in
         ''
-          echo 'Xcursor.theme: ${theme}' | ${pkgs.xorg.xrdb}/bin/xrdb -nocpp -merge
-          echo 'Xcursor.̛̛size: ${str_size}' | ${pkgs.xorg.xrdb}/bin/xrdb -nocpp -merge
+          echo 'Xcursor.theme: ${theme}' | ${pkgs.xrdb}/bin/xrdb -nocpp -merge
+          echo 'Xcursor.̛̛size: ${str_size}' | ${pkgs.xrdb}/bin/xrdb -nocpp -merge
           if [ -e "${cursor_path}" ]; then
-            ${pkgs.xorg.xsetroot}/bin/xsetroot -xcf ${cursor_path} ${str_size}
-          else 
+            ${pkgs.xsetroot}/bin/xsetroot -xcf ${cursor_path} ${str_size}
+          else
             echo "Warning: cursor file not found at ${cursor_path}" >&2
           fi
         '';

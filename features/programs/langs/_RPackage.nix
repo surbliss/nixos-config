@@ -8,6 +8,7 @@ let
   # Recursively get all dependencies of packages added
   getDeps =
     p: [ p ] ++ lib.flatten (map getDeps (p.propagatedBuildInputs or [ ]));
+
   packages = lib.unique (lib.flatten (map getDeps extraPackages));
   rEnv = pkgs.rWrapper.override { inherit packages; };
 in
@@ -37,13 +38,13 @@ pkgs.stdenv.mkDerivation rec {
     rEnv # Reference to packages
     # to here
     stdenv.cc.cc.lib
-    xorg.libX11
-    xorg.libxcb
-    xorg.libXcomposite
-    xorg.libXdamage
-    xorg.libXext
-    xorg.libXfixes
-    xorg.libXrandr
+    libX11
+    libxcb
+    libXcomposite
+    libXdamage
+    libXext
+    libXfixes
+    libXrandr
     alsa-lib
     cups
     dbus

@@ -49,3 +49,13 @@ link-system:
 
 link-dotfiles:
     ln -s "{{justfile_directory()}}/dotfiles" ~/.dotfiles
+
+features:
+    hx features/
+
+feat: features
+
+configuration:
+    hx configuration/
+
+conf: configuration
