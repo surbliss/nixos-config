@@ -1,24 +1,23 @@
 { moduleWithSystem, inputs, ... }:
 
-let
-  module =
+{
+  flake.modules.nixos.cli = {
+    programs.vim.enable = true;
+    programs.neovim.enable = true;
+
+    # To let lsps get info about nixpkgs
+    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+  };
+
+  flake.modules.homeManager.cli = moduleWithSystem (
     { self', ... }:
     { pkgs, ... }:
     {
-      programs.vim.enable = true;
-      programs.neovim = {
-        enable = true;
-        # package = self'.packages.neovim-nightly;
-      };
-
-      environment.sessionVariables = {
+      home.sessionVariables = {
         EDITOR = "hx";
       };
-      # To let lsps get info about nixpkgs
-      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-
-      environment.systemPackages = with pkgs; [
-        self'.packages.helix-steel
+      home.packages = with pkgs; [
+        self'.packages.helix
 
         # Lsps and formatters
         harper
@@ -71,15 +70,12 @@ let
         yamlfmt
 
       ];
-    };
-in
-{
-  flake.modules.nixos.cli = moduleWithSystem module;
+    }
+  );
 
   perSystem =
     { inputs', ... }:
     {
-      # packages.neovim-nightly = inputs'.neovim-nightly-overlay.packages.default;
-      packages.helix-steel = inputs'.helix-steel.packages.default;
+      packages.helix = inputs'.helix-master.packages.default;
     };
 }
