@@ -1,6 +1,5 @@
 {
   inputs,
-  withSystem,
   self,
   lib,
   ...
@@ -12,7 +11,6 @@
 let
   inherit (lib) mkDefault;
   hostname = "asus21";
-  hostSystem = "x86_64-linux";
   moduleList = [
     "asus21"
     "angryluck"
@@ -30,19 +28,15 @@ let
     |> map (name: cont.${name} or null)
     |> builtins.filter (m: m != null);
   nixosModules = getModules self.modules.nixos;
-  homeModules = getModules self.modules.homeManager;
 in
 {
 
-  # The ASUS zenbook
+  # The ASUS zenbook, from 2021
   flake.modules.nixos.${hostname} = {
+    custom.mainUser = "angryluck";
+
     imports = [ _generated/asus21-hardware-configuration.nix ];
     # TODO: Find better global place for this!
-    nix.settings.experimental-features = [
-      "nix-command"
-      "flakes"
-      "pipe-operators"
-    ];
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
@@ -61,40 +55,49 @@ in
 
   flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
     # No need to set 'system', as it is define in hardware config
-    modules = nixosModules;
+    modules = nixosModules ++ [
+      inputs.home-manager.nixosModules.home-manager
+      {
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+        home-manager.users.angryluck = {
+          imports = [ self.modules.homeManager.angryluck ];
+        };
+      }
+    ];
   };
 
-  flake.modules.homeManager.${hostname} =
-    { pkgs, ... }:
-    {
-      # mkDefault, or conflicts with nixos-def
-      nix.package = mkDefault pkgs.nix;
-      nix.settings.experimental-features = [
-        "nix-command"
-        "flakes"
-        "pipe-operators"
-      ];
+  # flake.modules.homeManager.${hostname} =
+  #   { pkgs, ... }:
+  #   {
+  #     # mkDefault, or conflicts with nixos-def
+  #     nix.package = mkDefault pkgs.nix;
+  #     nix.settings.experimental-features = [
+  #       "nix-command"
+  #       "flakes"
+  #       "pipe-operators"
+  #     ];
 
-      nixpkgs.config.allowUnfreePredicate =
-        pkg:
-        builtins.elem (lib.getName pkg) [
-          "discord"
-          "steam"
-          "zoom"
-          "obsidian"
-          "android-studio-stable"
-          "android-studio"
-          "keymapp"
-          "steam-unwrapped"
-          "idea"
-        ];
-    };
+  #     nixpkgs.config.allowUnfreePredicate =
+  #       pkg:
+  #       builtins.elem (lib.getName pkg) [
+  #         "discord"
+  #         "steam"
+  #         "zoom"
+  #         "obsidian"
+  #         "android-studio-stable"
+  #         "android-studio"
+  #         "keymapp"
+  #         "steam-unwrapped"
+  #         "idea"
+  #       ];
+  #   };
 
-  flake.homeConfigurations.angryluck = withSystem hostSystem (
-    { pkgs, ... }:
-    inputs.home-manager.lib.homeManagerConfiguration {
-      inherit pkgs;
-      modules = homeModules;
-    }
-  );
+  # flake.homeConfigurations.angryluck = withSystem hostSystem (
+  #   { pkgs, ... }:
+  #   inputs.home-manager.lib.homeManagerConfiguration {
+  #     inherit pkgs;
+  #     modules = homeModules;
+  #   }
+  # );
 }
