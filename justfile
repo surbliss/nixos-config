@@ -40,6 +40,7 @@ link: link-home link-system link-dotfiles
 # Both below use "" in case path contains folder with spaces in it
 
 # Make sure ~/.config/home-manager does not exist first!
+# Don't use if home-manager is installed as NixOS module
 link-home:
     ln -s "{{justfile_directory()}}" ~/.config/home-manager
 

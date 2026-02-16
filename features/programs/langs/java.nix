@@ -1,4 +1,10 @@
 {
+  flake.modules.nixos.gui = {
+    environment.sessionVariables = {
+      _JAVA_AWT_WM_NONREPARENTING = 1;
+    };
+  };
+
   flake.modules.homeManager.gui =
     { pkgs, ... }:
     {
@@ -7,6 +13,7 @@
         ant
         jdt-language-server
       ];
+      # NOTE: home.sessionVariables does not work on nushell, see https://github.com/nix-community/home-manager/issues/4313
       home.sessionVariables = {
         # NOTE: Intellij complains about setting Java environment variables,
         # e.g. _JAVA_OPTIONS.

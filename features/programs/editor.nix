@@ -7,15 +7,17 @@
 
     # To let lsps get info about nixpkgs
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    environment.sessionVariables.EDITOR = "hx";
   };
 
   flake.modules.homeManager.cli = moduleWithSystem (
     { self', ... }:
     { pkgs, ... }:
     {
-      home.sessionVariables = {
-        EDITOR = "hx";
-      };
+      ## NOTE: sessionVariables doesn't work with nushell, see https://github.com/nix-community/home-manager/issues/4313
+      # home.sessionVariables = {
+      #   EDITOR = "hx";
+      # };
       home.packages = with pkgs; [
         self'.packages.helix
 
