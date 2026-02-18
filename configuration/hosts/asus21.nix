@@ -40,6 +40,7 @@ in
       pkg:
       builtins.elem (lib.getName pkg) [
         "discord"
+        "vscode"
         "steam"
         "zoom"
         "obsidian"
