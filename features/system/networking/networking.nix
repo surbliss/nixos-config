@@ -5,6 +5,7 @@
 
       # Don't enable iwd, doesn't mash well with eduroam
       networking.networkmanager.enable = true;
+      networking.networkmanager.wifi.powersave = false;
 
       environment.etc."ssl/certs/eduroam-ca.pem" = {
         source = ./ca.pem;
@@ -26,15 +27,13 @@
 
         wifi-security.key-mgmt = "wpa-eap";
 
-        "802-1x" = {
-          eap = "peap";
-          phase2-auth = "mschapv2";
-          identity = "$KU_MAIL";
-          anonymous-identity = "anonymous@ku.dk";
-          password = "$KU_PASSWORD";
-          ca-cert = "/etc/ssl/certs/eduroam-ca.pem";
-          domain-suffix-match = "radius.ku.dk";
-        };
+        "802-1x".eap = "peap";
+        "802-1x".phase2-auth = "mschapv2";
+        "802-1x".identity = "$KU_MAIL";
+        "802-1x".anonymous-identity = "anonymous@ku.dk";
+        "802-1x".password = "$KU_PASSWORD";
+        "802-1x".ca-cert = "/etc/ssl/certs/eduroam-ca.pem";
+        "802-1x".domain-suffix-match = "radius.ku.dk";
 
         ipv4.method = "auto";
         ipv6.method = "auto";
