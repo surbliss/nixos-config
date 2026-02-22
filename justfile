@@ -15,7 +15,7 @@ update:
 
 
 clean:
-    sudo nix-collect-garbage --delete-older-than 14w
+    sudo nix-collect-garbage --delete-older-than 14d
 
 fmt:
     nix fmt
