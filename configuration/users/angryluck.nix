@@ -11,6 +11,7 @@
         gui
         gaming
         fonts
+        system
       ];
     };
   };

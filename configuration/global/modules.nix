@@ -19,5 +19,6 @@
     gui = { };
     gaming = { };
     fonts = { };
+    system = { };
   };
 }
