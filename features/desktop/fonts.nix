@@ -72,7 +72,6 @@ in
         inter
 
         # Helvetica clones
-        # tex-gyre-heros-fonts
         gyre-fonts
         # urw-base35-fonts # Includes Nimbus Sans
         aileron
@@ -96,9 +95,6 @@ in
         fira-math
         nerd-fonts.fira-code
         fira-sans
-        texlivePackages.lete-sans-math # Lato-based
-        # Latex base-font
-        newcomputermodern
       ];
     };
 }

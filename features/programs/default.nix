@@ -57,8 +57,6 @@
         xkill
         xprop
 
-        texlive.combined.scheme-full
-
         time # time programs
 
         ### Programming languages and tools

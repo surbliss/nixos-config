@@ -35,15 +35,11 @@
 
         llvmPackages_20.clang-tools
 
-        ltex-ls-plus # Supposedly more updated
-
         bash-language-server
 
         # Python
         ruff
         ty
-
-        pstree # for vimtex?
 
         # Typst
         tinymist
@@ -55,9 +51,6 @@
         nimlangserver
 
         simple-completion-language-server # completions # TODO: Delete
-        # Default lsp-s for helix
-        texlab
-        bibtex-tidy
         omnisharp-roslyn
         neocmakelsp
         vscode-langservers-extracted
