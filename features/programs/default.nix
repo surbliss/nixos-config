@@ -116,7 +116,7 @@
         bitwarden-desktop
         # isabelle # Also adds jedit
         # isabelle-components.isabelle-linter # Wrong place?
-        libreoffice-qt # Spreadsheets
+        # libreoffice-still # Spreadsheets
 
         # vscode
 
