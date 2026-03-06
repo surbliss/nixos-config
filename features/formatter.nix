@@ -7,7 +7,7 @@
         settings = {
           formatter.nixfmt = {
             options = [
-              "--width=80"
+              "--width=77"
               "--strict"
               "--verify"
             ];
