@@ -53,24 +53,10 @@
     services.power-profiles-daemon.enable = false;
 
     # FIX: Find a way to fix this later, so we can suspend/hibernate
+    # See https://nixos.wiki/wiki/Power_Management
     services.logind.settings.Login.HandleLidSwitch = "ignore";
     services.logind.settings.Login.HandleLidSwitchExternalPower = "ignore";
     services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
-
-    # Lock screen?
-    # FIX: Not working properly
-    # services.physlock = {
-    #   enable = true;
-    #   allowAnyUser = true;
-    #   lockMessage = "Thomas Surlykke's Laptop, LOCKED";
-    #   lockOn.suspend = true;
-    #   lockOn.hibernate = true;
-    # };
-    # See https://nixos.wiki/wiki/Power_Management
-    # AllowSuspendThenHibernate=no
-    systemd.sleep.extraConfig = ''
-      IdleAction=ignore
-    '';
 
   };
 }
