@@ -65,6 +65,8 @@
         wlsunset
 
         wlogout
+        slurp
+        wlr-which-key
 
         # dunst
 
