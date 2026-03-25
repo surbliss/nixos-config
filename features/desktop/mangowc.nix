@@ -3,60 +3,73 @@
 {
   flake.modules.nixos.desktop = moduleWithSystem (
     { inputs', ... }:
-    { pkgs, ... }:
+    { pkgs, config, ... }:
     let
-      mango = inputs'.mangowc.packages.mango;
+      mango-pkg = inputs'.mangowc.packages.mango;
     in
     {
-      ### Import mango-module from flake
+      ### Mango flake input
       imports = [ inputs.mangowc.nixosModules.mango ];
-
-      ### DankMaterialShell
-      programs.dms-shell.enable = true;
-
-      ### DankMateralGreeter
-      programs.sway.enable = true; # For running the greeter in
-      services.displayManager.dms-greeter = {
+      ### Login greeter
+      services.greetd = {
         enable = true;
-        compositor = {
-          name = "sway"; # Required. Can be also "hyprland" or "niri"
-          # Disable mouse acceleration
-          customConfig = ''
-            input type:pointer {
-              accel_profile flat
-            }
-          '';
+        settings = {
+          default_session = {
+            command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd mango";
+            user = "angryluck";
+          };
         };
-
-        # Sync your user's DankMaterialShell theme with the greeter. You'll probably want this
-        configHome = "/home/angryluck";
-
       };
 
+      ### Mango
       programs.mango.enable = true;
       # Add the default config
-      environment.etc."mango".source = "${mango}/etc/mango";
+      environment.etc."mango".source = "${mango-pkg}/etc/mango";
+
       xdg.portal = {
         enable = true;
         wlr.enable = true;
         extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
       };
+
+      ### Noctalia
+      # Noctalia requires these settings enabled, make sure enabled elsewhere
+      assertions = [
+        {
+          assertion =
+            config.services.power-profiles-daemon.enable || config.services.tuned.enable;
+          message = "Noctalia: requires either services.power-profiles-daemon.enable or services.tuned.enable";
+        }
+        {
+          assertion = config.networking.networkmanager.enable;
+          message = "Noctalia: requires networking.networkmanager.enable";
+        }
+        {
+          assertion = config.hardware.bluetooth.enable;
+          message = "Noctalia: requires hardware.bluetooth.enable";
+        }
+        {
+          assertion = config.services.upower.enable;
+          message = "Noctalia: requires services.upower.enable";
+        }
+      ];
     }
   );
+
   flake.modules.homeManager.desktop =
     { pkgs, custom-link, ... }:
     {
+      ### Noctalia flake input
+      imports = [ inputs.noctalia.homeModules.default ];
       xdg.configFile = custom-link "mango";
+      programs.noctalia-shell.enable = true;
+
       home.packages = with pkgs; [
         ### Packages that default config uses
         foot
-        # rofi
 
         ### Suggested packages, see https://mangowc.vercel.app/docs/quick-start/
-        # fuzzel
         wezterm
-        # waybar
-        # noctalia-shell
         swaybg
         wl-clipboard
         wl-clip-persist
@@ -67,10 +80,6 @@
         wlogout
         slurp
         wlr-which-key
-
-        # dunst
-
-        # polkit_gnome
       ];
 
     };
