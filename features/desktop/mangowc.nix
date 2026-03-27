@@ -20,13 +20,34 @@
               "--time"
               "--remember"
               "--cmd ${mango-pkg}/bin/mango"
-              # Sample theme from https://github.com/apognu/tuigreet
-              "--theme border=magenta;text=cyan;prompt=green;time=red;action=blue;button=yellow;container=black;input=red"
+              "--asterisks"
+              # Sample theme from https://github.com/apognu/tuigreet, with input changed from 'red' to 'white'
+              "--theme border=magenta;text=cyan;prompt=green;time=white;action=blue;button=yellow;container=black;input=white"
             ];
             user = "greeter";
           };
         };
       };
+
+      ### Global themeing for console, based on terminal theme (minimal-custom)
+      console.colors = [
+        "1f1f28" # black (terminal bg)
+        "C34043" # red
+        "98BB6C" # green
+        "E6C384" # yellow
+        "A3D4D5" # blue
+        "B8B4D0" # magenta
+        "7E9CD8" # cyan
+        "c8c093" # white
+        "727169" # bright black
+        "e82424" # bright red
+        "98bb6c" # bright green
+        "e6c384" # bright yellow
+        "7fb4ca" # bright blue
+        "938aa9" # bright magenta
+        "7aa89f" # bright cyan
+        "dcd7ba" # bright white
+      ];
 
       ### Mango
       programs.mango.enable = true;
