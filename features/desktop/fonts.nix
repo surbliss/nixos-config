@@ -71,6 +71,7 @@ in
         # Aptos clone
         inter
 
+        hasklig
         # Helvetica clones
         gyre-fonts
         # urw-base35-fonts # Includes Nimbus Sans
