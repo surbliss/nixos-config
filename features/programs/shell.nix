@@ -44,18 +44,10 @@
     };
 
   flake.modules.homeManager.cli =
-    { pkgs, custom-link, ... }:
+    { custom-link, ... }:
     {
       ### Use 'vivid' to generate LS_COLORS env variable on rebuild
       # 'ls-colors' is just name for this derivation, that shows up in nix-store
-      home.sessionVariables = {
-        LS_COLORS = builtins.readFile (
-          pkgs.runCommand "ls-colors" { } ''
-            ${pkgs.vivid}/bin/vivid generate catppuccin-latte > $out
-          ''
-        );
-      };
-
       programs.ghostty = {
         enable = true;
         systemd.enable = true;
