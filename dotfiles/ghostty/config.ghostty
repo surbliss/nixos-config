@@ -1,0 +1,15 @@
+# Lookz
+font-family = 0xProto Nerd Font
+font-feature = +calt, +liga, +dlig
+
+theme = Catppuccin Mocha
+
+
+# Bindings
+keybind = global:alt+t=toggle_quick_terminal
+keybind = ctrl+backspace=text:\x17
+keybind = ctrl+delete=esc:d
+keybind = ctrl+enter=unbind
+keybind = super+shift+enter=new_window
+keybind = unconsumed:page_up=scroll_page_up
+keybind = unconsumed:page_down=scroll_page_down
