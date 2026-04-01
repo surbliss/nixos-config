@@ -14,8 +14,8 @@
       xdg.mime.defaultApplications =
         let
           terminal = [
-            "Alacritty.desktop"
             "org.wezfurlong.wezterm.desktop"
+            "Alacritty.desktop"
             "kitty.desktop"
             "kitty-open.desktop"
           ];
@@ -44,7 +44,7 @@
     };
 
   flake.modules.homeManager.cli =
-    { pkgs, ... }:
+    { pkgs, custom-link, ... }:
     {
       ### Use 'vivid' to generate LS_COLORS env variable on rebuild
       # 'ls-colors' is just name for this derivation, that shows up in nix-store
@@ -55,5 +55,11 @@
           ''
         );
       };
+
+      programs.ghostty = {
+        enable = true;
+        systemd.enable = true;
+      };
+      xdg.configFile = custom-link "ghostty";
     };
 }
