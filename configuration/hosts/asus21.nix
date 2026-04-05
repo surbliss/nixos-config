@@ -49,7 +49,6 @@ in
         "keymapp"
         "steam-unwrapped"
         "idea"
-        "claude-code"
       ];
     networking.hostName = hostname;
   };
