@@ -108,6 +108,9 @@
         wlogout
         slurp
         wlr-which-key
+
+        ### For starting xwayland
+        xrdb
       ];
 
     };
