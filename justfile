@@ -34,6 +34,8 @@ pwd:
     echo {{justfile_directory()}}
 
 
+install host:
+    sudo nixos-rebuild switch --flake .#{{host}} --option experimental-features "nix-command flakes pipe-operators"
 # Links entire directory, so no need to rerun when adding new files
 link: link-home link-system link-dotfiles
 
