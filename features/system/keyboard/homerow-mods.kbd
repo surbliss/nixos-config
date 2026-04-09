@@ -1,9 +1,14 @@
-;; TO EXIT (if keyboard is unusable): space + left control + esc, before
-;; remapping
+;; NOTE: Kanata uses ;; as comments, not ; as in Scheme
+;; TO EXIT: space + left control + esc, before remapping
 (defcfg
-  ;; Only laptop-keyboard
-  linux-dev /dev/input/by-path/platform-i8042-serio-0-event-kbd 
-  process-unmapped-keys yes
+  ;; Not Voyager Keyboard
+  linux-dev-names-exclude (
+    "ZSA Technology Labs Voyager Keyboard"
+    "ZSA Technology Labs Voyager Consumer Control"
+    "ZSA Technology Labs Voyager System Control"
+    "ZSA Technology Labs Voyager"
+  )
+    process-unmapped-keys yes
   ;; override-release-on-activation yes   ;; needed to override shift-behavior
 )
 
@@ -14,8 +19,8 @@ grv     1    2    3    4    5    6    7    8    9    0    -    =    bspc
 tab     q    w    e    r    t    y    u    i    o    p    [    ]    \
 caps    a    s    d    f    g    h    j    k    l    ;    '    ret
 lsft    lsgt z    x    c    v    b    n    m    ,    .    /    rsft
-lctl    lmet      lalt           spc            ralt comp rctl   
-)   
+lctl    lmet      lalt           spc            ralt comp rctl
+)
 
 (defvar
   tap-time 200
@@ -43,7 +48,7 @@ _  _    _    _    _    _    _    _    _    _    _    _    _    _
 _    _    _    _    _    _    _    _    _    _    _    _   _   _
 _  @amo @smo @dmo @fmo _    _    @jmo @kmo @lmo @;mo   _   _
 _ _  _    _    _    _    _    _    _    _    _    _    _
-_    _         _             @sys            _    _    _    
+_    _         _             @sys            _    _    _
 )
 
 (deflayer system
@@ -51,5 +56,5 @@ _    _    _    _    _    _    _    _    _    _    _    _    _    _
 _    _    _    _    _    _    mute vold volu brdn bru  _    _    _
 _    ralt lmet lsft lctl _    left down up   right _   _    _
 _    _    _    _    _    _    _    _    _    _    _    _    _
-_    _         _              _              _    _    _    
+_    _         _              _              _    _    _
 )
