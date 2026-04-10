@@ -92,6 +92,11 @@
       xdg.configFile = custom-link "mango";
       programs.noctalia-shell.enable = true;
 
+      gtk.iconTheme = {
+        name = "Papirus";
+        package = pkgs.papirus-icon-theme;
+      };
+
       home.packages = with pkgs; [
         ### Packages that default config uses
         foot

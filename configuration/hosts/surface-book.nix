@@ -11,7 +11,7 @@
 let
   hostname = "surface-book";
   moduleList = [
-    "surface-book"
+    hostname
     "angryluck"
     "cli"
     "default"
@@ -29,7 +29,6 @@ let
   nixosModules = getModules self.modules.nixos;
 in
 {
-
   # The Surface Book 1, even older than the zenbook
   flake.modules.nixos.${hostname} = {
     custom.mainUser = "angryluck";
@@ -51,6 +50,9 @@ in
         "idea"
       ];
     networking.hostName = hostname;
+
+    # Driver crash fix, known bug for Surface Books
+    boot.kernelParams = [ "mwifiex_pcie.disable_host_sleep=1" ];
   };
 
   flake.nixosConfigurations.surface-book = inputs.nixpkgs.lib.nixosSystem {
