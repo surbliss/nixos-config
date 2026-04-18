@@ -2,7 +2,7 @@
 font-family = 0xProto Nerd Font
 font-feature = +calt, +liga, +dlig
 
-theme = Catppuccin Mocha
+theme = Kanso Zen
 
 
 # Bindings
@@ -11,5 +11,13 @@ keybind = ctrl+backspace=text:\x17
 keybind = ctrl+delete=esc:d
 keybind = ctrl+enter=unbind
 keybind = super+shift+enter=new_window
-keybind = unconsumed:page_up=scroll_page_up
-keybind = unconsumed:page_down=scroll_page_down
+keybind = performable:ctrl+page_up=scroll_page_up
+keybind = performable:ctrl+page_down=scroll_page_down
+
+font-size = 12.5
+
+# Config-options
+copy-on-select = clipboard
+window-inherit-working-directory = true
+### Default keybinds:
+# Reload config: C-S-,
