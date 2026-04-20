@@ -48,6 +48,7 @@ in
         "keymapp"
         "steam-unwrapped"
         "idea"
+        "dyalog"
       ];
     networking.hostName = hostname;
 
