@@ -4,10 +4,11 @@
   flake.modules.nixos.default = {
     imports = [ inputs.agenix.nixosModules.default ];
 
-    age.secrets.KU_PASSWORD.file = ./KU_PASSWORD.age;
+    age.secrets = {
+      KU_PASSWORD.file = ./KU_PASSWORD.age;
 
-    age.secrets.KU_MAIL.file = ./KU_MAIL.age;
-
+      KU_MAIL.file = ./KU_MAIL.age;
+    };
   };
 
   flake.modules.homeManager.default = moduleWithSystem (

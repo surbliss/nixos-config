@@ -20,6 +20,7 @@ let
     "gaming"
     "system"
     "fonts"
+    "home-server"
   ];
   getModules =
     cont:
