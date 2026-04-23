@@ -116,6 +116,8 @@
 
         ### For starting xwayland
         xrdb
+
+        brightnessctl
       ];
 
     };
