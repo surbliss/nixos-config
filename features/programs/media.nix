@@ -4,6 +4,7 @@
     {
       home.packages = with pkgs; [
         # Images
+        imv
         feh
 
         # PDF
@@ -31,7 +32,10 @@
           "org.pwmt.zathura-pdf-cb.desktop"
         ];
 
-        "image/*" = [ "feh.desktop" ];
+        "image/*" = [
+          "imv.desktop"
+          "feh.desktop"
+        ];
 
         "video/*" = [
           "mpv.desktop"
