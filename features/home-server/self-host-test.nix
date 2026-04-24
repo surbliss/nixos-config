@@ -20,6 +20,7 @@
       networking.firewall.allowedTCPPorts = [
         80
         3000
+        8080
       ];
 
       ## Grocy: Go to https://localhost:80 (80 default port)
