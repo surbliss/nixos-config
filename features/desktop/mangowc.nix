@@ -118,6 +118,10 @@
         xrdb
 
         brightnessctl
+
+        ### Screenshotting
+        grim
+        satty
       ];
 
     };
