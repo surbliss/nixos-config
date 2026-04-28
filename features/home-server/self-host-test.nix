@@ -18,8 +18,10 @@
     {
 
       networking.firewall.allowedTCPPorts = [
-        80
-        3000
+        80 # For Grocy
+        3000 # For Invidious
+        8080 # For hexa-game site
+        9000 # For websocket
       ];
 
       ## Grocy: Go to https://localhost:80 (80 default port)
