@@ -1,14 +1,22 @@
 { moduleWithSystem, inputs, ... }:
 
 {
-  flake.modules.nixos.cli = {
-    programs.vim.enable = true;
-    programs.neovim.enable = true;
+  flake.modules.nixos.cli = moduleWithSystem (
+    { self', ... }:
+    { ... }:
+    {
+      programs.vim.enable = true;
+      programs.neovim.enable = true;
+      environment.systemPackages = [
+        self'.packages.helix
 
-    # To let lsps get info about nixpkgs
-    nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
-    environment.sessionVariables.EDITOR = "hx";
-  };
+      ];
+
+      # To let lsps get info about nixpkgs
+      nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+      environment.sessionVariables.EDITOR = "hx";
+    }
+  );
 
   flake.modules.homeManager.cli = moduleWithSystem (
     { self', ... }:

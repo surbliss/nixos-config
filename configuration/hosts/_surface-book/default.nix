@@ -10,32 +10,8 @@
 # > builtins.attrNames outputs.<whatever>
 let
   hostname = "surface-book";
-  moduleList = [
-    hostname
-    "angryluck"
-    "cli"
-    "default"
-    "desktop"
-    "gui"
-    "gaming"
-    "system"
-    "fonts"
-    "home-server"
-  ];
-  getModules =
-    cont:
-    moduleList
-    |> map (name: cont.${name} or null)
-    |> builtins.filter (m: m != null);
-  nixosModules = getModules self.modules.nixos;
-in
-{
-  # The Surface Book 1, even older than the zenbook
-  flake.modules.nixos.${hostname} = {
+  host-config = {
     custom.mainUser = "angryluck";
-
-    imports = [ _generated/surface-book-hardware-configuration.nix ];
-    # TODO: Find better global place for this!
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
@@ -57,8 +33,24 @@ in
     boot.kernelParams = [ "mwifiex_pcie.disable_host_sleep=1" ];
   };
 
-  flake.nixosConfigurations.surface-book = inputs.nixpkgs.lib.nixosSystem {
+in
+{
+
+  # Surface-book 1, even older than Zenbook
+  flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     # No need to set 'system', as it is define in hardware config
-    modules = nixosModules;
+    modules = [
+      host-config
+      ./hardware-configuration.nix
+      self.modules.nixos.angryluck
+      self.modules.nixos.cli
+      self.modules.nixos.default
+      self.modules.nixos.desktop
+      self.modules.nixos.gui
+      self.modules.nixos.gaming
+      self.modules.nixos.system
+      self.modules.nixos.fonts
+      self.modules.nixos.home-manager-setup
+    ];
   };
 }

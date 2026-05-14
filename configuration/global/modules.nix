@@ -9,6 +9,8 @@
     gaming = { };
     system = { };
     fonts = { };
+    home-server = { };
+    home-manager-setup = { };
   };
 
   flake.modules.homeManager = {

@@ -3,37 +3,21 @@
     { pkgs, ... }:
 
     let
-
       invidious-companion = pkgs.runCommand "invidious-companion" { } ''
           mkdir -p $out/bin
           tar -xzf ${
             pkgs.fetchurl {
               url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
-              hash = "sha256-zWYcwXFy6Sna65guhzI9Z5PeQZiNSGp1TsQJ/zISMe4=";
+              hash = "sha256-n50zH2Z7HeYvAaIQKx19XvmfBqdIhntP0bGlOP/hgRc=";
             }
           } -C $out/bin
         chmod +x $out/bin/invidious_companion
       '';
     in
     {
-
       networking.firewall.allowedTCPPorts = [
-        80 # For Grocy
         3000 # For Invidious
-        8080 # For hexa-game site
-        9000 # For websocket
       ];
-
-      ## Grocy: Go to https://localhost:80 (80 default port)
-      services.grocy.enable = true;
-      services.grocy.hostName = "localhost";
-      services.grocy.nginx.enableSSL = false;
-      services.grocy.settings = {
-        currency = "DKK";
-        calendar.showWeekNumber = true;
-
-        calendar.firstDayOfWeek = 1;
-      };
 
       services.invidious = {
         enable = true;
@@ -47,6 +31,7 @@
           ];
         };
       };
+
       # See https://raw.githubusercontent.com/iv-org/invidious-companion/refs/heads/master/invidious-companion.service
       systemd.services.invidious-companion = {
         description = "invidious-companion (companion for Invidious which handles all the video stream retrieval from YouTube servers)";
@@ -65,11 +50,9 @@
           Group = "invidious";
 
           # Security hardening - balanced approach for Deno applications;
-          ProtectHostname = "true";
+          ProtectHostname = true;
           ProtectSystem = "strict";
           RestrictAddressFamilies = "AF_INET AF_INET6 AF_UNIX";
-
-          # WorkingDirectory = "/home/invidious/invidious-companion";
 
           ExecStart = "${invidious-companion}/bin/invidious_companion";
           Restart = "always";
@@ -90,5 +73,4 @@
         };
       };
     };
-
 }

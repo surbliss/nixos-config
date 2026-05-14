@@ -4,7 +4,7 @@
 # To add a user config, do "home-manager.users.<user> = {...};", and add home-manager modules as imports to this attribute set.
 { inputs, ... }:
 {
-  flake.modules.nixos.default = {
+  flake.modules.nixos.home-manager-setup = {
     imports = [ inputs.home-manager.nixosModules.home-manager ];
     home-manager.useUserPackages = true;
     home-manager.useGlobalPkgs = true;

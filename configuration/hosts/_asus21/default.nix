@@ -10,31 +10,9 @@
 # > builtins.attrNames outputs.<whatever>
 let
   hostname = "asus21";
-  moduleList = [
-    "asus21"
-    "angryluck"
-    "cli"
-    "default"
-    "desktop"
-    "gui"
-    "gaming"
-    "system"
-    "fonts"
-  ];
-  getModules =
-    cont:
-    moduleList
-    |> map (name: cont.${name} or null)
-    |> builtins.filter (m: m != null);
-  nixosModules = getModules self.modules.nixos;
-in
-{
-
-  # The ASUS zenbook, from 2021
-  flake.modules.nixos.${hostname} = {
+  host-config = {
     custom.mainUser = "angryluck";
 
-    imports = [ _generated/asus21-hardware-configuration.nix ];
     # TODO: Find better global place for this!
     nixpkgs.config.allowUnfreePredicate =
       pkg:
@@ -49,12 +27,28 @@ in
         "keymapp"
         "steam-unwrapped"
         "idea"
+        "dyalog"
       ];
     networking.hostName = hostname;
   };
+in
+{
 
-  flake.nixosConfigurations.asus21 = inputs.nixpkgs.lib.nixosSystem {
+  # The ASUS zenbook, from 2021
+  flake.nixosConfigurations.${hostname} = inputs.nixpkgs.lib.nixosSystem {
     # No need to set 'system', as it is define in hardware config
-    modules = nixosModules;
+    modules = [
+      host-config
+      ./hardware-configuration.nix
+      self.modules.nixos.angryluck
+      self.modules.nixos.cli
+      self.modules.nixos.default
+      self.modules.nixos.desktop
+      self.modules.nixos.gui
+      self.modules.nixos.gaming
+      self.modules.nixos.system
+      self.modules.nixos.fonts
+      self.modules.nixos.home-manager-setup
+    ];
   };
 }

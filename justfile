@@ -62,3 +62,6 @@ configuration:
     hx configuration/
 
 conf: configuration
+
+server:
+    sudo nixos-rebuild switch --target angryluck@192.168.0.247
