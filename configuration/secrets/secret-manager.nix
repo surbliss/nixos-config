@@ -10,6 +10,7 @@
       # Rememeber to set 'owner = "invidious"' in module using these;
       INVIDIOUS_SETTINGS.file = ./INVIDIOUS_SETTINGS.age;
       INVIDIOUS_COMPANION_ENV.file = ./INVIDIOUS_COMPANION_ENV.age;
+      KITCHENOWL_ENV.file = ./KITCHENOWL_ENV.age;
     };
   };
 

@@ -19,4 +19,6 @@ in
   "INVIDIOUS_COMPANION_ENV.age".publicKeys = all-systems;
   # Contains invidious_companion_key:<same-secret-as-above>
   "INVIDIOUS_SETTINGS.age".publicKeys = all-systems;
+  # Sets the JWT_SECRET_KEY
+  "KITCHENOWL_ENV.age".publicKeys = all-systems;
 }
