@@ -63,5 +63,11 @@ configuration:
 
 conf: configuration
 
-server:
-    sudo nixos-rebuild switch --target angryluck@192.168.0.247
+# NOTE: No sudo on the command itself, only remotely
+server-surface:
+    nixos-rebuild switch --flake .#server-surface --target-host angryluck@192.168.0.247 --sudo
+
+server: server-surface
+
+check:
+    nix flake check

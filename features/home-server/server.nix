@@ -3,9 +3,11 @@
   flake.modules.nixos.home-server =
     { pkgs, config, ... }:
     {
+      nix.settings.trusted-users = [ "angryluck" ];
 
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
+      boot.kernelParams = [ "consoleblank=60" ];
 
       networking.networkmanager.enable = true;
       networking.firewall.enable = true;
@@ -15,10 +17,14 @@
       i18n.defaultLocale = "en_US.UTF-8";
       console.keyMap = "dk";
 
+      users.mutableUsers = false;
       users.users.${config.custom.mainUser} = {
         isNormalUser = true;
-        initialPassword = "1234";
-        extraGroups = [ "wheel" ];
+        hashedPassword = "$6$l4qRlTctBwRHhqCh$w2OH3O..z0sim7rYhm/1MeUtmiIxA2G2b.K7rtPBjkazlL6VwbbzDD.aek55veKOcS2dGeBHAzlIwwW6BCyPR0";
+        extraGroups = [
+          "wheel"
+          "networkmanager"
+        ];
         openssh.authorizedKeys.keys = [
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj"
         ];
@@ -39,11 +45,13 @@
 
       ### Battery saving optimizations
       hardware.bluetooth.enable = false;
-
-      powerManagement.cpuFreqGovernor = "powersave";
+      powerManagement = {
+        enable = true;
+        cpuFreqGovernor = "powersave";
+      };
       services.logind.settings = {
         Login.HandleLidSwitchExternalPower = "ignore";
-        Login.handleLidSwitch = "ignore";
+        Login.HandleLidSwitch = "ignore";
       };
       systemd.sleep.settings.Sleep = {
         AllowSuspend = "no";

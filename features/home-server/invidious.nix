@@ -3,16 +3,21 @@
     { pkgs, ... }:
 
     let
-      invidious-companion = pkgs.runCommand "invidious-companion" { } ''
+      invidious-companion = pkgs.stdenv.mkDerivation {
+        name = "invidious-companion";
+        src = pkgs.fetchurl {
+          url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
+          hash = "sha256-n50zH2Z7HeYvAaIQKx19XvmfBqdIhntP0bGlOP/hgRc=";
+        };
+        nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+        buildInputs = [ pkgs.stdenv.cc.cc.lib ];
+        dontUnpack = true;
+        installPhase = ''
           mkdir -p $out/bin
-          tar -xzf ${
-            pkgs.fetchurl {
-              url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
-              hash = "sha256-n50zH2Z7HeYvAaIQKx19XvmfBqdIhntP0bGlOP/hgRc=";
-            }
-          } -C $out/bin
-        chmod +x $out/bin/invidious_companion
-      '';
+          tar -xzf $src -C $out/bin
+          chmod +x $out/bin/invidious_companion
+        '';
+      };
     in
     {
       networking.firewall.allowedTCPPorts = [

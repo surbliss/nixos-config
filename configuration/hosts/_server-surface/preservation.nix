@@ -3,8 +3,8 @@
   preservation = {
     enable = true;
     preserveAt."/persistent" = {
+      # NOTE: /etc/nixos is _not_ added - updating of server is done from main computer
       directories = [
-        "/etc/nixos"
         "/etc/NetworkManager/system-connections"
         {
           directory = "/var/lib/nixos";
