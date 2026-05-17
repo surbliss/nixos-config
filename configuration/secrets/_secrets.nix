@@ -14,4 +14,9 @@ in
 {
   "KU_PASSWORD.age".publicKeys = all-systems;
   "KU_MAIL.age".publicKeys = all-systems;
+  ### For Invidious and Invidious-companion to communicate properly
+  # Contains SERVER_SECRET_KEY=<secret>
+  "INVIDIOUS_COMPANION_ENV.age".publicKeys = all-systems;
+  # Contains invidious_companion_key:<same-secret-as-above>
+  "INVIDIOUS_SETTINGS.age".publicKeys = all-systems;
 }

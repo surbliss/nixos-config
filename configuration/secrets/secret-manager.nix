@@ -7,6 +7,9 @@
     age.secrets = {
       KU_PASSWORD.file = ./KU_PASSWORD.age;
       KU_MAIL.file = ./KU_MAIL.age;
+      # Rememeber to set 'owner = "invidious"' in module using these;
+      INVIDIOUS_SETTINGS.file = ./INVIDIOUS_SETTINGS.age;
+      INVIDIOUS_COMPANION_ENV.file = ./INVIDIOUS_COMPANION_ENV.age;
     };
   };
 
