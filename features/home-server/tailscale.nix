@@ -1,23 +1,19 @@
-let
-  tailscale-module = {
-    services.tailscale.enable = true;
-    networking.firewall.trustedInterfaces = [ "tailscale0" ];
-    services.tailscale.extraUpFlags = [ "--accept-dns=true" ];
-  };
-in
 {
-  flake.modules.nixos.home-server = tailscale-module // {
-
+  flake.modules.nixos.home-server = {
     # Caddy certification
+    services.tailscale.enable = true;
+    services.tailscale.extraUpFlags = [ "--accept-dns=true" ];
+    services.tailscale.permitCertUid = "caddy";
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+    # Caddy
+
     services.caddy.enable = true;
-    services.caddy.virtualHosts."https://server-surface.quagga-toad.ts.net" = {
-      extraConfig = ''
+    services.caddy.virtualHosts."server-surface.quagga-toad.ts.net".extraConfig =
+      ''
         tls {
           get_certificate tailscale
         }
-        reverse_proxy localhost:5000
       '';
-    };
 
     preservation.preserveAt."/persistent" = {
       directories = [
@@ -27,5 +23,9 @@ in
     };
   };
 
-  flake.modules.nixos.cli = tailscale-module;
+  flake.modules.nixos.cli = {
+    services.tailscale.enable = true;
+    services.tailscale.extraUpFlags = [ "--accept-dns=true" ];
+    networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  };
 }

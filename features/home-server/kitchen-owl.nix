@@ -15,11 +15,17 @@
       # source: https://docs.kitchenowl.org/latest/self-hosting/
       virtualisation.oci-containers.containers.kitchen-owl = {
         image = "tombursch/kitchenowl:latest";
-        ports = [ "5000:8080" ];
+        ports = [ "127.0.0.1:5000:8080" ];
         environmentFiles = [ config.age.secrets.KITCHENOWL_ENV.path ];
         volumes = [ "kitchenowl_data:/data" ];
         autoStart = true;
       };
-      networking.firewall.allowedTCPPorts = [ 5000 ];
+
+      services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:5001".extraConfig =
+        ''
+          reverse_proxy localhost:5000
+        '';
+
+      networking.firewall.allowedTCPPorts = [ 5001 ];
     };
 }
