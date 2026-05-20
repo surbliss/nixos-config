@@ -65,9 +65,18 @@ conf: configuration
 
 # NOTE: No sudo on the command itself, only remotely
 server-surface:
-    nixos-rebuild switch --flake .#server-surface --target-host angryluck@192.168.0.247 --sudo
+    nixos-rebuild switch --flake .#server-surface --target-host angryluck@192.168.0.247 --ask-sudo-password
+
+test-server-surface:
+    nixos-rebuild test --flake .#server-surface --target-host angryluck@192.168.0.247 --ask-sudo-password
 
 server: server-surface
 
+test-server: test-server-surface
+
 check:
     nix flake check
+
+[working-directory: "./configuration/secrets"]
+rekey:
+    agenix -r

@@ -6,7 +6,6 @@
 
     age.secrets = {
       KU_PASSWORD.file = ./KU_PASSWORD.age;
-
       KU_MAIL.file = ./KU_MAIL.age;
     };
   };
