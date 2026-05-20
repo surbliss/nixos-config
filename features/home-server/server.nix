@@ -28,7 +28,9 @@
           "networkmanager"
         ];
         openssh.authorizedKeys.keys = [
+          # Asus21 user-key
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj"
+
         ];
       };
 

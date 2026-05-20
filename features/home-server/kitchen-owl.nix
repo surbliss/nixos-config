@@ -3,21 +3,23 @@
     { config, ... }:
     {
       virtualisation.docker.enable = true;
+      preservation.preserveAt."/persistent" = {
+        # Preserve data-files
+        directories = [
+          # Big docker-images are redownloaded on reboot otherwise, and then fills a lot of space on the RAM-storage. This also ensures the kitchenowl data is stored.
+          "/var/lib/docker"
+        ];
+      };
+
       virtualisation.oci-containers.backend = "docker";
       # source: https://docs.kitchenowl.org/latest/self-hosting/
       virtualisation.oci-containers.containers.kitchen-owl = {
         image = "tombursch/kitchenowl:latest";
         ports = [ "5000:8080" ];
         environmentFiles = [ config.age.secrets.KITCHENOWL_ENV.path ];
-        volumes = [ "/persistent/kitchenowl_data:/data" ];
+        volumes = [ "kitchenowl_data:/data" ];
         autoStart = true;
       };
       networking.firewall.allowedTCPPorts = [ 5000 ];
-
-      ### NOTE: Not needed, since we mounting directly on '/persistent/' above
-      # Preserve data-files
-      # preservation.preserveAt."/persistent".directories = [
-      #   "/var/lib/docker/volumes/kitchenowl_data"
-      # ];
     };
 }

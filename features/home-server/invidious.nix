@@ -16,16 +16,17 @@
       '';
     in
     {
-
       # Add the essential storage-folders for invidious to the persistent storage:
-      preservation.preserveAt."/persistent".directories = [
-        # Stores subscriptions
-        {
-          directory = "/var/lib/postgresql";
-          user = "postgres";
-          group = "postgres";
-        }
-      ];
+      preservation.preserveAt."/persistent" = {
+        directories = [
+          # Stores subscriptions
+          {
+            directory = "/var/lib/postgresql";
+            user = "postgres";
+            group = "postgres";
+          }
+        ];
+      };
       # Make these secrets readable
       age.secrets = {
         ### NOTE: This is more permission than should be given, but interacting with the invidious-service is finicky. 444 should be fine for a personal server, but reconsider if connecting to the public
