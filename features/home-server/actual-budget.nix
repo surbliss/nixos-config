@@ -2,7 +2,6 @@
   flake.modules.nixos.home-server =
     { pkgs, ... }:
     {
-
       services.actual = {
         # Actual Budget: Budgeting-application
         enable = true;
@@ -13,8 +12,6 @@
           # Note: DynamicUser = true means systemd stores data at /var/lib/private/actual and creates /var/lib/actual as a symlink to it.
           dataDir = "/var/lib/actual";
         };
-        # Opens the port set above
-        openFirewall = true;
       };
 
       # certutil for Caddy
@@ -22,16 +19,10 @@
       # HTTPS certification with Caddy
       services.caddy = {
         enable = true;
-        httpPort = null;
-        httpsPort = 8443;
         openFirewall = true;
-        # TEMP: To avoid conflict with Nginx listening on port 80
-        globalConfig = ''
-          auto_https off
-        '';
       };
 
-      services.caddy.virtualHosts."https://192.168.0.247:8443" = {
+      services.caddy.virtualHosts."actual.home" = {
         extraConfig = ''
           tls internal
           reverse_proxy localhost:6000
@@ -50,6 +41,11 @@
 
   # Trust generated certificate from caddy on main machine
   flake.modules.nixos.system = {
+    # Give caddy something to connect to
+    networking.hosts = {
+      "192.168.0.247" = [ "actual.home" ];
+    };
+
     security.pki.certificates = [
       # Caddy certificate
       ''
