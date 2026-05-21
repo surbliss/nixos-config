@@ -22,6 +22,8 @@
       {
         file = "/var/lib/systemd/random-seed";
         inInitrd = true;
+        how = "symlink";
+        configureParent = true;
       }
 
       # Needed at boot
@@ -48,4 +50,10 @@
     # NOTE: User .ssh folder also not added, authorized_keys is managed through nixos-config
   };
 
+  # systemd-machine-id-commit tries to save a transient machine-id to disk, but
+  # since machine-id is already on persistent storage via preservation, it fails.
+  # Disable the condition so the service never runs.
+  systemd.services."systemd-machine-id-commit" = {
+    unitConfig.ConditionPathIsMountPoint = "!/etc/machine-id";
+  };
 }
