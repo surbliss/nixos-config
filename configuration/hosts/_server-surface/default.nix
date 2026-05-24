@@ -4,7 +4,7 @@ let
   host-config = {
     custom.mainUser = "angryluck";
     networking.hostName = hostname;
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
   };
 in
 {
@@ -20,6 +20,7 @@ in
 
       ./hardware-configuration.nix
       ./disk-config.nix
+      ./preservation.nix
     ];
   };
 }

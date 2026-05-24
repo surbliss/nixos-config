@@ -3,6 +3,8 @@
 
   # Mount /nix before booting, as entire system lives in /nix/store
   fileSystems."/nix".neededForBoot = true;
+  # Also mount before booting, so agenix can access ssh keys
+  fileSystems."/persistent".neededForBoot = true;
 
   disko.devices.nodev = {
     "/" = {

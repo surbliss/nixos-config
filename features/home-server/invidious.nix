@@ -1,25 +1,40 @@
 {
   flake.modules.nixos.home-server =
-    { pkgs, ... }:
+    { pkgs, config, ... }:
 
     let
-      invidious-companion = pkgs.stdenv.mkDerivation {
-        name = "invidious-companion";
-        src = pkgs.fetchurl {
-          url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
-          hash = "sha256-n50zH2Z7HeYvAaIQKx19XvmfBqdIhntP0bGlOP/hgRc=";
-        };
-        nativeBuildInputs = [ pkgs.autoPatchelfHook ];
-        buildInputs = [ pkgs.stdenv.cc.cc.lib ];
-        dontUnpack = true;
-        installPhase = ''
-          mkdir -p $out/bin
-          tar -xzf $src -C $out/bin
-          chmod +x $out/bin/invidious_companion
-        '';
+      inherit (config.age) secrets;
+      invidious-src = pkgs.fetchurl {
+        url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
+        hash = "sha256-n50zH2Z7HeYvAaIQKx19XvmfBqdIhntP0bGlOP/hgRc=";
+
       };
+      invidious-companion = pkgs.runCommand "invidious-companion" { } ''
+        mkdir -p $out/bin
+        tar -xzf ${invidious-src} -C $out/bin
+        chmod +x $out/bin/invidious_companion
+      '';
     in
     {
+      # Add the essential storage-folders for invidious to the persistent storage:
+      preservation.preserveAt."/persistent" = {
+        directories = [
+          # Stores subscriptions
+          {
+            directory = "/var/lib/postgresql";
+            user = "postgres";
+            group = "postgres";
+          }
+        ];
+      };
+      # Make these secrets readable
+      age.secrets = {
+        ### NOTE: This is more permission than should be given, but interacting with the invidious-service is finicky. 444 should be fine for a personal server, but reconsider if connecting to the public
+        INVIDIOUS_SETTINGS.mode = "444";
+        INVIDIOUS_COMPANION_ENV.mode = "444";
+      };
+
+      programs.nix-ld.enable = true; # Needed for invidious-companion
       networking.firewall.allowedTCPPorts = [
         3000 # For Invidious
       ];
@@ -28,13 +43,15 @@
         enable = true;
         nginx.enable = false;
         port = 3000;
+        # Just let invidious generate this key automatically, not super important
         hmacKeyFile = null;
         settings = {
-          invidious_companion_key = "changemechangeme";
           invidious_companion = [
             { private_url = "http://localhost:8282/companion"; }
           ];
         };
+        # Sets the invidious_companion_key
+        extraSettingsFile = secrets.INVIDIOUS_SETTINGS.path;
       };
 
       # See https://raw.githubusercontent.com/iv-org/invidious-companion/refs/heads/master/invidious-companion.service
@@ -47,12 +64,11 @@
         ];
         wants = [ "network-online.target" ];
         environment = {
-          SERVER_SECRET_KEY = "changemechangeme";
           CACHE_DIRECTORY = "/var/tmp/youtubei.js";
         };
         serviceConfig = {
-          User = "invidious";
-          Group = "invidious";
+          # Sets SERVER_SECRET_KEY
+          EnvironmentFile = secrets.INVIDIOUS_COMPANION_ENV.path;
 
           # Security hardening - balanced approach for Deno applications;
           ProtectHostname = true;
@@ -74,7 +90,6 @@
           RestrictNamespaces = true;
           RestrictSUIDSGID = true;
           RestrictRealtime = true;
-
         };
       };
     };
