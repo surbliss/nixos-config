@@ -2,6 +2,7 @@
 let
   inherit (lib) mkDefault;
   browserMimes = [
+    "helium.desktop"
     # Zen
     "zen-twilight.desktop" # Should be the correct version
     "zen_twilight.desktop"
@@ -32,9 +33,10 @@ let
 
       # MAYBE: programs.firefox.enable, consider:
       home.packages = with pkgs; [
-        brave
         self'.packages.zen-browser-twilight
+        self'.packages.helium
         qutebrowser
+        brave
       ];
 
       xdg.mime.enable = true;
@@ -75,6 +77,7 @@ in
     { inputs', ... }:
     {
       packages.zen-browser-twilight = inputs'.zen-browser.packages.twilight;
+      packages.helium = inputs'.helium.packages.default;
     };
 
 }

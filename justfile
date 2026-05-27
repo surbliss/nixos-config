@@ -23,7 +23,7 @@ fmt:
 # Query for a list of mime/types, for setting new defaults.
 # Combine with grep to find
 mime:
-    fd --color always -e desktop . /run/current-system/sw/share/applications/ ~/.nix-profile/share/applications/
+    fd -H -L --color always -e desktop . /run/current-system/ ~/.nix-profile
 
 home:
     home-manager switch
