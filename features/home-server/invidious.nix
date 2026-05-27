@@ -35,16 +35,13 @@
       };
 
       programs.nix-ld.enable = true; # Needed for invidious-companion
-      networking.firewall.allowedTCPPorts = [
-        3000 # For Invidious
-      ];
-
       services.invidious = {
         enable = true;
         nginx.enable = false;
         port = 3000;
         # Just let invidious generate this key automatically, not super important
         hmacKeyFile = null;
+        address = "127.0.0.1";
         settings = {
           invidious_companion = [
             { private_url = "http://localhost:8282/companion"; }
@@ -53,6 +50,12 @@
         # Sets the invidious_companion_key
         extraSettingsFile = secrets.INVIDIOUS_SETTINGS.path;
       };
+
+      services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:3001".extraConfig =
+        ''
+          reverse_proxy localhost:3000
+        '';
+      networking.firewall.allowedTCPPorts = [ 3001 ];
 
       # See https://raw.githubusercontent.com/iv-org/invidious-companion/refs/heads/master/invidious-companion.service
       systemd.services.invidious-companion = {

@@ -1,5 +1,6 @@
 { moduleWithSystem, ... }:
 {
+  # Own Hive-clone for local multiplayer. No Caddy-config here
   flake.modules.nixos.home-server = moduleWithSystem (
     { self', ... }:
     { ... }:

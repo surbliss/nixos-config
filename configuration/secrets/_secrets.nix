@@ -21,4 +21,5 @@ in
   "INVIDIOUS_SETTINGS.age".publicKeys = all-systems;
   # Sets the JWT_SECRET_KEY
   "KITCHENOWL_ENV.age".publicKeys = all-systems;
+  "POCKET_ID_ENCRYPTION_KEY.age".publicKeys = all-systems;
 }

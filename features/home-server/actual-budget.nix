@@ -1,6 +1,9 @@
 {
   flake.modules.nixos.home-server =
-    { pkgs, ... }:
+    { config, pkgs, ... }:
+    let
+      inherit (config.age) secrets;
+    in
     {
       services.actual = {
         # Actual Budget: Budgeting-application
@@ -11,6 +14,10 @@
           # The default, but made explicit for the preservation module
           # Note: DynamicUser = true means systemd stores data at /var/lib/private/actual and creates /var/lib/actual as a symlink to it.
           dataDir = "/var/lib/actual";
+          hostname = "127.0.0.1";
+
+          # OpenID setup
+          # openId.discoverURL = "";
         };
       };
 
@@ -21,46 +28,48 @@
         enable = true;
         openFirewall = true;
       };
-
-      services.caddy.virtualHosts."actual.home" = {
-        extraConfig = ''
-          tls internal
+      # Actual Budget
+      services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:6001".extraConfig =
+        ''
           reverse_proxy localhost:6000
         '';
+      # Pocket ID
+      services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:1412".extraConfig =
+        ''
+          reverse_proxy localhost:1411
+        '';
+      networking.firewall.allowedTCPPorts = [
+        6001
+        1412
+      ];
+
+      # For Actual authentication
+      services.pocket-id.enable = true;
+      services.pocket-id.credentials = {
+        ENCRYPTION_KEY = secrets.POCKET_ID_ENCRYPTION_KEY.path;
       };
+      services.pocket-id.settings = {
+        ANALYTICS_DISABLED = true;
+        APP_URL = "https://server-surface.quagga-toad.ts.net:1412";
+        TRUST_PROXY = true;
+        HOST = "127.0.0.1";
+        PORT = 1411; # The default
+      };
+
+      ## Pocket-ID port
+      # networking.firewall.allowedTCPPorts = [ 1411 ];
 
       preservation.preserveAt."/persistent" = {
         # As the systemd service enabled by the process above sets 'DynamicUser = true;', the actual data is stored in /var/lib/private. Trying to preserve /var/lib/actual causes an error, because the service expects that file to not exist.
         directories = [
           "/var/lib/private/actual"
-          # Where certificates are stored
-          "/var/lib/caddy"
+          {
+            directory = "/var/lib/pocket-id";
+            mode = "0755";
+            user = "pocket-id";
+            group = "pocket-id";
+          }
         ];
       };
     };
-
-  # Trust generated certificate from caddy on main machine
-  flake.modules.nixos.system = {
-    # Give caddy something to connect to
-    networking.hosts = {
-      "192.168.0.247" = [ "actual.home" ];
-    };
-
-    security.pki.certificates = [
-      # Caddy certificate
-      ''
-        -----BEGIN CERTIFICATE-----
-        MIIBpDCCAUqgAwIBAgIRAOfkNC5o9p9ADfUfhkOe4jMwCgYIKoZIzj0EAwIwMDEu
-        MCwGA1UEAxMlQ2FkZHkgTG9jYWwgQXV0aG9yaXR5IC0gMjAyNiBFQ0MgUm9vdDAe
-        Fw0yNjA1MjExMjA0NTVaFw0zNjAzMjkxMjA0NTVaMDAxLjAsBgNVBAMTJUNhZGR5
-        IExvY2FsIEF1dGhvcml0eSAtIDIwMjYgRUNDIFJvb3QwWTATBgcqhkjOPQIBBggq
-        hkjOPQMBBwNCAAS0R6iJmTlybxEnBJW9+5vyVmAV925afEpWHdtMgBWJqtG6Fzpr
-        yCkB4L59E/NQ4poLVQL+ruIriqQYAFarKir2o0UwQzAOBgNVHQ8BAf8EBAMCAQYw
-        EgYDVR0TAQH/BAgwBgEB/wIBATAdBgNVHQ4EFgQUTu1FE+e3Iif+nFWbvr/dEIEp
-        HV4wCgYIKoZIzj0EAwIDSAAwRQIga62kr/8c8+kUM9qKlKmksAFV+hVayG+urzOD
-        m3xrx6UCIQC7uL/xRtxwWkJeKvw6b6uVbh58iU5LR8ybF6C/gOXQ+Q==
-        -----END CERTIFICATE-----
-      ''
-    ];
-  };
 }

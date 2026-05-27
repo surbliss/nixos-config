@@ -56,6 +56,8 @@
         neovim
         helix
         git
+
+        tree # List all of directory
       ];
 
       services.openssh.settings = {
