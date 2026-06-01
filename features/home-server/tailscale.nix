@@ -13,6 +13,9 @@
         tls {
           get_certificate tailscale
         }
+
+        # PocketID as default host
+        redir https://server-surface.quagga-toad.ts.net:1412
       '';
 
     preservation.preserveAt."/persistent" = {
