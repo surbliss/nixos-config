@@ -64,15 +64,22 @@ configuration:
 conf: configuration
 
 # NOTE: No sudo on the command itself, only remotely
-server-surface:
+server-surface-kbh:
     nixos-rebuild switch --flake .#server-surface --target-host angryluck@192.168.0.247 --ask-sudo-password
 
-test-server-surface:
+server-surface-thi:
+    nixos-rebuild switch --flake .#server-surface --target-host angryluck@192.168.8.4 --ask-sudo-password
+
+
+test-server-surface-kbh:
     nixos-rebuild test --flake .#server-surface --target-host angryluck@192.168.0.247 --ask-sudo-password
 
-server: server-surface
+test-server-surface-thi:
+    nixos-rebuild test --flake .#server-surface --target-host angryluck@192.168.8.4 --ask-sudo-password
 
-test-server: test-server-surface
+server: server-surface-thi
+
+test-server: test-server-surface-thi
 
 check:
     nix flake check
