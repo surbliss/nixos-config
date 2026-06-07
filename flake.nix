@@ -29,6 +29,9 @@
     ### Nixpkgs
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    # Smaller subset of nixos-unstable, that gets updates slightly faster.
+    # See https://status.nixos.org/ for update status
+    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     home-manager = {
       url = "github:nix-community/home-manager";
