@@ -8,7 +8,9 @@
         teams-for-linux
         discord # Only for backup, if vesktop doesn't work
         zoom-us
-        zulip
+        ### FIX: Depends on EOL Electron 39
+        # zulip
+
         # dorion # Broken, white page half the time
       ];
     };

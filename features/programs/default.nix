@@ -111,7 +111,9 @@
     {
       home.packages = with pkgs; [
         ### Desktop-applications
-        bitwarden-desktop
+        # FIX: Disabel for now, as electron 39 is marked as insecure
+        # bitwarden-desktop
+
         # isabelle # Also adds jedit
         # isabelle-components.isabelle-linter # Wrong place?
         # libreoffice-still # Spreadsheets

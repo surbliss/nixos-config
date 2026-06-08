@@ -31,7 +31,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
     # Smaller subset of nixos-unstable, that gets updates slightly faster.
     # See https://status.nixos.org/ for update status
-    nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    # nixpkgs-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -64,7 +64,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
+      url = "github:noctalia-dev/noctalia/legacy-v4";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-index-database = {
@@ -75,6 +75,12 @@
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # For home-server
     disko = {
       url = "github:nix-community/disko";
@@ -87,9 +93,5 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    helium = {
-      url = "github:schembriaiden/helium-browser-nix-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 }
