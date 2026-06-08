@@ -122,18 +122,11 @@
 
         ### Unsure about these
         android-studio
-        inkscape
-        figma-linux
 
         zotero
 
+        # For Voyager keyboard
         keymapp
-
-        # dorion
-
-        # TODO: Delete
-        mangohud
-        pdfpc
       ];
     };
 }

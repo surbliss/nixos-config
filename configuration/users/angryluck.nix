@@ -9,7 +9,7 @@
         default
         desktop
         gui
-        gaming
+        # gaming
         fonts
         system
       ];
