@@ -1,5 +1,4 @@
-{ inputs, moduleWithSystem, ... }:
-{
+{ inputs, moduleWithSystem, ... }: {
   # agenix as secret-manager
   flake.modules.nixos.default = {
     imports = [ inputs.agenix.nixosModules.default ];
@@ -17,9 +16,7 @@
   };
 
   flake.modules.homeManager.default = moduleWithSystem (
-    { inputs', ... }:
-    { ... }:
-    {
+    { inputs', ... }: { ... }: {
       imports = [ inputs.agenix.homeManagerModules.default ];
       home.packages = [ inputs'.agenix.packages.default ];
       # No user-specific secrets yet

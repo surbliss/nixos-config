@@ -1,22 +1,20 @@
 {
-  flake.modules.homeManager.gui =
-    { pkgs, ... }:
-    {
-      home.packages = with pkgs; [
-        # Images
-        imv
-        feh
+  flake.modules.homeManager.gui = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      # Images
+      imv
+      feh
 
-        # PDF
-        zathura
-        sioyek
+      # PDF
+      zathura
+      sioyek
 
-        # Videos
-        mpv-unwrapped
-        vlc
-      ];
+      # Videos
+      mpv-unwrapped
+      vlc
+    ];
 
-    };
+  };
 
   flake.modules.nixos.gui = {
     xdg.mime = {

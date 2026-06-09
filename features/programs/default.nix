@@ -1,132 +1,128 @@
 {
-  flake.modules.homeManager.cli =
-    { pkgs, ... }:
-    {
-      home.packages = with pkgs; [
-        stow # For dotfiles
+  flake.modules.homeManager.cli = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      stow # For dotfiles
 
-        wget # Download stuff
-        curl
+      wget # Download stuff
+      curl
 
-        vim # Edit files
-        ### Needed for neovim
-        xclip # Manage clipboard
-        xdotool
-        ripgrep
+      vim # Edit files
+      ### Needed for neovim
+      xclip # Manage clipboard
+      xdotool
+      ripgrep
 
-        ## LSPs for neovim:
+      ## LSPs for neovim:
 
-        # lua52Packages.tiktoken_core
-        # For copilot
-        luajitPackages.tiktoken_core
-        luajitPackages.jsregexp # For LuaSnip
-        luajitPackages.luarocks # For LuaSnip
+      # lua52Packages.tiktoken_core
+      # For copilot
+      luajitPackages.tiktoken_core
+      luajitPackages.jsregexp # For LuaSnip
+      luajitPackages.luarocks # For LuaSnip
 
-        ### Replaced by nixd
-        # nil
+      ### Replaced by nixd
+      # nil
 
-        ### To fix haskell-lsp for xmonad
-        # haskellPackages.fourmolu
-        haskellPackages.hoogle
-        ghcid
+      ### To fix haskell-lsp for xmonad
+      # haskellPackages.fourmolu
+      haskellPackages.hoogle
+      ghcid
 
-        # ccls
-        clang
+      # ccls
+      clang
 
-        zoxide
-        eza
-        # nix-search-cli # Search nixpkgs
+      zoxide
+      eza
+      # nix-search-cli # Search nixpkgs
 
-        # neofetch
-        trash-cli
-        fzf
-        bc
-        htop
+      # neofetch
+      trash-cli
+      fzf
+      bc
+      htop
 
-        # cowsay
+      # cowsay
 
-        zip
-        unzip
+      zip
+      unzip
 
-        ### Not needed (should just be run with 'nix run' instead)
-        # xcolor
-        # killall
-        # file
+      ### Not needed (should just be run with 'nix run' instead)
+      # xcolor
+      # killall
+      # file
 
-        xev
-        xkill
-        xprop
+      xev
+      xkill
+      xprop
 
-        time # time programs
+      time # time programs
 
-        ### Programming languages and tools
-        # C + RISC-V
-        # gcc14
-        gnumake
-        valgrind
-        rars
-        # jdk
+      ### Programming languages and tools
+      # C + RISC-V
+      # gcc14
+      gnumake
+      valgrind
+      rars
+      # jdk
 
-        ### Nix helpers
-        nix-prefetch
-        nix-prefetch-git
-        nix-prefetch-github
+      ### Nix helpers
+      nix-prefetch
+      nix-prefetch-git
+      nix-prefetch-github
 
-        mermaid-cli
+      mermaid-cli
 
-        # Instead of cat
-        bat
+      # Instead of cat
+      bat
 
-        # Get wifi-name (iwgetid -r)
-        wirelesstools
+      # Get wifi-name (iwgetid -r)
+      wirelesstools
 
-        rbw
-        pinentry-curses
+      rbw
+      pinentry-curses
 
-        evtest
+      evtest
 
-        fd # find files
+      fd # find files
 
-        tree-sitter
+      tree-sitter
 
-        tree # Better file listing
+      tree # Better file listing
 
-        typst # Better latex?
+      typst # Better latex?
 
-        watchexec
+      watchexec
 
-        todo-txt-cli
+      todo-txt-cli
 
-        just
+      just
 
-        nim
+      nim
 
-        wl-color-picker
+      wl-color-picker
 
-      ];
-    };
+    ];
+  };
 
-  flake.modules.homeManager.gui =
-    { pkgs, ... }:
-    {
-      home.packages = with pkgs; [
-        ### Desktop-applications
-        # FIX: Disabel for now, as electron 39 is marked as insecure
-        # bitwarden-desktop
+  flake.modules.homeManager.gui = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      ### Desktop-applications
+      # FIX: Disabel for now, as electron 39 is marked as insecure
+      # bitwarden-desktop
 
-        # isabelle # Also adds jedit
-        # isabelle-components.isabelle-linter # Wrong place?
-        # libreoffice-still # Spreadsheets
+      # isabelle # Also adds jedit
+      # isabelle-components.isabelle-linter # Wrong place?
+      # libreoffice-still # Spreadsheets
 
-        # vscode
+      # vscode
 
-        ### Unsure about these
-        android-studio
+      ### Unsure about these
+      android-studio
 
-        zotero
+      zotero
 
-        # For Voyager keyboard
-        keymapp
-      ];
-    };
+      # For Voyager keyboard
+      keymapp
+    ];
+  };
 }

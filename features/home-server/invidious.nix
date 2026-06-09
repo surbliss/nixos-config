@@ -43,9 +43,7 @@
         hmacKeyFile = null;
         address = "127.0.0.1";
         settings = {
-          invidious_companion = [
-            { private_url = "http://localhost:8282/companion"; }
-          ];
+          invidious_companion = [ { private_url = "http://localhost:8282/companion"; } ];
         };
         # Sets the invidious_companion_key
         extraSettingsFile = secrets.INVIDIOUS_SETTINGS.path;

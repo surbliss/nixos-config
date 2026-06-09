@@ -1,5 +1,4 @@
-{ ... }:
-{
+{ ... }: {
 
   flake.modules.nixos.gui = {
     programs.thunar.enable = true;

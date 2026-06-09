@@ -44,58 +44,56 @@ in
     fonts = { inherit fontconfig; };
   };
 
-  flake.modules.nixos.fonts =
-    { pkgs, ... }:
-    {
-      fonts = { inherit fontconfig; };
+  flake.modules.nixos.fonts = { pkgs, ... }: {
+    fonts = { inherit fontconfig; };
 
-      fonts.enableDefaultPackages = true;
-      fonts.packages = with pkgs; [
-        ### Errors when defined as nerd-fonts below, but only one is probably
-        # needed...
-        # _0xproto
-        # inconsolata
-        font-awesome
-        hack-font
+    fonts.enableDefaultPackages = true;
+    fonts.packages = with pkgs; [
+      ### Errors when defined as nerd-fonts below, but only one is probably
+      # needed...
+      # _0xproto
+      # inconsolata
+      font-awesome
+      hack-font
 
-        noto-fonts-color-emoji
-        noto-fonts
+      noto-fonts-color-emoji
+      noto-fonts
 
-        # noto-fonts-extra
-        # otf-fira-mono
-        terminus_font
-        # ttf-aptos 1.0-1
-        caladea
-        fira-sans
-        julia-mono
-        # Aptos clone
-        inter
+      # noto-fonts-extra
+      # otf-fira-mono
+      terminus_font
+      # ttf-aptos 1.0-1
+      caladea
+      fira-sans
+      julia-mono
+      # Aptos clone
+      inter
 
-        hasklig
-        # Helvetica clones
-        gyre-fonts
-        # urw-base35-fonts # Includes Nimbus Sans
-        aileron
+      hasklig
+      # Helvetica clones
+      gyre-fonts
+      # urw-base35-fonts # Includes Nimbus Sans
+      aileron
 
-        lato
-        poppins
+      lato
+      poppins
 
-        # Need nermal versions too
-        _0xproto
-        inconsolata
-        hack-font
+      # Need nermal versions too
+      _0xproto
+      inconsolata
+      hack-font
 
-        nerd-fonts._0xproto
-        nerd-fonts.symbols-only
-        nerd-fonts.inconsolata
-        nerd-fonts.hack
-        nerd-fonts.dejavu-sans-mono
+      nerd-fonts._0xproto
+      nerd-fonts.symbols-only
+      nerd-fonts.inconsolata
+      nerd-fonts.hack
+      nerd-fonts.dejavu-sans-mono
 
-        # Fonts for polylux slides (metropolus)
-        fira
-        fira-math
-        nerd-fonts.fira-code
-        fira-sans
-      ];
-    };
+      # Fonts for polylux slides (metropolus)
+      fira
+      fira-math
+      nerd-fonts.fira-code
+      fira-sans
+    ];
+  };
 }

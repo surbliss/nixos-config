@@ -1,10 +1,7 @@
-{ moduleWithSystem, ... }:
-{
+{ moduleWithSystem, ... }: {
   # Own Hive-clone for local multiplayer. No Caddy-config here
   flake.modules.nixos.home-server = moduleWithSystem (
-    { self', ... }:
-    { ... }:
-    {
+    { self', ... }: { ... }: {
 
       # Backend
       systemd.services.hexa-game = {
@@ -37,10 +34,8 @@
     }
   );
 
-  perSystem =
-    { inputs', ... }:
-    {
-      packages.hexa-game-backend = inputs'.hexa-game.packages.backend;
-      packages.hexa-game-frontend = inputs'.hexa-game.packages.frontend;
-    };
+  perSystem = { inputs', ... }: {
+    packages.hexa-game-backend = inputs'.hexa-game.packages.backend;
+    packages.hexa-game-frontend = inputs'.hexa-game.packages.frontend;
+  };
 }

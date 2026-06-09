@@ -84,45 +84,43 @@
     }
   );
 
-  flake.modules.homeManager.desktop =
-    { pkgs, custom-link, ... }:
-    {
-      ### Noctalia flake input
-      imports = [ inputs.noctalia.homeModules.default ];
-      xdg.configFile = custom-link "mango";
-      programs.noctalia-shell.enable = true;
+  flake.modules.homeManager.desktop = { pkgs, custom-link, ... }: {
+    ### Noctalia flake input
+    imports = [ inputs.noctalia.homeModules.default ];
+    xdg.configFile = custom-link "mango";
+    programs.noctalia-shell.enable = true;
 
-      gtk.iconTheme = {
-        name = "Papirus";
-        package = pkgs.papirus-icon-theme;
-      };
-
-      home.packages = with pkgs; [
-        ### Packages that default config uses
-        foot
-
-        ### Suggested packages, see https://mangowc.vercel.app/docs/quick-start/
-        wezterm
-        swaybg
-        wl-clipboard
-        wl-clip-persist
-        cliphist
-
-        wlsunset
-
-        wlogout
-        slurp
-        wlr-which-key
-
-        ### For starting xwayland
-        xrdb
-
-        brightnessctl
-
-        ### Screenshotting
-        grim
-        satty
-      ];
-
+    gtk.iconTheme = {
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
     };
+
+    home.packages = with pkgs; [
+      ### Packages that default config uses
+      foot
+
+      ### Suggested packages, see https://mangowc.vercel.app/docs/quick-start/
+      wezterm
+      swaybg
+      wl-clipboard
+      wl-clip-persist
+      cliphist
+
+      wlsunset
+
+      wlogout
+      slurp
+      wlr-which-key
+
+      ### For starting xwayland
+      xrdb
+
+      brightnessctl
+
+      ### Screenshotting
+      grim
+      satty
+    ];
+
+  };
 }

@@ -8,15 +8,14 @@
     # Caddy
 
     services.caddy.enable = true;
-    services.caddy.virtualHosts."server-surface.quagga-toad.ts.net".extraConfig =
-      ''
-        tls {
-          get_certificate tailscale
-        }
+    services.caddy.virtualHosts."server-surface.quagga-toad.ts.net".extraConfig = ''
+      tls {
+        get_certificate tailscale
+      }
 
-        # PocketID as default host
-        redir https://server-surface.quagga-toad.ts.net:1412
-      '';
+      # PocketID as default host
+      redir https://server-surface.quagga-toad.ts.net:1412
+    '';
 
     preservation.preserveAt."/persistent" = {
       directories = [

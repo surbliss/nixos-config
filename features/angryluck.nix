@@ -36,16 +36,14 @@ in
       useDefaultShell = true;
     };
   };
-  flake.modules.homeManager.${username} =
-    { pkgs, ... }:
-    {
-      # TEMP: Just for testing user-install of home-manager:
-      home.packages = [ pkgs.hello ];
-      # mkDefault, or conflicts with system-def
-      home.username = mkDefault username;
-      home.homeDirectory = mkDefault /home/${username};
+  flake.modules.homeManager.${username} = { pkgs, ... }: {
+    # TEMP: Just for testing user-install of home-manager:
+    home.packages = [ pkgs.hello ];
+    # mkDefault, or conflicts with system-def
+    home.username = mkDefault username;
+    home.homeDirectory = mkDefault /home/${username};
 
-      # Required, probably best to match with NixOS state-version?
-      home.stateVersion = "24.05";
-    };
+    # Required, probably best to match with NixOS state-version?
+    home.stateVersion = "24.05";
+  };
 }

@@ -1,31 +1,24 @@
-{ moduleWithSystem, ... }:
-{
+{ moduleWithSystem, ... }: {
   flake.modules.nixos.gui = {
     hardware.graphics.enable = true;
   };
 
   flake.modules.homeManager.gui = moduleWithSystem (
-    { self', ... }:
-    { ... }:
-    {
-      home.packages = [ self'.packages.rstudio ];
-    }
+    { self', ... }: { ... }: { home.packages = [ self'.packages.rstudio ]; }
   );
 
-  perSystem =
-    { pkgs, ... }:
-    {
-      packages.rstudio = pkgs.callPackage ./_RPackage.nix {
-        extraPackages = with pkgs.rPackages; [
-          tinytex
-          knitr
-          rmarkdown
-          # RStudio says rmarkdown needs newest version of these packages
-          magrittr
-          stringi
-          stringr
+  perSystem = { pkgs, ... }: {
+    packages.rstudio = pkgs.callPackage ./_RPackage.nix {
+      extraPackages = with pkgs.rPackages; [
+        tinytex
+        knitr
+        rmarkdown
+        # RStudio says rmarkdown needs newest version of these packages
+        magrittr
+        stringi
+        stringr
 
-        ];
-      };
+      ];
     };
+  };
 }

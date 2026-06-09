@@ -1,7 +1,5 @@
 {
-  flake.modules.nixos.cli =
-    { pkgs, ... }:
-    {
-      environment.systemPackages = [ pkgs.envsubst ];
-    };
+  flake.modules.nixos.cli = { pkgs, ... }: {
+    environment.systemPackages = [ pkgs.envsubst ];
+  };
 }

@@ -1,5 +1,4 @@
-{ config, ... }:
-{
+{ config, ... }: {
   # TODO: This should just be moved into _xmonad.nix, and not imported
   # TODO: Also, this way of adding packages doesnt work
   flake.modules.nixos.cli =
@@ -38,21 +37,19 @@
         ]))
       ];
     };
-  perSystem =
-    { pkgs, ... }:
-    {
+  perSystem = { pkgs, ... }: {
 
-      packages.rofi-custom = pkgs.rofi.override {
-        plugins = with pkgs; [
+    packages.rofi-custom = pkgs.rofi.override {
+      plugins = with pkgs; [
 
-          rofimoji
-          rofi-emoji
-          rofi-calc
-          rofi-file-browser
-        ];
-      };
-      packages.picom-jonaburg = pkgs.callPackage ./_picom-jonaburd.nix;
-      # picom-jonaburg = (import ./pkgs/default.nix) pkgs.picom;
-
+        rofimoji
+        rofi-emoji
+        rofi-calc
+        rofi-file-browser
+      ];
     };
+    packages.picom-jonaburg = pkgs.callPackage ./_picom-jonaburd.nix;
+    # picom-jonaburg = (import ./pkgs/default.nix) pkgs.picom;
+
+  };
 }
