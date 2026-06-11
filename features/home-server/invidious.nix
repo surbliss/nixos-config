@@ -6,7 +6,7 @@
       inherit (config.age) secrets;
       invidious-src = pkgs.fetchurl {
         url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
-        hash = "sha256-Q0+FmRN5Awhv1VFzgBfTwx3p85eP0TaoFPDiIvAEKv8=";
+        hash = "sha256-fUS9Fkvss6Y6KIjvpMqZmbwWEKyp8C6WFFPU3/azYYw=";
 
       };
       invidious-companion = pkgs.runCommand "invidious-companion" { } ''
