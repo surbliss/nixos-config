@@ -2,8 +2,7 @@
 font-family = 0xProto Nerd Font
 font-feature = +calt, +liga, +dlig
 
-theme = Kanso Zen
-
+config-file = ?auto/theme.ghostty
 
 # Bindings
 keybind = global:alt+t=toggle_quick_terminal

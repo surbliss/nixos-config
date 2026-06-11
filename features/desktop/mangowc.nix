@@ -1,15 +1,28 @@
-{ inputs, moduleWithSystem, ... }:
-
-{
+{ inputs, moduleWithSystem, ... }: {
   flake.modules.nixos.desktop = moduleWithSystem (
     { inputs', ... }:
-    { pkgs, config, ... }:
+    { pkgs, ... }:
     let
       mango-pkg = inputs'.mangowc.packages.mango;
     in
     {
       ### Mango flake input
       imports = [ inputs.mangowc.nixosModules.mango ];
+      # Dank Material Shell
+      programs.dms-shell.enable = true;
+      programs.dms-shell.systemd.enable = true;
+
+      ### Wire dms to MangoWC
+      programs.dms-shell.systemd.target = "mango-session.target";
+
+      systemd.user.targets.mango-session = {
+        unitConfig = {
+          Description = "MangoWC Session Target";
+          Requires = "graphical-session.target";
+          After = "graphical-session.target";
+        };
+      };
+
       ### Login greeter
       services.greetd = {
         enable = true;
@@ -62,33 +75,33 @@
 
       ### Noctalia
       # Noctalia requires these settings enabled, make sure enabled elsewhere
-      assertions = [
-        {
-          assertion =
-            config.services.power-profiles-daemon.enable || config.services.tuned.enable;
-          message = "Noctalia: requires either services.power-profiles-daemon.enable or services.tuned.enable";
-        }
-        {
-          assertion = config.networking.networkmanager.enable;
-          message = "Noctalia: requires networking.networkmanager.enable";
-        }
-        {
-          assertion = config.hardware.bluetooth.enable;
-          message = "Noctalia: requires hardware.bluetooth.enable";
-        }
-        {
-          assertion = config.services.upower.enable;
-          message = "Noctalia: requires services.upower.enable";
-        }
-      ];
+      # assertions = [
+      #   {
+      #     assertion =
+      #       config.services.power-profiles-daemon.enable || config.services.tuned.enable;
+      #     message = "Noctalia: requires either services.power-profiles-daemon.enable or services.tuned.enable";
+      #   }
+      #   {
+      #     assertion = config.networking.networkmanager.enable;
+      #     message = "Noctalia: requires networking.networkmanager.enable";
+      #   }
+      #   {
+      #     assertion = config.hardware.bluetooth.enable;
+      #     message = "Noctalia: requires hardware.bluetooth.enable";
+      #   }
+      #   {
+      #     assertion = config.services.upower.enable;
+      #     message = "Noctalia: requires services.upower.enable";
+      #   }
+      # ];
     }
   );
 
   flake.modules.homeManager.desktop = { pkgs, custom-link, ... }: {
     ### Noctalia flake input
-    imports = [ inputs.noctalia.homeModules.default ];
+    # imports = [ inputs.noctalia.homeModules.default ];
     xdg.configFile = custom-link "mango";
-    programs.noctalia-shell.enable = true;
+    # programs.noctalia-shell.enable = true;
 
     gtk.iconTheme = {
       name = "Papirus";
@@ -98,13 +111,21 @@
     home.packages = with pkgs; [
       ### Packages that default config uses
       foot
+      rofi
+
+      # Other program suggested by `dms doctor`
+      fprintd
+      # Optional dms-programs suggested here: https://danklinux.com/docs/dankmaterialshell/installation#miracle-wm
+      dgop
+      dsearch
+      matugen
+      i2c-tools
+      cava
+      qt6.qtmultimedia
 
       ### Suggested packages, see https://mangowc.vercel.app/docs/quick-start/
       wezterm
       swaybg
-      wl-clipboard
-      wl-clip-persist
-      cliphist
 
       wlsunset
 
@@ -121,6 +142,5 @@
       grim
       satty
     ];
-
   };
 }
