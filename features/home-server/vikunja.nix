@@ -29,13 +29,7 @@
 
       preservation.preserveAt."/persistent" = {
         # Preserve data-files
-        files = [
-          {
-            file = "/var/lib/private/vikunja/vikunja.db";
-            how = "symlink";
-            configureParent = true;
-          }
-        ];
+        directories = [ "/var/lib/private/vikunja" ];
       };
 
       services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:3456".extraConfig =
