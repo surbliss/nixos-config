@@ -1,26 +1,21 @@
-{ inputs, ... }:
-
-{
-  flake.modules.nixos.cli = { pkgs, ... }: {
+{ inputs, moduleWithSystem, ... }:
+let
+  nixos-module = { self', ... }: { ... }: {
     programs.vim.enable = true;
     programs.neovim.enable = true;
-    environment.systemPackages = [
-      pkgs.steelix
-
-    ];
+    environment.systemPackages = [ self'.packages.helix-master ];
 
     # To let lsps get info about nixpkgs
     nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     environment.sessionVariables.EDITOR = "hx";
   };
-
-  flake.modules.homeManager.cli = { pkgs, ... }: {
+  hm-module = { self', ... }: { pkgs, ... }: {
     ## NOTE: sessionVariables doesn't work with nushell, see https://github.com/nix-community/home-manager/issues/4313
     # home.sessionVariables = {
     #   EDITOR = "hx";
     # };
     home.packages = with pkgs; [
-      pkgs.steelix
+      self'.packages.helix-master
 
       # Lsps and formatters
       harper
@@ -66,5 +61,15 @@
       yamlfmt
 
     ];
+  };
+in
+{
+  flake.modules.nixos.cli = moduleWithSystem nixos-module;
+
+  flake.modules.homeManager.cli = moduleWithSystem hm-module;
+
+  perSystem = { inputs', ... }: {
+    # Upstream version, for example includes rainbow-queries
+    packages.helix-master = inputs'.helix-master.packages.default;
   };
 }

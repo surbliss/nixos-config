@@ -39,22 +39,14 @@
     };
 
     ### Other inputs
-    # neovim-nightly-overlay = {
-    #   url = "github:nix-community/neovim-nightly-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake"; # Best one
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # helix-steel = {
-    #   url = "github:mattwparas/helix/steel-event-system";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # helix-master = {
-    #   url = "github:helix-editor/helix/master";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    helix-master = {
+      url = "github:helix-editor/helix/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix = {
       url = "github:ryantm/agenix";
       inputs.nixpkgs.follows = "nixpkgs";
