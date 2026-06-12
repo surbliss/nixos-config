@@ -149,5 +149,3 @@ source=./tag.conf
 source=./autostart.conf
 # source=./dms/layout.conf
 # source=./dms/colors.conf
-
-source=./dms/outputs.conf
