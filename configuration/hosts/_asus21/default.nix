@@ -45,6 +45,7 @@ in
       self.modules.nixos.default
       self.modules.nixos.desktop
       self.modules.nixos.gui
+      self.modules.nixos.light-mode
       self.modules.nixos.system
       self.modules.nixos.fonts
       self.modules.nixos.home-manager-setup

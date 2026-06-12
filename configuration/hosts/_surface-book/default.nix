@@ -47,6 +47,7 @@ in
       self.modules.nixos.default
       self.modules.nixos.desktop
       self.modules.nixos.gui
+      self.modules.nixos.dark-mode
       self.modules.nixos.gaming
       self.modules.nixos.system
       self.modules.nixos.fonts
