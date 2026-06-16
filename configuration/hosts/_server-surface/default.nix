@@ -14,6 +14,7 @@ in
 
       self.modules.nixos.default
       self.modules.nixos.home-server
+      self.modules.nixos.nh # Garbage-collection
 
       inputs.disko.nixosModules.disko
       inputs.preservation.nixosModules.default

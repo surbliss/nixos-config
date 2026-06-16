@@ -12,6 +12,7 @@
       KITCHENOWL_ENV.file = ./KITCHENOWL_ENV.age;
       POCKET_ID_ENCRYPTION_KEY.file = ./POCKET_ID_ENCRYPTION_KEY.age;
       VIKUNJA_ENV.file = ./VIKUNJA_ENV.age;
+      PAPERLESS_ENV.file = ./PAPERLESS_ENV.age;
     };
   };
 

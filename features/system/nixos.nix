@@ -1,9 +1,10 @@
-{ inputs, ... }:
+{ inputs, self, ... }:
 let
   stateVersion = "24.05";
 in
 {
   flake.modules.nixos.system = {
+    imports = [ self.modules.nixos.nh ];
     # See https://github.com/NixOS/nix/issues/1281
     nix.optimise.automatic = true;
     nix.settings.auto-optimise-store = true;
@@ -12,25 +13,6 @@ in
     nix.channel.enable = false;
     nixpkgs.flake.setFlakeRegistry = true;
     nix.registry.nixpkgs.flake = inputs.nixpkgs;
-
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 14d";
-    };
-
-    # https://nixos.wiki/wiki/Automatic_system_upgrades
-    system.autoUpgrade = {
-      enable = true;
-      flake = inputs.self.outPath;
-      flags = [
-        "--update-input"
-        "nixpkgs"
-        "-L" # print build logs
-      ];
-      dates = "02:00";
-      randomizedDelaySec = "45min";
-    };
 
     ### Always needed
     # Don't change, doesn't affect the version of packages installed.
