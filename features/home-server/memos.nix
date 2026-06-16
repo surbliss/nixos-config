@@ -18,7 +18,7 @@ in
       MEMOS_PORT = "5230";
       MEMOS_DATA = memos-data-dir;
       MEMOS_DRIVER = "sqlite";
-      MEMOS_INSTANCE_URL = "http://localhost:5230";
+      MEMOS_INSTANCE_URL = "https://server-surface.quagga-toad.ts.net:5231";
     };
 
     services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:5231".extraConfig =
