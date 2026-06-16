@@ -24,4 +24,5 @@ in
   "POCKET_ID_ENCRYPTION_KEY.age".publicKeys = all-systems;
   "VIKUNJA_ENV.age".publicKeys = all-systems;
   "PAPERLESS_ENV.age".publicKeys = all-systems;
+  "TRILIUM_ENV.age".publicKeys = all-systems;
 }
