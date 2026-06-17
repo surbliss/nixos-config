@@ -1,19 +1,8 @@
-{
+{ inputs, ... }: {
   flake.modules.nixos.home-server =
-    { pkgs, config, ... }:
-
+    { config, ... }:
     let
       inherit (config.age) secrets;
-      invidious-src = pkgs.fetchurl {
-        url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
-        hash = "sha256-7Pw+9bo7UsSW4iCS2UIbWIZKdPhFp16VPYHnTIqSiZY=";
-
-      };
-      invidious-companion = pkgs.runCommand "invidious-companion" { } ''
-        mkdir -p $out/bin
-        tar -xzf ${invidious-src} -C $out/bin
-        chmod +x $out/bin/invidious_companion
-      '';
     in
     {
       # Add the essential storage-folders for invidious to the persistent storage:
@@ -38,7 +27,7 @@
       services.invidious = {
         enable = true;
         nginx.enable = false;
-        port = 3000;
+        port = 3002; # .gotenberg, dependency of Trilium, hijacked port 3000
         # Just let invidious generate this key automatically, not super important
         hmacKeyFile = null;
         address = "127.0.0.1";
@@ -51,7 +40,7 @@
 
       services.caddy.virtualHosts."server-surface.quagga-toad.ts.net:3001".extraConfig =
         ''
-          reverse_proxy localhost:3000
+          reverse_proxy localhost:3002
         '';
       networking.firewall.allowedTCPPorts = [ 3001 ];
 
@@ -76,7 +65,7 @@
           ProtectSystem = "strict";
           RestrictAddressFamilies = "AF_INET AF_INET6 AF_UNIX";
 
-          ExecStart = "${invidious-companion}/bin/invidious_companion";
+          ExecStart = "${inputs.invidious-companion}/invidious_companion";
           Restart = "always";
           RestartSec = "2s";
           Type = "simple";

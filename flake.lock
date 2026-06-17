@@ -315,6 +315,19 @@
         "type": "github"
       }
     },
+    "invidious-companion": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781682525,
+        "narHash": "sha256-hN+5DtCoEiHQebTR5Cgm6eSl/lOv8nBDVhLOyLWgcGM=",
+        "type": "tarball",
+        "url": "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz"
+      }
+    },
     "mangowc": {
       "inputs": {
         "flake-parts": "flake-parts_3",
@@ -505,6 +518,7 @@
         "hexa-game": "hexa-game",
         "home-manager": "home-manager_2",
         "import-tree": "import-tree",
+        "invidious-companion": "invidious-companion",
         "mangowc": "mangowc",
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",

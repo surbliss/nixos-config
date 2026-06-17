@@ -43,6 +43,10 @@
       url = "github:0xc000022070/zen-browser-flake"; # Best one
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    invidious-companion = {
+      url = "https://github.com/iv-org/invidious-companion/releases/download/release-master/invidious_companion-x86_64-unknown-linux-gnu.tar.gz";
+      flake = false;
+    };
     helix-master = {
       url = "github:helix-editor/helix/master";
       inputs.nixpkgs.follows = "nixpkgs";
