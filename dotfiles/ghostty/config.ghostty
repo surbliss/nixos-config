@@ -10,8 +10,10 @@ keybind = ctrl+backspace=text:\x17
 keybind = ctrl+delete=esc:d
 keybind = ctrl+enter=unbind
 keybind = super+shift+enter=new_window
-keybind = performable:ctrl+page_up=scroll_page_up
-keybind = performable:ctrl+page_down=scroll_page_down
+keybind = page_up=scroll_page_fractional:-0.5
+keybind = page_down=scroll_page_fractional:0.5
+keybind = performable:ctrl+page_up=scroll_page_fractional:-0.5
+keybind = performable:ctrl+page_down=scroll_page_fractional:0.5
 
 font-size = 12.5
 
