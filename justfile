@@ -26,17 +26,17 @@ update:
 upgrade:
     nh os switch . --update
 
-# Rebuild server
+# Uses tailscale MagicDns to pick the correct device
+[doc("Rebuild server")]
 [group("Installation")]
 server-switch:
-    # Uses tailscale MagicDns to pick the correct device
-    nh os switch .  --hostname server-surface --target-host {{ server }} --build-host {{ server }}
+    nh os switch .  --hostname server-surface --target-host {{ server }} --build-host {{ server }} --elevation-strategy passwordless
 
-# Test rebuild on server
+    # Uses tailscale MagicDns to pick the correct device
+[doc("Test rebuild on server")]
 [group("Installation")]
 server-test:
-    # Uses tailscale MagicDns to pick the correct device
-    nh os test .  --hostname server-surface --target-host {{ server }} --build-host {{ server }}
+    nh os test .  --hostname server-surface --target-host {{ server }} --build-host {{ server }} --elevation-strategy passwordless
 
 # Preserves _last 5 generations_ and _any generations from last 14 days_, and then performs garbage collection on the rest.
 # But, since automatic garbage collect is enabled, this command should be redundant

@@ -10,5 +10,32 @@
     };
     # nh cleaning conflicts with standard gc-setting!
     nix.gc.automatic = false;
+
+    # Allow password-less rebuilding of server
   };
+
+  flake.modules.nixos.home-server = {
+    security.sudo.extraRules = [
+      {
+        users = [ "angryluck" ];
+        # See https://www.man7.org/linux/man-pages/man5/sudoers.5.html for 'glob' info. Note, that '*' inside the command-part does _not_ match '/', but it _does_ inside the command passed (alongside whitespace). So, specify 'test', 'switch' and 'boot' explicitly!
+        commands = [
+          {
+            command = "/nix/store/*nixos-system-server-surface-*/bin/switch-to-configuration test";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "/nix/store/*nixos-system-server-surface-*/bin/switch-to-configuration switch";
+            options = [ "NOPASSWD" ];
+          }
+          {
+            command = "/nix/store/*nixos-system-server-surface-*/bin/switch-to-configuration boot";
+            options = [ "NOPASSWD" ];
+          }
+        ];
+
+      }
+    ];
+  };
+
 }
