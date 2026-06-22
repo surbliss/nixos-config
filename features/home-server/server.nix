@@ -53,11 +53,12 @@
       # Some basic tools, ensuring ability to fix stuff
       environment.systemPackages = with pkgs; [
         vim
-        neovim
         helix
         git
 
-        tree # List all of directory
+        tree # List entire directory
+
+        zellij # Multiplexer
       ];
 
       services.openssh.settings = {

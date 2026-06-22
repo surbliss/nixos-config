@@ -5,6 +5,9 @@
     home.packages = with pkgs; [
       zk
       zettlr
+      trilium-desktop
+      zotero
+      jabref
       ### FIX: uses electron version 39, which is marked as insecure
       # logseq
     ];

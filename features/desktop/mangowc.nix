@@ -134,6 +134,7 @@
       wlr-which-key
 
       ### For starting xwayland
+      xwayland-satellite
       xrdb
 
       brightnessctl
@@ -141,6 +142,7 @@
       ### Screenshotting
       grim
       satty
+
     ];
   };
 }
