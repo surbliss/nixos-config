@@ -91,5 +91,11 @@
       # Make /nix/store take up less space
       nix.optimise.automatic = true;
       nix.settings.auto-optimise-store = true;
+
+      # Set default shell
+      users.defaultUserShell = pkgs.nushell;
+      # NOTE: NixOS wiki recommends enabling zsh this way
+      programs.zsh.enable = true;
     };
+
 }
