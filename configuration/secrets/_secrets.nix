@@ -25,4 +25,5 @@ in
   "VIKUNJA_ENV.age".publicKeys = all-systems;
   "PAPERLESS_ENV.age".publicKeys = all-systems;
   "TRILIUM_ENV.age".publicKeys = all-systems;
+  "DONETICK_ENV.age".publicKeys = all-systems;
 }

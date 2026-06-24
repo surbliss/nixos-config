@@ -88,6 +88,10 @@
       url = "github:surbliss/hexa-game";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    donetick = {
+      url = "https://github.com/donetick/donetick/releases/download/v0.1.75/donetick_Linux_x86_64.tar.gz";
+      flake = false;
+    };
 
   };
 }

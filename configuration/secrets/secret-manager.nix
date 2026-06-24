@@ -14,6 +14,7 @@
       VIKUNJA_ENV.file = ./VIKUNJA_ENV.age;
       PAPERLESS_ENV.file = ./PAPERLESS_ENV.age;
       TRILIUM_ENV.file = ./TRILIUM_ENV.age;
+      DONETICK_ENV.file = ./DONETICK_ENV.age;
     };
   };
 

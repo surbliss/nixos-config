@@ -103,6 +103,19 @@
         "type": "github"
       }
     },
+    "donetick": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776124433,
+        "narHash": "sha256-mp4PtUoAYyj2M1WJIa0r04344sseZm1oLvTZyciLZdg=",
+        "type": "tarball",
+        "url": "https://github.com/donetick/donetick/releases/download/v0.1.75/donetick_Linux_x86_64.tar.gz"
+      },
+      "original": {
+        "type": "tarball",
+        "url": "https://github.com/donetick/donetick/releases/download/v0.1.75/donetick_Linux_x86_64.tar.gz"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -512,6 +525,7 @@
         "agenix": "agenix",
         "devshell": "devshell",
         "disko": "disko",
+        "donetick": "donetick",
         "flake-parts": "flake-parts",
         "helium": "helium",
         "helix-master": "helix-master",
