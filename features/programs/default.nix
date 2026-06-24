@@ -119,8 +119,6 @@
       ### Unsure about these
       android-studio
 
-      zotero
-
       # For Voyager keyboard
       keymapp
     ];

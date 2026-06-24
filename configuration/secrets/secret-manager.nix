@@ -13,6 +13,7 @@
       POCKET_ID_ENCRYPTION_KEY.file = ./POCKET_ID_ENCRYPTION_KEY.age;
       VIKUNJA_ENV.file = ./VIKUNJA_ENV.age;
       PAPERLESS_ENV.file = ./PAPERLESS_ENV.age;
+      TRILIUM_ENV.file = ./TRILIUM_ENV.age;
     };
   };
 
