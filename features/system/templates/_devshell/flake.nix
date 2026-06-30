@@ -8,8 +8,19 @@
       welcomeText = ''
         Minimal development shell
         ==========================
-        1. Add packages to default.nix
-        2. Run `direnv allow` for automatic shell-entering
+        1. Add packages to shell.nix
+        2. Create an .envrc file containing "use flake" and run `direnv allow` for automatic shell-entering
+      '';
+    };
+    templates.haskell = {
+      path = ./haskell;
+      description = "Haskell flake";
+      welcomeText = ''
+        Minimal development shell
+        ==========================
+        1. Add packages to shell.nix
+        2. Create an .envrc file containing "use flake" and run `direnv allow` for automatic shell-entering
+        3. Edit/rename the .cabal file for the project
       '';
     };
 

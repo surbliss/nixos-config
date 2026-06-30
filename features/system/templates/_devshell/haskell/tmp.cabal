@@ -1,0 +1,23 @@
+cabal-version: 3.0
+name: tmp
+version: 0.1.0.0
+license: AGPL-3.0-only
+license-file: LICENSE
+build-type: Simple
+
+common warnings
+  ghc-options: -Wall
+
+executable run
+  import: warnings
+  main-is: main.hs
+  other-modules:
+    Lib
+
+  build-depends:
+    base,
+    containers,
+    text,
+
+  hs-source-dirs: app
+  default-language: GHC2024
