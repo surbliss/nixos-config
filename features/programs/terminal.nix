@@ -1,6 +1,5 @@
-##################################################
-# Terminal + Shell config
-##################################################
+# Setup terminal emulator + the shell + main tools. Specific cli-tools are
+# defined elsewhere
 {
   flake.modules.nixos.cli = { pkgs, ... }: {
     users.defaultUserShell = pkgs.nushell;
@@ -26,11 +25,10 @@
     environment.systemPackages = with pkgs; [
       nushell
       carapace # completions for nushell
-      # nufmt # NOTE: Very broken formatter, wait for it to mature more
+      nufmt # NOTE: Very broken formatter, but trying again
       git # Needed for zinit plugin-manager
       zoxide
       eza
-      starship
       oh-my-posh
 
       # Terminals
@@ -41,13 +39,15 @@
     ];
   };
 
-  flake.modules.homeManager.cli = { custom-link, ... }: {
-    ### Use 'vivid' to generate LS_COLORS env variable on rebuild
-    # 'ls-colors' is just name for this derivation, that shows up in nix-store
+  flake.modules.homeManager.cli = { pkgs, custom-link, ... }: {
     programs.ghostty = {
       enable = true;
       systemd.enable = true;
     };
-    xdg.configFile = custom-link "ghostty";
+    home.packages = [
+      # Terminal multiplexer
+      pkgs.zellij
+    ];
+    xdg.configFile = custom-link "ghostty" // custom-link "zellij";
   };
 }

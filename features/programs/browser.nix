@@ -34,7 +34,7 @@ let
       self'.packages.zen-browser-twilight
       self'.packages.helium
       qutebrowser
-      brave
+      nyxt
     ];
 
     xdg.mime.enable = true;
