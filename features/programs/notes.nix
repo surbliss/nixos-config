@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.gui = { pkgs, custom-link, ... }: {
+  flake.modules.homeManager.gui = { pkgs, ... }: {
     ### Zettlekasten cli-tool
 
     home.packages = with pkgs; [
@@ -12,6 +12,7 @@
       # logseq
     ];
 
-    xdg.configFile = custom-link "zk";
+    # TODO: Move zk config into this module when stable
+    # xdg.configFile.zk = TODO;
   };
 }

@@ -97,11 +97,10 @@
     }
   );
 
-  flake.modules.homeManager.desktop = { pkgs, custom-link, ... }: {
-    ### Noctalia flake input
-    # imports = [ inputs.noctalia.homeModules.default ];
-    xdg.configFile = custom-link "mango";
-    # programs.noctalia-shell.enable = true;
+  flake.modules.homeManager.desktop = { pkgs, ... }: {
+
+    # TODO: Migrate mango-config back into this module, when stable
+    # xdg.configFile.mango = TODO;
 
     gtk.iconTheme = {
       name = "Papirus";

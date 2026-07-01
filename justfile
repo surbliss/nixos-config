@@ -62,16 +62,6 @@ mime:
 install host:
     sudo nixos-rebuild switch --flake .#{{ host }} --option experimental-features "nix-command flakes pipe-operators"
 
-# Link dotfiles to ./dotfiles.
-# Required for `mkOutOfStoreSymlink` alias used in configuration
-[group("Installation")]
-link-dotfiles:
-    # -s = Symbolic link instead of hard link
-    # -f = force (overwrite) any files. So, any file with name `.dotfiles` will be overwritten, but not an non-empty folder `.dotfiles/`
-    # -n = When target is a symlink pointing to a directory, treat this symlink as a file instead of a folder to follow. Allows the target to be overwritten by the -f flag.
-    # Together: Overwrite files/symlinks at the target location (not non-emtpy actual folders)
-    ln -sfn "{{ justfile_directory() }}/dotfiles" ~/.dotfiles
-
 alias feat := features
 [group("Edit")]
 features:

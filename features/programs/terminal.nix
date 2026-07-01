@@ -39,7 +39,7 @@
     ];
   };
 
-  flake.modules.homeManager.cli = { pkgs, custom-link, ... }: {
+  flake.modules.homeManager.cli = { pkgs, ... }: {
     programs.ghostty = {
       enable = true;
       systemd.enable = true;
@@ -48,6 +48,8 @@
       # Terminal multiplexer
       pkgs.zellij
     ];
-    xdg.configFile = custom-link "ghostty" // custom-link "zellij";
+    # TODO: Integrate config-files for ghostty and zellij, when stable
+    # xdg.configFile.ghostty = TODO;
+    # xdg.configFile.zellij = TODO;
   };
 }
