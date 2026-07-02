@@ -11,11 +11,11 @@ list:
 
 [group("Installation")]
 switch:
-    nh os switch .
+    nh os switch . --ask
 
 [group("Installation")]
 test:
-    nh os test .
+    nh os test . --ask
 
 [group("Installation")]
 update:
@@ -24,7 +24,7 @@ update:
 # Reinstall with updated packages on main machine (not server, do that manually)
 [group("Installation")]
 upgrade:
-    nh os switch . --update
+    nh os switch . --update --ask
 
 # Uses tailscale MagicDns to pick the correct device
 [doc("Rebuild server")]
