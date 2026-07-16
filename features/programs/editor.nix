@@ -51,8 +51,11 @@ let
       neocmakelsp
       vscode-langservers-extracted
       just-lsp
-      marksman
+
+      marksman # NOTE: Needs a .marksman.toml file placed at root
       markdown-oxide
+      rumdl # Formatter and linter, complements the other LSPs
+
       nil
       systemd-lsp
       taplo
