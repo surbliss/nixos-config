@@ -2,13 +2,16 @@
   flake.modules.homeManager.cli =
     { pkgs, ... }:
     let
-      # Latex installetion, slightly larger than medium, but smaller than full
-      tex = pkgs.texlive.combine {
-        inherit (pkgs.texlive) scheme-medium csquotes biblatex;
-      };
+      # Latex installation, smallest version, with all packages explicitly declared
+      tex = pkgs.texliveBasic.withPackages (
+        ps: with ps; [
+          csquotes
+          biber # biblatex legacy at this point
+          babel-danish
+          tikz-cd
+        ]
+      );
       other-packages = with pkgs; [
-        biber # bibtex legacy at this point
-
         # Editor-lsps
         ltex-ls-plus # Supposedly more updated
         pstree # for vimtex?
