@@ -2,12 +2,7 @@
 # NOTE: These commands require that `nh` is installed/enabled!
 server := "angryluck@server-surface"
 
-# List available recipes
-[group("Info")]
-list:
-    # TODO: When updated to version 1.52.0: Replace `list` recipe with
-    # set default-list := true
-    just --list
+set default-list
 
 [group("Installation")]
 switch:
