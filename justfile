@@ -1,6 +1,7 @@
 ### Helpful shorthands for nixos configuration
 # NOTE: These commands require that `nh` is installed/enabled!
-server := "angryluck@server-surface"
+ssh-tailnet := "angryluck@server-surface"
+ssh-thisted := "angryluck@192.168.8.4"
 
 set default-list
 
@@ -21,17 +22,27 @@ update:
 upgrade:
     nh os switch . --update --ask
 
-# Uses tailscale MagicDns to pick the correct device
-[doc("Rebuild server")]
-[group("Installation")]
-server-switch:
-    nh os switch .  --hostname server-surface --target-host {{ server }} --build-host {{ server }} --elevation-strategy passwordless
+### Server-helpers
+[doc("Template for server-commands")]
+server cmd host:
+    nh os {{ cmd }} . --hostname server-surface --target-host {{ host }} --ask
+    # nh os {{ cmd }} . --hostname server-surface --target-host {{ host }} --build-host {{ host }} --ask
 
-    # Uses tailscale MagicDns to pick the correct device
-[doc("Test rebuild on server")]
-[group("Installation")]
-server-test:
-    nh os test .  --hostname server-surface --target-host {{ server }} --build-host {{ server }} --elevation-strategy passwordless
+thisted cmd: (server cmd ssh-thisted)
+tailnet cmd: (server cmd ssh-tailnet)
+
+# # Uses tailscale MagicDns to pick the correct device
+# [doc("Rebuild server")]
+# [group("Installation")]
+# switch-server:
+#     nh os switch . --hostname server-surface --target-host {{ ssh-thisted }}  --elevation-strategy passwordless
+
+#     # Uses tailscale MagicDns to pick the correct device
+# [doc("Test rebuild on server")]
+# [group("Installation")]
+# test-server:
+#     nh os test . --hostname server-surface --target-host {{ ssh-thisted }} --build-host {{ ssh-thisted }} --elevation-strategy passwordless
+#     # nh os test .  --hostname server-surface --target-host {{ ssh-tailnet }} --build-host {{ ssh-tailnet }} --elevation-strategy passwordless
 
 # Preserves _last 5 generations_ and _any generations from last 14 days_, and then performs garbage collection on the rest.
 # But, since automatic garbage collect is enabled, this command should be redundant
