@@ -15,6 +15,7 @@
   };
 
   flake.modules.nixos.home-server = {
+    security.sudo.enable = true;
     security.sudo.extraRules = [
       {
         users = [ "angryluck" ];
