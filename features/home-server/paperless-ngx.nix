@@ -5,7 +5,7 @@ in
 {
   flake.modules.nixos.home-server = { config, ... }: {
     services.paperless = {
-      enable = true;
+      enable = false;
       address = "127.0.0.1";
       domain = "server-surface.quagga-toad.ts.net:${toString caddy-port}";
       inherit port; # Default
