@@ -26,9 +26,6 @@ let
       nixd
       nixfmt
 
-      haskellPackages.haskell-language-server
-      haskellPackages.ormolu
-
       llvmPackages_20.clang-tools
 
       bash-language-server

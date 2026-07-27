@@ -23,11 +23,6 @@
       ### Replaced by nixd
       # nil
 
-      ### To fix haskell-lsp for xmonad
-      # haskellPackages.fourmolu
-      haskellPackages.hoogle
-      ghcid
-
       # ccls
       clang
 
