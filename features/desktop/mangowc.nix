@@ -3,9 +3,7 @@
     # Dank Material Shell
     programs.dms-shell.enable = true;
     programs.dms-shell.systemd.enable = true;
-
-    ### Wire dms to MangoWC
-    programs.dms-shell.systemd.target = "wayland-session.target";
+    programs.dms-shell.systemd.target = "graphical-session.target";
 
     ### Login greeter
     services.greetd = {
