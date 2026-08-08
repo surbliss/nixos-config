@@ -25,7 +25,7 @@ in
     environment.systemPackages = [ (cursor pkgs) ];
 
     # Display manager
-    programs.regreet.cursorTheme = {
+    services.displayManager.regreet.cursorTheme = {
       package = cursor pkgs;
       name = theme;
     };
