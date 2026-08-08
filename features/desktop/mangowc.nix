@@ -5,17 +5,7 @@
     programs.dms-shell.systemd.enable = true;
 
     ### Wire dms to MangoWC
-    programs.dms-shell.systemd.target = "mango-session.target";
-
-    systemd.user.targets.mango-session = {
-      unitConfig = {
-        Description = "MangoWC Session Target";
-        Requires = "graphical-session.target";
-        After = "graphical-session.target";
-      };
-      wants = [ "dms" ];
-
-    };
+    programs.dms-shell.systemd.target = "wayland-session.target";
 
     ### Login greeter
     services.greetd = {
