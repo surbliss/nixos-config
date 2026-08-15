@@ -7,19 +7,21 @@ in
   flake.modules.nixos.home-server = { pkgs, ... }: {
     systemd.services.koffan = {
       description = "Koffan grocery list";
-      wantedBy = [ "multi-user.target" ];
       after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+      path = [ pkgs.koffan ];
       environment = {
         DISABLE_AUTH = "true";
         PORT = toString koffan-port;
         DB_PATH = db-path;
       };
+
       serviceConfig = {
-        ExecStart = "${pkgs.koffan}/bin/shopping-list";
-        Restart = "on-failure";
-        User = "koffan";
+        Type = "simple";
         DynamicUser = true;
         StateDirectory = "koffan";
+        ExecStart = "${pkgs.koffan}/bin/shopping-list";
+        Restart = "on-failure";
         # Koffan doesn't create the db on its own, so make sure it exists.
         ExecStartPre = "${pkgs.coreutils}/bin/touch ${db-path}";
       };
