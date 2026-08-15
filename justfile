@@ -2,6 +2,7 @@
 # NOTE: These commands require that `nh` is installed/enabled!
 ssh-tailnet := "angryluck@server-surface"
 ssh-thisted := "angryluck@192.168.8.4"
+ssh-kbh := "angryluck@192.168.0.247"
 
 set default-list
 
@@ -30,6 +31,7 @@ server cmd host:
 
 thisted cmd: (server cmd ssh-thisted)
 tailnet cmd: (server cmd ssh-tailnet)
+kbh cmd: (server cmd ssh-kbh)
 
 # # Uses tailscale MagicDns to pick the correct device
 # [doc("Rebuild server")]
