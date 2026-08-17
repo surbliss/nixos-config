@@ -2,9 +2,11 @@
 # defined elsewhere
 {
   flake.modules.nixos.cli = { pkgs, ... }: {
-    users.defaultUserShell = pkgs.nushell;
+    users.defaultUserShell = pkgs.fish;
     # NOTE: NixOS wiki recommends enabling zsh this way
     programs.zsh.enable = true;
+    programs.fish.enable = true;
+    programs.direnv.enableFishIntegration = true;
 
     # Default terminal-opener
     xdg.mime.enable = true;
