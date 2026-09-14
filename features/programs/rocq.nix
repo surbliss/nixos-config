@@ -1,21 +1,17 @@
 {
   flake.modules.nixos.gui =
-    { pkgs, lib, ... }:
+    { pkgs, ... }:
     let
       # coq-with-ide = pkgs.coq.override { buildIde = true; };
       coq-with-ide = pkgs.coq.override { buildIde = true; };
-      coq-with-packages = coq-with-ide.withPackages (
-        p: with p; [
-          ssprove
-          vscoq-language-server
-        ]
-      );
+
+      rocq-packages = with pkgs.rocqPackages; [
+        ssprove
+        vsrocq-language-server
+      ];
     in
     {
-      environment.systemPackages = [
-        (lib.lowPrio coq-with-ide)
-        coq-with-packages
-      ];
+      environment.systemPackages = [ coq-with-ide ] ++ rocq-packages;
 
     };
 
