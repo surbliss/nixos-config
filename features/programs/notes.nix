@@ -7,7 +7,7 @@
       zettlr
       trilium-desktop
       zotero
-      jabref
+      # jabref # FIX: Broken as of 14/09-2026
       ### FIX: uses electron version 39, which is marked as insecure
       # logseq
     ];
