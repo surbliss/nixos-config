@@ -116,6 +116,22 @@
         "url": "https://github.com/donetick/donetick/releases/download/v0.1.75/donetick_Linux_x86_64.tar.gz"
       }
     },
+    "flake-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767039857,
+        "narHash": "sha256-vNpUSpF5Nuw8xvDLj2KCwwksIbjua2LZCqhV1LNRDns=",
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "rev": "5edf11c44bc78a0d334f6334cdaf7d60d732daab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "edolstra",
+        "repo": "flake-compat",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -453,6 +469,7 @@
         "nix-index-database": "nix-index-database",
         "nixpkgs": "nixpkgs_2",
         "preservation": "preservation",
+        "waybar": "waybar",
         "zen-browser": "zen-browser"
       }
     },
@@ -522,6 +539,27 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "waybar": {
+      "inputs": {
+        "flake-compat": "flake-compat",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787863049,
+        "narHash": "sha256-G6AcGuevhkYflQHhJq9GnLhEMgcI51Y6MYKBQvdRPDc=",
+        "owner": "Alexays",
+        "repo": "Waybar",
+        "rev": "6d60c8e02be67bb85bb9b1ea803f2fbcf0722002",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Alexays",
+        "repo": "Waybar",
         "type": "github"
       }
     },

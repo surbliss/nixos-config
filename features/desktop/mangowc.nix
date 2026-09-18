@@ -3,7 +3,7 @@
     # Dank Material Shell
     programs.dms-shell.enable = true;
     programs.dms-shell.systemd.enable = true;
-    programs.dms-shell.systemd.target = "graphical-session.target";
+    programs.dms-shell.systemd.target = "mango-session.target";
 
     ### Login greeter
     services.greetd = {
@@ -23,6 +23,16 @@
         };
       };
     };
+
+    # Make a target for mango to start, that then starts graphical-session.target
+    systemd.user.targets."mango-session" = {
+      description = "Mango compositor session";
+      requires = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+    };
+    # Defaults to starting with "graphical-session.target"
+    # programs.waybar.enable = true;
+    # programs.waybar.systemd.target = "mango-session.target";
 
     ### Global themeing for console, based on terminal theme (minimal-custom)
     console.colors = [
@@ -123,6 +133,12 @@
       grim
       satty
 
+      ### Just for manual testing, and checking whether mango-workspaces work after any updates
+      waybar
     ];
   };
+
+  # perSystem = { inputs', ... }: {
+  #   packages.waybar = inputs'.waybar.packages.default;
+  # };
 }
