@@ -28,6 +28,7 @@ let
         "steam-unwrapped"
         "idea"
         "dyalog"
+        "antigravity-ide"
       ];
     networking.hostName = hostname;
   };
