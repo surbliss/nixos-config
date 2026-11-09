@@ -4,11 +4,13 @@ let
   asus21-user = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2I6rQN0INm8Y4lajgTzgTZdBX1U/9NdiqtZ3xYjwoj";
   surface-book-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHQSzkjLsfRzeDRpgZQI+KXfdqHq3vqt2MnInr4AH3qG root@surface-book";
   server-surface-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM8wwPs6zmhawSbJM6+lIy1la2S6fVeOYIoySsXuKzgw root@server-surface";
+  lenovo-far-system = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBr/gVEjRFy1EB2yM0TJDxSkDJhEd9kZSlupKoU+54XH root@nixos";
   all-systems = [
     asus21-system
     asus21-user
     surface-book-system
     server-surface-system
+    lenovo-far-system
   ];
 in
 {
