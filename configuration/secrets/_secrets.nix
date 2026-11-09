@@ -26,4 +26,6 @@ in
   "PAPERLESS_ENV.age".publicKeys = all-systems;
   "TRILIUM_ENV.age".publicKeys = all-systems;
   "DONETICK_ENV.age".publicKeys = all-systems;
+  "TANDOOR_SECRET_KEY.age".publicKeys = all-systems;
+  "TANDOOR_SOCIALACCOUNT_PROVIDERS.age".publicKeys = all-systems;
 }
